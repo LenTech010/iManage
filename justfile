@@ -1,6 +1,9 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
 # SPDX-License-Identifier: Apache-2.0
 
+set windows-shell := ["powershell.exe", "-c"]
+set shell := ["sh", "-c"]
+
 [private]
 default:
     @just --list
@@ -19,7 +22,7 @@ install-all:
 
 # Install all dependencies (dev, devdocs, postgres, redis)
 [group('development')]
-[working-directory("src/pretalx/frontend/schedule-editor/")]
+[working-directory("src/imanage/frontend/schedule-editor/")]
 install-npm:
     npm ci
 
@@ -31,7 +34,7 @@ install-plugin path="":
 # Check for outdated dependencies
 [group('development')]
 deps-outdated:
-    uv pip list --outdated --format=json | python -c "\
+    uv pip list --outdated --format=json | python -c " \
     import json, sys, tomllib; \
     from packaging.requirements import Requirement; \
     outdated = {p['name'].lower(): p for p in json.load(sys.stdin)}; \
@@ -42,7 +45,7 @@ deps-outdated:
 # Bump a dependency version
 [group('development')]
 deps-bump package version:
-    python -c "\
+    python -c " \
     import tomllib; \
     from pathlib import Path; \
     from packaging.requirements import Requirement; \
@@ -76,7 +79,7 @@ docs *args="html":
 [group('documentation')]
 [working-directory("doc")]
 docs-serve *args="--port 8001":
-    rm -rf _build/html
+    python -c "import shutil; shutil.rmtree('_build/html', ignore_errors=True)"
     uv run sphinx-autobuild . _build/html {{ args }}
 
 # Update the API documentation
@@ -122,7 +125,7 @@ djhtml-check:
 # Format Django templates with djhtml
 [group('linting')]
 djhtml *args="":
-    find src -name "*.html" -not -path '*/vendored/*' -not -path '*/node_modules/*' -not -path '*/htmlcov/*' -not -path '*/local/*' -not -path '*dist/*' -not -path "*.min.html" -not -path '*/pretalx-schedule' -print | xargs uv run --extra=dev djhtml {{ args }}
+    python -c "import pathlib, subprocess; [subprocess.run(['uv', 'run', '--extra=dev', 'djhtml'] + (['{{args}}'] if '{{args}}' else []) + [str(p)]) for p in pathlib.Path('src').rglob('*.html') if not any(x in p.parts for x in ['vendored', 'node_modules', 'htmlcov', 'local', 'dist']) and p.name != 'imanage-schedule' and not p.name.endswith('.min.html')]"
 
 # Run all formatters and linters
 [group('linting')]
@@ -145,18 +148,13 @@ unsafe-shell *args:
 # Clean up generated files
 [group('development')]
 clean:
-    find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
-    find . -type f -name "*.pyc" -delete
-    find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null || true
-    rm -rf .pytest_cache
-    rm -rf .coverage htmlcov
-    rm -rf dist build
+    python -c "import pathlib, shutil; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').rglob('__pycache__')]; [p.unlink(missing_ok=True) for p in pathlib.Path('.').rglob('*.pyc')]; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').rglob('*.egg-info')]; shutil.rmtree('.pytest_cache', ignore_errors=True); shutil.rmtree('.coverage', ignore_errors=True); shutil.rmtree('htmlcov', ignore_errors=True); shutil.rmtree('dist', ignore_errors=True); shutil.rmtree('build', ignore_errors=True)"
 
 # Run the test suite
 [group('tests')]
 test *args:
     uv run --extra=dev --extra=devdocs pytest {{ args }}
-    git checkout -- src/pretalx/locale
+    git checkout -- src/imanage/locale
 
 # Run tests in parallel (requires pytest-xdist)
 [group('tests')]
@@ -174,7 +172,7 @@ test-coverage *args:
 [group('tests')]
 [working-directory("src")]
 test-coverage-report: test-coverage
-    open htmlcov/index.html || xdg-open htmlcov/index.html || echo "Coverage report generated in htmlcov/index.html"
+    python -c "import os, webbrowser; path = os.path.abspath('htmlcov/index.html'); webbrowser.open('file://' + path) if os.path.exists(path) else print('Coverage report generated in htmlcov/index.html')"
 
 # Run release checks
 [group('release')]
@@ -182,18 +180,18 @@ release-checks:
     uv run check-manifest
     uv run python -m build
     uv run twine check dist/*
-    unzip -l dist/pretalx*whl | grep frontend || exit 1
-    unzip -l dist/pretalx*whl | grep node_modules && exit 1 || exit 0
+    python -c "import zipfile, sys, pathlib; [sys.exit(0 if any('frontend' in n for n in zipfile.ZipFile(f).namelist()) else 1) for f in pathlib.Path('dist').glob('imanage*.whl')]"
+    python -c "import zipfile, sys, pathlib; [sys.exit(1 if any('node_modules' in n for n in zipfile.ZipFile(f).namelist()) else 0) for f in pathlib.Path('dist').glob('imanage*.whl')]"
     echo "All release checks successful"
 
-# Release a new pretalx version
+# Release a new Imanage version
 [group('release')]
 release version:
     uv pip install build
     git commit -am "Release {{ version }}"
     git tag -m "Release {{ version }}" {{ version }}
-    rm -rf dist/ build/ pretalx.egg-info
+    python -c "import shutil; [shutil.rmtree(p, ignore_errors=True) for p in ['dist', 'build', 'imanage.egg-info']]"
     uv run python -m build -n
-    uvx twine upload dist/pretalx-*
+    uvx twine upload dist/imanage-*
     git push
     git push --tags

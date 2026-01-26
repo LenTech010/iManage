@@ -1,0 +1,87 @@
+<!--
+SPDX-FileCopyrightText: 2017-present Tobias Kunze
+SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+-->
+
+{% extends "orga/base.html" %}
+
+{% load event_tags %}
+{% load i18n %}
+{% load rules %}
+{% load static %}
+
+{% block extra_title %}
+    {% block submission_title %}{% endblock submission_title %}
+    {% has_perm "person.orga_list_speakerprofile" request.user request.event as can_view_speakers %}
+    {% if can_view_speakers %}{{ submission.title }}{% else %}{{ submission.anonymised.title|default:submission.title }}{% endif %} ::
+{% endblock extra_title %}
+
+{% block alternate_link %}
+    <link rel="alternate" type="application/json" title="{{ request.event.name }} API" href="{{ request.event.api_urls.talks.full }}{{ submission.code }}" />
+{% endblock alternate_link %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "orga/css/ui/submission.css" %}" />
+{% endblock %}
+
+{% block content %}
+    {% if submission %}
+        {% has_perm "submission.update_submission" request.user submission as can_edit_submission %}
+        {% has_perm "submission.view_reviews_submission" request.user submission as can_view_reviews %}
+        {% has_perm "submission.review_submission" request.user submission as can_review %}
+        {% has_perm "person.orga_list_speakerprofile" request.user request.event as can_view_speakers %}
+
+        <div class="card content-card shadow-sm rounded">
+            <div class="card-body">
+                {# Row 1: Title & Status Header #}
+                <div class="d-flex align-items-center mb-3">
+                    <h2 class="mb-0 font-weight-bold">
+                        {% if can_view_speakers %}{{ submission.title }}{% else %}{{ submission.anonymised.title|default:submission.title }}{% endif %}
+                    </h2>
+                    <span class="badge badge-success ml-3 px-3 py-2 d-flex align-items-center" style="font-size: 1rem;">
+                        <i class="fa fa-check mr-2"></i>
+                        {% translate "Accepted" %}
+                    </span>
+                </div>
+
+                {# Row 2: Tabbed Navigation Bar #}
+                <ul class="nav nav-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link {% if "submissions.content" in url_name %}active font-weight-bold text-primary{% endif %}" href="{{ submission.orga_urls.base }}" style="{% if "submissions.content" in url_name %}border: none; border-bottom: 3px solid var(--color-info);{% endif %}">
+                            {% translate "Content" %}
+                        </a>
+                    </li>
+                    {% if can_view_speakers %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if "submissions.speakers" in url_name %}active font-weight-bold text-primary{% endif %}" href="{{ submission.orga_urls.speakers }}" style="{% if "submissions.speakers" in url_name %}border: none; border-bottom: 3px solid var(--color-info);{% endif %}">
+                                {{ phrases.schedule.speakers }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if can_view_reviews or can_review %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if "submissions.reviews" in url_name %}active font-weight-bold text-primary{% endif %}" href="{{ submission.orga_urls.reviews }}" style="{% if "submissions.reviews" in url_name %}border: none; border-bottom: 3px solid var(--color-info);{% endif %}">
+                                {% translate "Reviews" %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                {# Row 3: Alert/Info Box #}
+                <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                    <i class="fa fa-info-circle fa-lg mr-3"></i>
+                    <div>
+                        {% translate "This proposal is currently under review." %}
+                    </div>
+                </div>
+
+                {# Row 4: The Data Grid (Key-Value Pairs) - Injected via submission_content block #}
+                <div class="data-grid">
+                    {% block submission_content %}{% endblock submission_content %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% block submission_content_new %}{% endblock submission_content_new %}
+    {% endif %}
+{% endblock content %}

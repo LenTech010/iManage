@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.conf import settings
 from django.core import mail as djmail
 from django.urls import reverse
 
-from pretalx.event.models import TeamInvite
+from imanage.event.models import TeamInvite
 
 
 @pytest.mark.django_db

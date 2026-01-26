@@ -4,10 +4,10 @@
 include LICENSE
 recursive-include LICENSES *.txt
 include README.rst
-include src/pretalx.example.cfg
+include src/imanage.example.cfg
 
-exclude src/pretalx/override_settings.py
-exclude src/pretalx.cfg
+exclude src/imanage/override_settings.py
+exclude src/imanage.cfg
 exclude justfile
 
 recursive-exclude doc *
@@ -15,19 +15,19 @@ recursive-exclude src/data *
 recursive-exclude src/local *
 recursive-exclude src/static.dist *
 
-recursive-include src/pretalx/frontend *
-recursive-exclude src/pretalx/frontend/schedule-editor/dist *
-recursive-exclude src/pretalx/frontend/schedule-editor/node_modules *
+recursive-include src/imanage/frontend *
+recursive-exclude src/imanage/frontend/schedule-editor/dist *
+recursive-exclude src/imanage/frontend/schedule-editor/node_modules *
 
-recursive-include src/pretalx/static *
-recursive-include src/pretalx/locale *
-recursive-include src/pretalx/agenda/templates *
-recursive-include src/pretalx/api/templates *
-recursive-include src/pretalx/common/templates *
-recursive-include src/pretalx/cfp/templates *
-recursive-include src/pretalx/mail/templates *
-recursive-include src/pretalx/orga/templates *
-recursive-include src/pretalx/schedule/templates *
+recursive-include src/imanage/static *
+recursive-include src/imanage/locale *
+recursive-include src/imanage/agenda/templates *
+recursive-include src/imanage/api/templates *
+recursive-include src/imanage/common/templates *
+recursive-include src/imanage/cfp/templates *
+recursive-include src/imanage/mail/templates *
+recursive-include src/imanage/orga/templates *
+recursive-include src/imanage/schedule/templates *
 recursive-exclude src/tests *
 recursive-include src *.py
 recursive-include src *.license

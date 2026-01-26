@@ -6,7 +6,7 @@
 Sessions & Proposals
 ====================
 
-In pretalx, sessions (also called proposals) contain the content of your event
+In imanage, sessions (also called proposals) contain the content of your event
 – the talks, workshops, and other programming items that make up your schedule.
 
 .. note::
@@ -31,7 +31,7 @@ Session Lifecycle
 -----------------
 
 Sessions go through several states during their lifecycle, and these states and
-their transitions are a key part of pretalx.
+their transitions are a key part of imanage.
 
 Submitted
 ^^^^^^^^^
@@ -87,7 +87,7 @@ their attendance.
     the state of a session manually.
 
 Confirmed sessions will be visible to the public on the schedule, though
-pretalx makes sure to not change the schedule without the organiser’s input:
+imanage makes sure to not change the schedule without the organiser’s input:
 You will need to release a new schedule version to make the changes visible to
 the public, and you will see which sessions will become publicly visible. See
 more in the :ref:`Scheduling Guide <user-guide-schedule>`.
@@ -161,8 +161,8 @@ Session Types define the format and default duration of sessions. Common example
 Session types make scheduling easier for you, because you can just drag blocks of the correct duration onto the schedule.
 You can always override the duration of a session individually, but offering these categories can help the submitter communicate their intended format from the beginning.
 
-If you don’t want to use session types, just don’t create any beyond the default one that pretalx creates for you.
-If there is only a single session type, pretalx will not show the session type selection field at all.
+If you don’t want to use session types, just don’t create any beyond the default one that imanage creates for you.
+If there is only a single session type, imanage will not show the session type selection field at all.
 
 Tags
 ^^^^
@@ -207,7 +207,7 @@ If a session is submitted through the CfP, the submitting user is automatically 
 Organisers can add or remove speakers at any time.
 You can do so from the „Speakers“ tab on the session detail page.
 If you add a new speaker to a session, they will receive an email notification.
-The notification will be based on the email template „Add a speaker to a proposal (existing account)“ if the email address is already known to pretalx, and on the template „Add a speaker to a proposal (new account)“ if the email address is not yet known.
+The notification will be based on the email template „Add a speaker to a proposal (existing account)“ if the email address is already known to imanage, and on the template „Add a speaker to a proposal (new account)“ if the email address is not yet known.
 If the speaker does not have an account yet, their email will contain a link where they can set their account password.
 
 Interaction & Communication

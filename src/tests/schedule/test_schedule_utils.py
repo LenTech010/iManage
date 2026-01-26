@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.schedule.notifications import (
+from imanage.schedule.notifications import (
     get_current_notifications,
     get_full_notifications,
 )
-from pretalx.schedule.utils import guess_schedule_version
+from imanage.schedule.utils import guess_schedule_version
 
 
 @pytest.mark.django_db

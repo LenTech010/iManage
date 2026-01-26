@@ -5,7 +5,7 @@ Developer documentation
 =======================
 
 You want to contribute? That’s great, we love contributions! Being an open
-source project, pretalx will thrive if it receives regular contributions from
+source project, imanage will thrive if it receives regular contributions from
 the community. Everyone is able to contribute, and contributions come in many
 forms: Code, Documentation, Translations, Graphics, Feedback ….
 We appreciate them highly!

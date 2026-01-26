@@ -6,19 +6,19 @@
 Configuration
 =============
 
-You can configure pretalx using config files or environment variables. You can
+You can configure imanage using config files or environment variables. You can
 combine those two options, and their precedence is in this order:
 
 1. Environment variables
 2. Configuration files
 
-   * The config file in the environment variable ``PRETALX_CONFIG_FILE`` if present, **or**
+   * The config file in the environment variable ``IMANAGE_CONFIG_FILE`` if present, **or**
 
    * The following three configuration files in this order:
 
-      - The config file ``pretalx.cfg`` in the ``src`` directory, next to the ``pretalx.example.cfg`` file.
-      - The config file ``~/.pretalx.cfg`` in the home of the executing user.
-      - The config file ``/etc/pretalx/pretalx.cfg``
+      - The config file ``imanage.cfg`` in the ``src`` directory, next to the ``imanage.example.cfg`` file.
+      - The config file ``~/.imanage.cfg`` in the home of the executing user.
+      - The config file ``/etc/imanage/imanage.cfg``
 
 3. Sensible defaults
 
@@ -26,7 +26,7 @@ This page explains the options grouped by configuration file sections. You’ll
 find the environment variable next to their corresponding settings.  A config
 file looks like this:
 
-.. literalinclude:: ../../src/pretalx.example.cfg
+.. literalinclude:: ../../src/imanage.example.cfg
    :language: ini
 
 The configuration format is the INI file format as understood by `Python`_.
@@ -42,36 +42,36 @@ The filesystem section
 ~~~~~~~~
 
 - The ``data`` option describes the path that is the base for all other
-  directories. pretalx will also save its log files there. Unless you have a
+  directories. imanage will also save its log files there. Unless you have a
   compelling reason to keep other files apart, setting the ``data`` option is
   the easiest way to configure file storage.
-- **Environment variable:** ``PRETALX_DATA_DIR``
-- **Default:** A directory called ``data`` next to pretalx’s ``manage.py``.
+- **Environment variable:** ``IMANAGE_DATA_DIR``
+- **Default:** A directory called ``data`` next to imanage’s ``manage.py``.
 
 ``media``
 ~~~~~~~~~
 
 - The ``media`` option sets the media directory that contains user generated files. It needs to
-  be writable by the pretalx process.
-- **Environment variable:** ``PRETALX_FILESYSTEM_MEDIA``
+  be writable by the imanage process.
+- **Environment variable:** ``IMANAGE_FILESYSTEM_MEDIA``
 - **Default:** A directory called ``media`` in the ``data`` directory (see above).
 
 ``logs``
 ~~~~~~~~
 
 - The ``logs`` option sets the log directory that contains logged data. It needs to
-  be writable by the pretalx process.
-- **Environment variable:** ``PRETALX_FILESYSTEM_LOGS``
+  be writable by the imanage process.
+- **Environment variable:** ``IMANAGE_FILESYSTEM_LOGS``
 - **Default:** A directory called ``logs`` in the ``data`` directory (see above).
 
 ``static``
 ~~~~~~~~~~
 
 - The ``statics`` option sets the directory that contains static files. It needs to
-  be writable by the pretalx process. pretalx will put files there during the ``rebuild`` and
+  be writable by the imanage process. imanage will put files there during the ``rebuild`` and
   ``collectstatic`` commands.
-- **Environment variable:** ``PRETALX_FILESYSTEM_STATIC``
-- **Default:** A directory called ``static.dist`` next to pretalx’s ``manage.py``.
+- **Environment variable:** ``IMANAGE_FILESYSTEM_STATIC``
+- **Default:** A directory called ``static.dist`` next to imanage’s ``manage.py``.
 
 The site section
 ----------------
@@ -79,44 +79,44 @@ The site section
 ``debug``
 ~~~~~~~~~
 
-- Decides if pretalx runs in debug mode. Please use this mode for development and debugging, not
-  for live usage. pretalx behaves differently when ``debug`` is on, so you should run **all**
+- Decides if imanage runs in debug mode. Please use this mode for development and debugging, not
+  for live usage. imanage behaves differently when ``debug`` is on, so you should run **all**
   your production commands, like e.g. ``rebuild`` with ``debug`` turned off.
-- **Environment variable:** ``PRETALX_DEBUG``
+- **Environment variable:** ``IMANAGE_DEBUG``
 - **Default:** ``True`` if you’re executing ``runserver``, ``False`` otherwise. **Never run a
   production server in debug mode.**
 
 ``url``
 ~~~~~~~
 
-- pretalx uses this value when it has to render full URLs, for example in
+- imanage uses this value when it has to render full URLs, for example in
   emails or feeds. It is also used to determined the allowed incoming hosts.
-- **Environment variable:** ``PRETALX_SITE_URL``
+- **Environment variable:** ``IMANAGE_SITE_URL``
 - **Default:** ``http://localhost``
 
 ``secret``
 ~~~~~~~~~~
 
 - Every Django application has a secret that Django uses for cryptographic signing.
-  You do not need to set this variable – pretalx will generate a secret key and save it in a local file if
+  You do not need to set this variable – imanage will generate a secret key and save it in a local file if
   you do not set it.
 - **Default:** None
 
 ``media``
 ~~~~~~~~~
 
-- The URL under which the media files (all files uploaded by users or generated by pretalx) should be.
+- The URL under which the media files (all files uploaded by users or generated by imanage) should be.
   If you change this value, remember to change your web server configuration, too!
-- **Environment variable:** ``PRETALX_SITE_MEDIA``
+- **Environment variable:** ``IMANAGE_SITE_MEDIA``
 - **Default**: ``/media/``
 
 ``static``
 ~~~~~~~~~~
 
 - The URL under which the static files should be. This includes all JavaScript and CSS files that
-  are packaged with pretalx. If you change this value, remember to change your web server configuration,
+  are packaged with imanage. If you change this value, remember to change your web server configuration,
   too!
-- **Environment variable:** ``PRETALX_SITE_STATIC``
+- **Environment variable:** ``IMANAGE_SITE_STATIC``
 - **Default**: ``/static/``
 
 ``csp``, ``csp_script``, ``csp_style``, ``csp_img``, ``csp_form``
@@ -127,7 +127,7 @@ The site section
   them completely!
   If you need to include special values like ``self``, remember to use single tick
   quotation marks: ``csp=https://rixx.de,'self'``
-- **Environment variables:** ``PRETALX_SITE_CSP``, ``PRETALX_SITE_CSP_SCRIPT`` etc.
+- **Environment variables:** ``IMANAGE_SITE_CSP``, ``IMANAGE_SITE_CSP_SCRIPT`` etc.
 - **Default**: ``''``
 
 ``max_pagination_limit``
@@ -136,7 +136,7 @@ The site section
 - The maximum number of items that can be requested per page. Users can request
   smaller page sizes, but cannot exceed this limit. Set to ``-1`` to remove the
   limit entirely. This setting applies to both API pages and UI pages.
-- **Environment variable:** ``PRETALX_MAX_PAGINATION_LIMIT``
+- **Environment variable:** ``IMANAGE_MAX_PAGINATION_LIMIT``
 - **Default:** ``250``
 
 ``highlighted_plugins``
@@ -147,7 +147,7 @@ The site section
   display a "Recommended" badge in both the plugin settings page and the event
   creation wizard. The order of the list does not matter, as the group of
   highlighted plugins will be sorted alphabetically.
-- **Environment variable:** ``PRETALX_HIGHLIGHTED_PLUGINS``
+- **Environment variable:** ``IMANAGE_HIGHLIGHTED_PLUGINS``
 - **Default:** ``''``
 
 The database section
@@ -156,120 +156,120 @@ The database section
 ``backend``
 ~~~~~~~~~~~
 
-- pretalx supports most SQL databases. You’ll need to install the appropriate
+- imanage supports most SQL databases. You’ll need to install the appropriate
   Python library for each of them, as described in the table below.
-- **Environment variable:** ``PRETALX_DB_TYPE``
+- **Environment variable:** ``IMANAGE_DB_TYPE``
 - **Default:** ``sqlite3``
 
 +------------+----------------------+-----------------------+
 | Database   | Configuration string | pip package           |
 +============+======================+=======================+
-| PostgresQL | ``postgresql``       | ``pretalx[postgres]`` |
+| PostgresQL | ``postgresql``       | ``imanage[postgres]`` |
 +------------+----------------------+-----------------------+
-| SQLite     | ``sqlite3``          | ``pretalx``           |
+| SQLite     | ``sqlite3``          | ``imanage``           |
 +------------+----------------------+-----------------------+
 
 ``name``
 ~~~~~~~~
 
 - The database’s name.
-- **Environment variable:** ``PRETALX_DB_NAME``
+- **Environment variable:** ``IMANAGE_DB_NAME``
 - **Default:** ``''``
 
 ``user``
 ~~~~~~~~
 
 - The database user, if applicable.
-- **Environment variable:** ``PRETALX_DB_USER``
+- **Environment variable:** ``IMANAGE_DB_USER``
 - **Default:** ``''``
 
 ``password``
 ~~~~~~~~~~~~
 
 - The database password, if applicable.
-- **Environment variable:** ``PRETALX_DB_PASS``
+- **Environment variable:** ``IMANAGE_DB_PASS``
 - **Default:** ``''``
 
 ``host``
 ~~~~~~~~
 
 - The database host, or the socket location, as needed. For local PostgreSQL authentication, you can leave this variable empty.
-- **Environment variable:** ``PRETALX_DB_HOST``
+- **Environment variable:** ``IMANAGE_DB_HOST``
 - **Default:** ``''``
 
 ``port``
 ~~~~~~~~
 
 - The database port, if applicable.
-- **Environment variable:** ``PRETALX_DB_PORT``
+- **Environment variable:** ``IMANAGE_DB_PORT``
 - **Default:** ``''``
 
 The mail section
 ----------------
 
-This section serves to configure the email server pretalx will use to send
+This section serves to configure the email server imanage will use to send
 emails by default. Events can override these settings in the web interface.
-However, even with event-specific settings, pretalx will use these global
+However, even with event-specific settings, imanage will use these global
 settings for non-event-specific emails like password resets (even when
 triggered from an event context) and team invitations.
 
 ``from``
 ~~~~~~~~
 
-- The fall-back sender address, e.g. for when pretalx sends event independent emails.
-- **Environment variable:** ``PRETALX_MAIL_FROM``
+- The fall-back sender address, e.g. for when imanage sends event independent emails.
+- **Environment variable:** ``IMANAGE_MAIL_FROM``
 - **Default:** ``admin@localhost``
 
 ``host``
 ~~~~~~~~
 
 - The email server host address.
-- **Environment variable:** ``PRETALX_MAIL_HOST``
+- **Environment variable:** ``IMANAGE_MAIL_HOST``
 - **Default:** ``localhost``
 
 ``port``
 ~~~~~~~~
 
 - The email server port.
-- **Environment variable:** ``PRETALX_MAIL_PORT``
+- **Environment variable:** ``IMANAGE_MAIL_PORT``
 - **Default:** ``25``
 
 ``user``
 ~~~~~~~~
 
 - The user account for mail server authentication, if needed.
-- **Environment variable:** ``PRETALX_MAIL_USER``
+- **Environment variable:** ``IMANAGE_MAIL_USER``
 - **Default:** ``''``
 
 ``password``
 ~~~~~~~~~~~~
 
 - The password for mail server authentication, if needed.
-- **Environment variable:** ``PRETALX_MAIL_PASSWORD``
+- **Environment variable:** ``IMANAGE_MAIL_PASSWORD``
 - **Default:** ``''``
 
 ``tls``
 ~~~~~~~
 
-- Should pretalx use TLS when sending mail? Please choose either TLS or SSL.
-- **Environment variable:** ``PRETALX_MAIL_TLS``
+- Should imanage use TLS when sending mail? Please choose either TLS or SSL.
+- **Environment variable:** ``IMANAGE_MAIL_TLS``
 - **Default:** ``False``
 
 ``ssl``
 ~~~~~~~
 
-- Should pretalx use SSL when sending mail? Please choose either TLS or SSL.
-- **Environment variable:** ``PRETALX_MAIL_SSL``
+- Should imanage use SSL when sending mail? Please choose either TLS or SSL.
+- **Environment variable:** ``IMANAGE_MAIL_SSL``
 - **Default:** ``False``
 
 The celery section
 ------------------
 
-Celery is not a requirement for pretalx. Celery runs as a separate process, and
+Celery is not a requirement for imanage. Celery runs as a separate process, and
 allows you to execute long-running tasks away from the usual request-response
 cycle.
 
-.. warning:: If this config section is present, pretalx will assume that Celery
+.. warning:: If this config section is present, imanage will assume that Celery
              workers exist and collect talks. If you include this section without
              providing Celery workers, no asynchronous tasks (like email sending)
              will be processed. If you do not use Celery, omit this section in
@@ -280,7 +280,7 @@ cycle.
 
 - The celery backend. If you use a standard redis-based setup,
   ``redis://127.0.0.1/1`` would be a sensible value.
-- **Environment variable:** ``PRETALX_CELERY_BACKEND``
+- **Environment variable:** ``IMANAGE_CELERY_BACKEND``
 - **Default:** ``''``
 
 ``broker``
@@ -288,13 +288,13 @@ cycle.
 
 - The celery broker. If you use a standard redis-based setup,
   ``redis://127.0.0.1/2`` would be a sensible value.
-- **Environment variable:** ``PRETALX_CELERY_BROKER``
+- **Environment variable:** ``IMANAGE_CELERY_BROKER``
 - **Default:** ``''``
 
 The redis section
 -----------------
 
-If you configure a redis server, pretalx can use it for locking, caching and
+If you configure a redis server, imanage can use it for locking, caching and
 session storage to speed up operations. You will need to install ``django_redis``.
 
 ``location``
@@ -303,14 +303,14 @@ session storage to speed up operations. You will need to install ``django_redis`
 - The location of redis, if you want to use it as a cache.
   ``redis://[:password]@127.0.0.1:6379/1`` would be a sensible value, or
   ``unix://[:password]@/path/to/socket.sock?db=0`` if you prefer to use sockets.
-- **Environment variable:** ``PRETALX_REDIS``
+- **Environment variable:** ``IMANAGE_REDIS``
 - **Default:** ``''``
 
 ``session``
 ~~~~~~~~~~~
 
 - If you want to use redis as your session storage, set this to ``True``.
-- **Environment variable:** ``PRETALX_REDIS_SESSIONS``
+- **Environment variable:** ``IMANAGE_REDIS_SESSIONS``
 - **Default:** ``False``
 
 The logging section
@@ -320,14 +320,14 @@ The logging section
 ~~~~~~~~~
 
 - The email address (or addresses, comma separated) to send system logs to.
-- **Environment variable:** ``PRETALX_LOGGING_EMAIL``
+- **Environment variable:** ``IMANAGE_LOGGING_EMAIL``
 - **Default:** ``''``
 
 ``email_level``
 ~~~~~~~~~~~~~~~
 
 - The log level to start sending emails at. Any of ``[DEBUG, INFO, WARNING, ERROR, CRITICAL]``.
-- **Environment variable:** ``PRETALX_LOGGING_EMAIL_LEVEL``
+- **Environment variable:** ``IMANAGE_LOGGING_EMAIL_LEVEL``
 - **Default:** ``ERROR``
 
 The locale section
@@ -337,14 +337,14 @@ The locale section
 ~~~~~~~~~~~~~~~~~
 
 - The system’s default locale.
-- **Environment variable:** ``PRETALX_LANGUAGE_CODE``
+- **Environment variable:** ``IMANAGE_LANGUAGE_CODE``
 - **Default:** ``en``
 
 ``time_zone``
 ~~~~~~~~~~~~~
 
 - The system’s default time zone as a ``pytz`` name.
-- **Environment variable:** ``PRETALX_TIME_ZONE``
+- **Environment variable:** ``IMANAGE_TIME_ZONE``
 - **Default:** ``UTC``
 
 The files section
@@ -354,7 +354,7 @@ The files section
 ~~~~~~~~~~~~~~~~
 
 - The maximum file size for uploads in MB.
-- **Environment variable:** ``PRETALX_FILE_UPLOAD_LIMIT``
+- **Environment variable:** ``IMANAGE_FILE_UPLOAD_LIMIT``
 - **Default:** ``10``
 
 

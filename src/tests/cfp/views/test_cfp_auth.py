@@ -1,13 +1,13 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 from unittest.mock import patch
 
 import pytest
 from django.test import override_settings
 
-from pretalx.common.auth import get_client_ip
-from pretalx.person.forms.user import UserForm
+from imanage.common.auth import get_client_ip
+from imanage.person.forms.user import UserForm
 
 
 @pytest.mark.django_db
@@ -176,7 +176,7 @@ def test_login_rate_limiting_blocks_after_threshold(speaker, rf):
     request = rf.post("/login/")
     request.META["REMOTE_ADDR"] = "8.8.8.8"
 
-    with patch("pretalx.person.forms.user.cache") as mock_cache:
+    with patch("imanage.person.forms.user.cache") as mock_cache:
         mock_cache.get.return_value = 11
 
         form = UserForm(
@@ -194,7 +194,7 @@ def test_login_increments_counter_on_failure(speaker, rf):
     request = rf.post("/login/")
     request.META["REMOTE_ADDR"] = "8.8.8.8"
 
-    with patch("pretalx.person.forms.user.cache") as mock_cache:
+    with patch("imanage.person.forms.user.cache") as mock_cache:
         mock_cache.get.return_value = 5
 
         form = UserForm(
@@ -212,7 +212,7 @@ def test_login_sets_counter_on_first_failure(speaker, rf):
     request = rf.post("/login/")
     request.META["REMOTE_ADDR"] = "8.8.8.8"
 
-    with patch("pretalx.person.forms.user.cache") as mock_cache:
+    with patch("imanage.person.forms.user.cache") as mock_cache:
         mock_cache.get.return_value = 0
         mock_cache.incr.side_effect = ValueError("Key not found")
 
@@ -235,7 +235,7 @@ def test_login_does_not_increment_counter_on_success(speaker, rf):
     request = rf.post("/login/")
     request.META["REMOTE_ADDR"] = "8.8.8.8"
 
-    with patch("pretalx.person.forms.user.cache") as mock_cache:
+    with patch("imanage.person.forms.user.cache") as mock_cache:
         mock_cache.get.return_value = 5
 
         form = UserForm(
@@ -253,7 +253,7 @@ def test_login_no_rate_limiting_for_private_ip(speaker, rf):
     request = rf.post("/login/")
     request.META["REMOTE_ADDR"] = "192.168.1.1"
 
-    with patch("pretalx.person.forms.user.cache") as mock_cache:
+    with patch("imanage.person.forms.user.cache") as mock_cache:
         mock_cache.get.return_value = 100
 
         form = UserForm(

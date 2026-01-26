@@ -366,7 +366,7 @@
       },
       "oneOf": [
         { "$ref": "#/definitions/FrabPerson" },
-        { "$ref": "#/definitions/PretalxPerson" }
+        { "$ref": "#/definitions/ImanagePerson" }
       ]
     },
     "FrabPerson": {
@@ -404,7 +404,7 @@
       },
       "required": ["name", "guid", "slug"]
     },
-    "PretalxPerson": {
+    "ImanagePerson": {
       "type": "object",
       "properties": {
         "code": {

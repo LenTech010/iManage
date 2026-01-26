@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 
@@ -8,9 +8,9 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.timezone import now
 from django_scopes import scope
 
-from pretalx.common.models.log import ActivityLog
-from pretalx.submission.models import Submission, SubmissionInvitation, SubmissionStates
-from pretalx.submission.models.question import QuestionRequired, QuestionVariant
+from imanage.common.models.log import ActivityLog
+from imanage.submission.models import Submission, SubmissionInvitation, SubmissionStates
+from imanage.submission.models.question import QuestionRequired, QuestionVariant
 
 
 @pytest.mark.django_db
@@ -432,7 +432,7 @@ def test_orga_can_edit_submission(orga_client, event, accepted_submission):
 
         logs = accepted_submission.logged_actions()
         assert logs.count() > initial_log_count
-        update_log = logs.filter(action_type="pretalx.submission.update").first()
+        update_log = logs.filter(action_type="imanage.submission.update").first()
         assert update_log is not None
         assert "changes" in update_log.json_data
         assert "title" in update_log.json_data["changes"]
@@ -475,7 +475,7 @@ def test_orga_can_edit_submission_with_custom_field_consolidated_log(
         new_log_count = logs.count()
         assert new_log_count == initial_log_count + 1
 
-        update_log = logs.filter(action_type="pretalx.submission.update").first()
+        update_log = logs.filter(action_type="imanage.submission.update").first()
         assert update_log
         assert update_log.changes
         assert update_log.changes["title"]["old"] == old_title
@@ -800,7 +800,7 @@ def test_submission_statistics(use_tracks, slot, other_slot, orga_client):
         logs = []
         subs = [slot.submission, other_slot.submission]
         for i in range(2):
-            logs.append(subs[i].log_action("pretalx.submission.create"))
+            logs.append(subs[i].log_action("imanage.submission.create"))
         ActivityLog.objects.filter(pk=logs[0].pk).update(
             timestamp=logs[0].timestamp - dt.timedelta(days=2)
         )
@@ -993,7 +993,7 @@ def test_orga_cannot_post_empty_submission_comment(orga_client, submission):
 def test_orga_can_view_submission_history(orga_client, event, submission, orga_user):
     with scope(event=event):
         submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=orga_user,
             orga=True,
             old_data={"title": "Old Title"},
@@ -1027,7 +1027,7 @@ def test_orga_can_retract_invitation(orga_client, submission):
         assert not SubmissionInvitation.objects.filter(pk=invitation_id).exists()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.invitation.retract")
+            .filter(action_type="imanage.submission.invitation.retract")
             .exists()
         )
 
@@ -1037,7 +1037,7 @@ def test_reviewer_can_delete_own_review(review_client, review, submission):
     with scope(event=submission.event):
         assert submission.event.active_review_phase.can_review is True
         review_pk = review.pk
-        from pretalx.submission.models import Review
+        from imanage.submission.models import Review
 
         assert Review.objects.filter(pk=review_pk).exists()
 

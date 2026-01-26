@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2019-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import math
 
 import pytest
 
-from pretalx.submission.models import SubmitterAccessCode
+from imanage.submission.models import SubmitterAccessCode
 
 
 @pytest.mark.parametrize(

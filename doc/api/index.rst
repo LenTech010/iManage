@@ -6,7 +6,7 @@
 API documentation
 =================
 
-pretalx has a REST-style API.  This API is not yet considered stable, so the
+imanage has a REST-style API.  This API is not yet considered stable, so the
 API may change between releases. We will document API changes in our
 :ref:`changelog`.
 

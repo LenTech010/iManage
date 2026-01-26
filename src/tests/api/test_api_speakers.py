@@ -1,13 +1,13 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope
 
-from pretalx.person.models import SpeakerProfile, UserApiToken
-from pretalx.submission.models import Answer, Question, QuestionTarget, Submission
+from imanage.person.models import SpeakerProfile, UserApiToken
+from imanage.submission.models import Answer, Question, QuestionTarget, Submission
 
 
 @pytest.fixture
@@ -467,7 +467,7 @@ def test_speaker_update_by_orga(
         assert profile.biography == new_bio
         assert (
             profile.logged_actions()
-            .filter(action_type="pretalx.user.profile.update")
+            .filter(action_type="imanage.user.profile.update")
             .exists()
         )
 
@@ -537,7 +537,7 @@ def test_speaker_update_change_name_email(
         assert speaker.email == new_email
         assert (
             profile.logged_actions()
-            .filter(action_type="pretalx.user.profile.update")
+            .filter(action_type="imanage.user.profile.update")
             .exists()
         )
 

@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2019-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.http import HttpResponseNotAllowed
 from django_scopes import scope
 from i18nfield.strings import LazyI18nString
 
-from pretalx.cfp.flow import BaseCfPStep, i18n_string
-from pretalx.person.forms.profile import SpeakerProfileForm
-from pretalx.submission.forms.submission import InfoForm
+from imanage.cfp.flow import BaseCfPStep, i18n_string
+from imanage.person.forms.profile import SpeakerProfileForm
+from imanage.submission.forms.submission import InfoForm
 
 
 @pytest.mark.parametrize(
@@ -146,7 +146,7 @@ def test_get_field_config_returns_empty_dict_for_missing(event):
 
 @pytest.mark.django_db
 def test_get_field_config_returns_field(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.save_config(
@@ -177,7 +177,7 @@ def test_get_field_config_returns_field(event):
 
 @pytest.mark.django_db
 def test_update_field_config_creates_new_field(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.update_field_config("info", "title", label="New Label")
@@ -189,7 +189,7 @@ def test_update_field_config_creates_new_field(event):
 
 @pytest.mark.django_db
 def test_update_field_config_updates_existing_field(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.save_config(
@@ -205,7 +205,7 @@ def test_update_field_config_updates_existing_field(event):
 
 @pytest.mark.django_db
 def test_update_field_config_creates_step_if_missing(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.update_field_config("profile", "biography", help_text="Bio help")
@@ -217,7 +217,7 @@ def test_update_field_config_creates_step_if_missing(event):
 
 @pytest.mark.django_db
 def test_update_field_order_reorders_existing_fields(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.save_config(
@@ -245,7 +245,7 @@ def test_update_field_order_reorders_existing_fields(event):
 
 @pytest.mark.django_db
 def test_update_field_order_creates_new_fields(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.update_field_order("info", ["title", "new_field", "abstract"])
@@ -258,7 +258,7 @@ def test_update_field_order_creates_new_fields(event):
 
 @pytest.mark.django_db
 def test_update_field_order_creates_step_if_missing(event):
-    from pretalx.cfp.flow import CfPFlow
+    from imanage.cfp.flow import CfPFlow
 
     with scope(event=event):
         event.cfp_flow.update_field_order("newstep", ["field1", "field2"])

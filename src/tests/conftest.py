@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -12,13 +12,13 @@ from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
 from lxml import etree
 
-from pretalx.common.models.settings import GlobalSettings
-from pretalx.event.models import Event, Organiser, Team, TeamInvite
-from pretalx.mail.models import MailTemplate
-from pretalx.person.models import SpeakerInformation, SpeakerProfile, User, UserApiToken
-from pretalx.person.models.auth_token import ENDPOINTS, generate_api_token
-from pretalx.schedule.models import Availability, Room, TalkSlot
-from pretalx.submission.models import (
+from imanage.common.models.settings import GlobalSettings
+from imanage.event.models import Event, Organiser, Team, TeamInvite
+from imanage.mail.models import MailTemplate
+from imanage.person.models import SpeakerInformation, SpeakerProfile, User, UserApiToken
+from imanage.person.models.auth_token import ENDPOINTS, generate_api_token
+from imanage.schedule.models import Availability, Room, TalkSlot
+from imanage.submission.models import (
     Answer,
     AnswerOption,
     Feedback,
@@ -32,7 +32,7 @@ from pretalx.submission.models import (
     Tag,
     Track,
 )
-from pretalx.submission.models.question import QuestionRequired
+from imanage.submission.models.question import QuestionRequired
 
 
 @pytest.fixture(scope="session", autouse=True)

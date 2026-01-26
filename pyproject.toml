@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 [project]
-name = "pretalx"
+name = "Imanage"
 dynamic = ["version"]
-description = "Conference organisation: CfPs, scheduling, much more"
+description = "Imanage conference management"
 readme = "README.rst"
 license = "AGPL-3.0-only"
 # SHOULD be the following, but Python does not support SPDX v3 (yet?)
-#license = "AGPL-3.0-only WITH AdditionRef-Pretalx-AGPL-3.0-Terms"
+#license = "AGPL-3.0-only WITH AdditionRef-Imanage-AGPL-3.0-Terms"
 license-files = ["LICENSE"]
 requires-python = ">=3.12"
 keywords = ["conference", "event", "schedule", "talk", "cfp"]
@@ -107,22 +107,22 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]
 
 [project.urls]
-Homepage = "https://pretalx.com"
-Documentation = "https://docs.pretalx.org"
-Repository = "https://github.com/pretalx/pretalx"
-Changelog = "https://docs.pretalx.org/changelog/"
-Issues = "https://github.com/pretalx/pretalx/issues"
+Homepage = "https://imanage.com"
+Documentation = "https://docs.imanage.org"
+Repository = "https://github.com/imanage/imanage"
+Changelog = "https://docs.imanage.org/changelog/"
+Issues = "https://github.com/imanage/imanage/issues"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.dynamic]
-version = {attr = "pretalx.__version__"}
+version = {attr = "imanage.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["pretalx*"]
-exclude = ["pretalx/frontend/node_modules"]
+include = ["imanage*"]
+exclude = ["imanage/frontend/node_modules"]
 
 [tool.check-manifest]
 ignore = [
@@ -138,12 +138,12 @@ ignore = [
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "pretalx.common.settings.test_settings"
+DJANGO_SETTINGS_MODULE = "imanage.common.settings.test_settings"
 testpaths = "src/tests"
 pythonpath = "src"
 filterwarnings = [
     # We can ignore this one, as it's just about trying to parse the XML output while exporting the schedule
-    "ignore:It looks like you're parsing an XML document using an HTML parser.::pretalx.agenda.management.commands.export_schedule:",
+    "ignore:It looks like you're parsing an XML document using an HTML parser.::imanage.agenda.management.commands.export_schedule:",
     # This warning *should* get suppressed via our own settings anyway …
     "ignore:Cache key contains characters that will cause errors if used with memcached::django.core.cache.backends.base:"
 ]
@@ -180,7 +180,7 @@ exclude_also = [
 
 [tool.isort]
 profile = "black"
-known_first_party = "pretalx"
+known_first_party = "imanage"
 skip = [
   "celery_app.py",
   "local",

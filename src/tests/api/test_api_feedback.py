@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -8,8 +8,8 @@ import pytest
 from django.utils.timezone import now
 from django_scopes import scope
 
-from pretalx.api.serializers.feedback import FeedbackSerializer
-from pretalx.submission.models import Feedback
+from imanage.api.serializers.feedback import FeedbackSerializer
+from imanage.submission.models import Feedback
 
 
 @pytest.mark.django_db

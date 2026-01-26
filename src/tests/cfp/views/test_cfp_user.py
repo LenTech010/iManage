@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 from contextlib import suppress
@@ -12,7 +12,7 @@ from django.urls import reverse
 from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
 
-from pretalx.submission.models import (
+from imanage.submission.models import (
     SubmissionInvitation,
     SubmissionStates,
     SubmitterAccessCode,
@@ -226,7 +226,7 @@ def test_speaker_can_edit_submission_logs_consolidated(
         assert submission.title == "Completely New Title"
         logs = submission.logged_actions()
         assert logs.count() == log_count + 1
-        update_log = logs.filter(action_type="pretalx.submission.update").first()
+        update_log = logs.filter(action_type="imanage.submission.update").first()
         assert update_log
         assert update_log.changes
         assert update_log.changes["title"]["old"] == old_title
@@ -793,7 +793,7 @@ def test_speaker_can_retract_invitation(speaker_client, submission):
         assert not SubmissionInvitation.objects.filter(pk=invitation_id).exists()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.invitation.retract")
+            .filter(action_type="imanage.submission.invitation.retract")
             .exists()
         )
 

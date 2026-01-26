@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.mail import MailTemplateSerializer
+from imanage.api.serializers.mail import MailTemplateSerializer
 
 
 @pytest.mark.django_db
@@ -82,14 +82,14 @@ def test_orga_can_see_single_mail_template_locale_override(
 
 @pytest.mark.django_db
 def test_no_legacy_mail_template_api(client, orga_user_token, mail_template):
-    from pretalx.api.versions import LEGACY
+    from imanage.api.versions import LEGACY
 
     response = client.get(
         mail_template.event.api_urls.mail_templates + f"{mail_template.pk}/",
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     assert response.status_code == 400, response.text
@@ -118,7 +118,7 @@ def test_orga_can_create_mail_templates(client, orga_user_write_token, event):
         assert not mail_template.role
         assert (
             mail_template.logged_actions()
-            .filter(action_type="pretalx.mail_template.create")
+            .filter(action_type="imanage.mail_template.create")
             .exists()
         )
 
@@ -141,7 +141,7 @@ def test_orga_cannot_create_mail_templates_readonly_token(
         assert not event.mail_templates.filter(subject="newtesttemplate").exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.mail_template.create")
+            .filter(action_type="imanage.mail_template.create")
             .exists()
         )
 
@@ -166,7 +166,7 @@ def test_orga_can_update_mail_templates(
         assert mail_template.subject == "newtesttemplate"
         assert (
             mail_template.logged_actions()
-            .filter(action_type="pretalx.mail_template.update")
+            .filter(action_type="imanage.mail_template.update")
             .exists()
         )
 
@@ -195,7 +195,7 @@ def test_orga_update_mail_template_invalid_placeholder(
         assert getattr(mail_template, field) != value
         assert not (
             mail_template.logged_actions()
-            .filter(action_type="pretalx.mail_template.update")
+            .filter(action_type="imanage.mail_template.update")
             .exists()
         )
 
@@ -238,7 +238,7 @@ def test_orga_cannot_update_mail_templates_readonly_token(
         assert mail_template.subject != "newtesttemplate"
         assert (
             not mail_template.logged_actions()
-            .filter(action_type="pretalx.mail_template.update")
+            .filter(action_type="imanage.mail_template.update")
             .exists()
         )
 
@@ -259,7 +259,7 @@ def test_orga_can_delete_mail_templates(
         assert not event.mail_templates.filter(pk=mail_template.pk).exists()
         assert (
             event.logged_actions()
-            .filter(action_type="pretalx.mail_template.delete")
+            .filter(action_type="imanage.mail_template.delete")
             .exists()
         )
 

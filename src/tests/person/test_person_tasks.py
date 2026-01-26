@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2023-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 
-from pretalx.person import tasks
-from pretalx.person.models import User
+from imanage.person import tasks
+from imanage.person.models import User
 
 
 def mock_get_404(*args, **kwargs):
@@ -21,7 +21,7 @@ def test_gravatar_refetch_called(user, caplog, mocker, event):
     User.objects.filter(pk=user.pk).update(get_gravatar=True)
 
     # patch requests.get to return a 404
-    mocker.patch("pretalx.person.tasks.get", mock_get_404)
+    mocker.patch("imanage.person.tasks.get", mock_get_404)
     mocker.patch("requests.get", mock_get_404)
 
     tasks.refetch_gravatars(sender=event)
@@ -37,7 +37,7 @@ def test_gravatar_refetch_called(user, caplog, mocker, event):
 @pytest.mark.django_db
 def test_gravatar_refetch_called_on_save(user, caplog, mocker):
     # patch requests.get to return a 404
-    mocker.patch("pretalx.person.tasks.get", mock_get_404)
+    mocker.patch("imanage.person.tasks.get", mock_get_404)
     mocker.patch("requests.get", mock_get_404)
 
     user.get_gravatar = True

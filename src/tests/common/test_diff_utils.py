@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
-from pretalx.common.diff_utils import detect_markdown, render_diff
+from imanage.common.diff_utils import detect_markdown, render_diff
 
 
 def test_detect_markdown_bold():
@@ -76,9 +76,9 @@ def test_render_diff_simple():
 
 def test_render_diff_markdown_list_with_newlines():
     """Test that newlines in markdown lists are preserved in diffs."""
-    old = "- [test](https://pretalx.com/)"
+    old = "- [test](https://imanage.com/)"
     new = (
-        '- [test](https://pretalx.com/)\n- <i class="fa fa-paperclip"></i> double test'
+        '- [test](https://imanage.com/)\n- <i class="fa fa-paperclip"></i> double test'
     )
 
     result = render_diff(old, new)

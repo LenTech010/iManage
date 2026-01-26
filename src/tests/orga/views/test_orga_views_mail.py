@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.core import mail as djmail
 from django_scopes import scope
 
-from pretalx.mail.models import MailTemplate, MailTemplateRoles, QueuedMail
+from imanage.mail.models import MailTemplate, MailTemplateRoles, QueuedMail
 
 
 @pytest.mark.django_db
@@ -727,7 +727,7 @@ def test_orga_can_compose_single_mail_from_wrong_template(
 
 @pytest.mark.django_db
 def test_orga_can_send_draft_reminder(orga_client, event, speaker):
-    from pretalx.submission.models import Submission, SubmissionStates
+    from imanage.submission.models import Submission, SubmissionStates
 
     with scope(event=event):
         draft = Submission.objects.create(

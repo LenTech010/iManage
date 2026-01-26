@@ -4,17 +4,17 @@
 import os
 import sys
 from datetime import date
-from pretalx import __version__
+from imanage import __version__
 
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(0, os.path.abspath("./_extensions"))
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pretalx.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "imanage.settings")
 import django
 
 django.setup()
 
-project = "pretalx"
+project = "imanage"
 copyright = "2017-present, Tobias Kunze. "
 copyright += 'Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target=_blank>CC BY-SA 4.0</a>'
 author = "Tobias Kunze"
@@ -51,40 +51,40 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 pygments_style = "sphinx"
 html_static_path = [
-    "_themes/pretalx_theme/static",
+    "_themes/imanage_theme/static",
     "_static",
-    "../src/pretalx/static/fonts/",
-    "../src/pretalx/static/common/img/icons/",
-    "../src/pretalx/static/common/img/logo_white.svg",
+    "../src/imanage/static/fonts/",
+    "../src/imanage/static/common/img/icons/",
+    "../src/imanage/static/common/img/logo_white.svg",
 ]
 html_additional_pages = {"index": "index.html"}
 html_extra_path = ["api/schema.yml"]
-html_theme = "pretalx_theme"
+html_theme = "imanage_theme"
 html_theme_path = [os.path.abspath("_themes")]
 html_context = {
     "display_github": True,  # Integrate GitHub
-    "github_user": "pretalx",  # Username
-    "github_repo": "pretalx",  # Repo name
+    "github_user": "imanage",  # Username
+    "github_repo": "imanage",  # Repo name
     "github_version": "main",  # Version
     "conf_py_path": "/doc/",  # Path in the checkout to the docs root
 }
 
 linkcheck_ignore = [
-    "https://pretalx.example.org",
+    "https://imanage.example.org",
     "http://localhost",
     "http://127.0.0.1",
     "/schema.yml",
-    r"https://github.com/pretalx/pretalx/issues/\d+",  # The release notes are auto generated and contain a LOT of issue links
-    r"https://github.com/pretalx/pretalx/issues/new",  # Requires login
-    r"https://github.com/pretalx/pretalx/discussions/new",  # Requires login
-    "https://translate.pretalx.com/projects/pretalx/pretalx/#repository",  # Only accessible by admins
+    r"https://github.com/imanage/imanage/issues/\d+",  # The release notes are auto generated and contain a LOT of issue links
+    r"https://github.com/imanage/imanage/issues/new",  # Requires login
+    r"https://github.com/imanage/imanage/discussions/new",  # Requires login
+    "https://translate.imanage.com/projects/imanage/imanage/#repository",  # Only accessible by admins
     "https://github.com/fullcalendar/fullcalendar/releases/download/v6.1.5/fullcalendar-6.1.5.zip",  # redirects to cdn
     "https://www.patreon.com/rixx",  # spurious errors, sigh
-    "https://pypi.org/project/pretalx/#history",  # CDN/bot check breaks the check for the link anchor
+    "https://pypi.org/project/imanage/#history",  # CDN/bot check breaks the check for the link anchor
     "https://www.gnu.org",  # spurious errors, and as it’s only licensing information, this is fine
 ]
 
-htmlhelp_basename = "pretalxdoc"
+htmlhelp_basename = "imanagedoc"
 autodoc_member_order = "groupwise"
 
 if HAS_PYENCHANT:

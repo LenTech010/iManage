@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 import tempfile
@@ -7,7 +7,7 @@ import tempfile
 import pytest
 from django_scopes import scope
 
-from pretalx.submission.models.question import QuestionRequired
+from imanage.submission.models.question import QuestionRequired
 
 
 @pytest.mark.parametrize("assigned", (True, False))

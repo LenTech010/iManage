@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import tempfile
 
 import pytest
 from django.core.files.base import ContentFile
 
-from pretalx.common.models.file import CachedFile
+from imanage.common.models.file import CachedFile
 
 
 @pytest.mark.django_db

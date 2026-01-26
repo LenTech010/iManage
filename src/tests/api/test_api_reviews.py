@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 from decimal import Decimal
@@ -7,8 +7,8 @@ from decimal import Decimal
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.review import ReviewSerializer
-from pretalx.submission.models import Answer, Review, ReviewScore, ReviewScoreCategory
+from imanage.api.serializers.review import ReviewSerializer
+from imanage.submission.models import Answer, Review, ReviewScore, ReviewScoreCategory
 
 
 @pytest.fixture

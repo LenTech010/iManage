@@ -1,0 +1,159 @@
+<!--
+SPDX-FileCopyrightText: 2017-present Tobias Kunze
+SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+-->
+
+{% extends "orga/base.html" %}
+
+{% load i18n %}
+{% load rules %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "common/css/ui/stages.css" %}">
+    <link rel="stylesheet" href="{% static "orga/css/ui/dashboard.css" %}">
+    <link rel="stylesheet" href="{% static "orga/css/forms/i18n.css" %}">
+    <link rel="stylesheet" href="{% static "orga/css/ui/history.css" %}">
+{% endblock stylesheets %}
+
+{% block scripts %}
+    <script defer src="{% static "vendored/htmx.min.js" %}"></script>
+    <script defer src="{% static "common/js/ui/dialog.js" %}"></script>
+    <script defer src="{% static "common/js/ui/history-dialog.js" %}"></script>
+{% endblock scripts %}
+
+{% block content %}
+    {% has_perm "person.orga_list_speakerprofile" request.user request.event as can_view_speakers %}
+    {% has_perm "event.update_event" request.user request.event as can_change_settings %}
+    {% has_perm "submission.orga_update_submission" request.user request.event as is_admin %}
+    {% has_perm "submission.review_submission" request.user request.event as is_reviewer %}
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                {{ request.event.name }}
+                <small class="text-muted small">{{ request.event.get_date_range_display }}</small>
+            </h2>
+        </div>
+    </div>
+
+    {% if is_admin %}
+        <div class="card shadow-sm mb-5">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="h5 mb-0 font-weight-bold text-navy"><i class="fa fa-university mr-2"></i> Conference Chair Console</h3>
+                <span class="badge badge-primary px-3 py-2">Admin View</span>
+            </div>
+            <div class="card-body">
+                <div class="row text-center py-3">
+                    <div class="col-md-3 border-right">
+                        <div class="text-slate mb-1">Total Proposals</div>
+                        <h4 class="display-4 font-weight-bold text-navy mb-3">{{ tiles.0.large|default:"0" }}</h4>
+                        <a href="{{ request.event.orga_urls.submissions }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">Manage Proposals</a>
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <div class="text-slate mb-1">Acceptance Rate</div>
+                        <h4 class="display-4 font-weight-bold text-success mb-3">{{ accepted_count|default:"0" }}</h4>
+                        <a href="{{ request.event.orga_urls.submissions }}" class="btn btn-sm btn-outline-success rounded-pill px-3">View Stats</a>
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <div class="text-slate mb-1">Review Progress</div>
+                        <h4 class="display-4 font-weight-bold text-info mb-3">{{ request.event.reviews.count|default:"0" }}</h4>
+                        <a href="{% url "orga:reviews.dashboard" event=request.event.slug %}" class="btn btn-sm btn-outline-info rounded-pill px-3">Review Status</a>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-slate mb-1">Active Reviewers</div>
+                        <h4 class="display-4 font-weight-bold text-warning mb-3">{{ request.event.reviewers.count|default:"0" }}</h4>
+                        <a href="{{ request.event.organiser.orga_urls.teams }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">Assign Reviewers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if is_reviewer %}
+        <div class="card shadow-sm mb-5">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="h5 mb-0 font-weight-bold text-info"><i class="fa fa-eye mr-2"></i> Review Workspace</h3>
+                <span class="badge badge-info px-3 py-2">Reviewer View</span>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">You have been assigned to assess the following academic contributions for <strong>{{ request.event.name }}</strong>.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-4 border rounded bg-light mb-3">
+                            <h5 class="font-weight-bold mb-3">Assigned Submissions</h5>
+                            <p class="small text-muted mb-4">Download PDF, Score Originality/Relevance/Clarity and provide your expert feedback.</p>
+                            <a href="{% url "orga:reviews.dashboard" event=request.event.slug %}" class="btn btn-info btn-block shadow-sm">
+                                <i class="fa fa-pencil-square-o mr-2"></i> Start Reviewing
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 border rounded bg-light mb-3">
+                            <h5 class="font-weight-bold mb-3">Review Guidelines</h5>
+                            <p class="small text-muted mb-4">Please ensure your scores follow the conference's unified evaluation criteria.</p>
+                            <a href="{{ request.event.urls.base }}" class="btn btn-outline-secondary btn-block">
+                                <i class="fa fa-book mr-2"></i> View Guidelines
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card shadow-sm mb-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="h5 mb-0 font-weight-bold"><i class="fa fa-file-text-o mr-2"></i> Submission Portal</h3>
+            <span class="badge badge-secondary px-3 py-2">Author View</span>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4">Centralized workspace for managing your papers and interacting with the conference organizers.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-none bg-light">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fa fa-files-o fa-3x"></i>
+                            </div>
+                            <h5 class="font-weight-bold">My Papers</h5>
+                            <p class="small text-muted mb-4">View and track the status of your submitted manuscripts.</p>
+                            <a href="{{ request.event.urls.user_submissions }}" class="btn btn-primary btn-sm px-4 rounded-pill">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-none bg-light">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3 text-success">
+                                <i class="fa fa-upload fa-3x"></i>
+                            </div>
+                            <h5 class="font-weight-bold">Upload Version</h5>
+                            <p class="small text-muted mb-4">Submit a new paper or upload a revised version of an existing one.</p>
+                            <a href="{{ request.event.urls.submit }}" class="btn btn-success btn-sm px-4 rounded-pill">New Submission</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-none bg-light">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3 text-info">
+                                <i class="fa fa-comments-o fa-3x"></i>
+                            </div>
+                            <h5 class="font-weight-bold">Review Comments</h5>
+                            <p class="small text-muted mb-4">Access detailed feedback and comments from the review committee.</p>
+                            <button class="btn btn-info btn-sm px-4 rounded-pill disabled" disabled>View Feedback</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if history and can_change_settings %}
+        <div class="dashboard-history mt-4">
+            <h3>Recent Activity</h3>
+            {% include "common/logs.html" with entries=history %}
+        </div>
+    {% endif %}
+{% endblock content %}

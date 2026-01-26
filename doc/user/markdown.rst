@@ -9,7 +9,7 @@ Markdown Guide
 What is Markdown?
 -----------------
 
-pretalx often allows you to write `Markdown`_ instead of plain text, like in
+imanage often allows you to write `Markdown`_ instead of plain text, like in
 talk descriptions, the Call for Papers, and email texts. Markdown is helpful if
 you want to write text including links, bold text, and other formatted content.
 Markdown is a common option since it’s way easier to learn than languages like
@@ -37,9 +37,9 @@ on the right:
 |     Print `this`.                        | Print ``this``.                      |
 +------------------------------------------+--------------------------------------+
 | .. code-block:: md                       |                                      |
-|                                          | Look at https://pretalx.com.         |
-|     Look at https://pretalx.com.         |                                      |
-|     Look at [this](https://pretalx.com)  | Look at `this <https://pretalx.com>`_|
+|                                          | Look at https://imanage.com.         |
+|     Look at https://imanage.com.         |                                      |
+|     Look at [this](https://imanage.com)  | Look at `this <https://imanage.com>`_|
 +------------------------------------------+--------------------------------------+
 | .. code-block:: md                       |                                      |
 |                                          |                                      |
@@ -101,8 +101,8 @@ You can use the following attributes::
     <p class="…">
     <span class="…">
 
-pretalx will strip all other elements and attributes during parsing.
+imanage will strip all other elements and attributes during parsing.
 
 
 .. _Markdown: https://en.wikipedia.org/wiki/Markdown
-.. _this: https://pretalx.com
+.. _this: https://imanage.com

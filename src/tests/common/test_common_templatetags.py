@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.common.templatetags.copyable import copyable
-from pretalx.common.templatetags.html_signal import html_signal
-from pretalx.common.templatetags.rich_text import rich_text
-from pretalx.common.templatetags.times import times
-from pretalx.common.templatetags.xmlescape import xmlescape
+from imanage.common.templatetags.copyable import copyable
+from imanage.common.templatetags.html_signal import html_signal
+from imanage.common.templatetags.rich_text import rich_text
+from imanage.common.templatetags.times import times
+from imanage.common.templatetags.xmlescape import xmlescape
 
 
 @pytest.mark.parametrize(
@@ -101,7 +101,7 @@ def test_html_signal(event, slug, signal):
         event.plugins = "tests"
         event.save()
         result = html_signal(
-            f"pretalx.cfp.signals.{signal}", sender=event, request=None
+            f"imanage.cfp.signals.{signal}", sender=event, request=None
         )
         assert bool(result) is not slug
 

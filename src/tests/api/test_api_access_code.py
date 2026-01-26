@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.access_code import SubmitterAccessCodeSerializer
+from imanage.api.serializers.access_code import SubmitterAccessCodeSerializer
 
 
 @pytest.mark.django_db
@@ -72,7 +72,7 @@ def test_orga_can_see_single_access_code(client, orga_user_token, event):
 
 @pytest.mark.django_db
 def test_no_legacy_access_code_api(client, orga_user_token, event):
-    from pretalx.api.versions import LEGACY
+    from imanage.api.versions import LEGACY
 
     with scope(event=event):
         access_code = event.submitter_access_codes.create(code="testcode")
@@ -81,7 +81,7 @@ def test_no_legacy_access_code_api(client, orga_user_token, event):
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     assert response.status_code == 400, response.text
@@ -109,7 +109,7 @@ def test_orga_can_create_access_codes(client, orga_user_write_token, event):
         assert access_code.maximum_uses == 1
         assert (
             access_code.logged_actions()
-            .filter(action_type="pretalx.access_code.create")
+            .filter(action_type="imanage.access_code.create")
             .exists()
         )
 
@@ -132,7 +132,7 @@ def test_orga_cannot_create_access_codes_readonly_token(client, orga_user_token,
         ).exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.access_code.create")
+            .filter(action_type="imanage.access_code.create")
             .exists()
         )
 
@@ -157,7 +157,7 @@ def test_orga_can_update_access_codes(client, orga_user_write_token, event):
         assert access_code.code == "newtestcode"
         assert (
             access_code.logged_actions()
-            .filter(action_type="pretalx.access_code.update")
+            .filter(action_type="imanage.access_code.update")
             .exists()
         )
 
@@ -182,7 +182,7 @@ def test_orga_cannot_update_access_codes_readonly_token(client, orga_user_token,
         assert access_code.code != "newtestcode"
         assert (
             not access_code.logged_actions()
-            .filter(action_type="pretalx.access_code.update")
+            .filter(action_type="imanage.access_code.update")
             .exists()
         )
 
@@ -204,7 +204,7 @@ def test_orga_can_delete_access_codes(client, orga_user_write_token, event):
         assert not event.submitter_access_codes.filter(pk=access_code.pk).exists()
         assert (
             event.logged_actions()
-            .filter(action_type="pretalx.access_code.delete")
+            .filter(action_type="imanage.access_code.delete")
             .exists()
         )
 

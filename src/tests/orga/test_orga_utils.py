@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.conf import settings
 
-from pretalx.orga.utils.i18n import get_moment_locale
+from imanage.orga.utils.i18n import get_moment_locale
 
 
 @pytest.mark.parametrize(

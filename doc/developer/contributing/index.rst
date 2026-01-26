@@ -3,12 +3,12 @@
 
 .. _contributing:
 
-Contributing to pretalx
+Contributing to imanage
 =======================
 
 .. highlight: console
 
-You want to contribute? That’s great! Being an open source project, pretalx
+You want to contribute? That’s great! Being an open source project, imanage
 thrives if it receives regular contributions from the community. Everyone is
 able to contribute, and contributions can come in many forms: Code,
 Documentation, :ref:`Translations<translating>`, Graphics, Feedback ….  We
@@ -16,7 +16,7 @@ appreciate them highly! If you’re not sure how to make something work, feel
 free to `open a GitHub Discussion`_ about it.
 
 Don’t forget to head over to :ref:`devsetup` to read about how to set up your
-local copy of pretalx for development and testing.
+local copy of imanage for development and testing.
 
 Please note that we bound ourselves to a :ref:`coc` that applies to all
 communication around the project. We do not tolerate any form of harassment.
@@ -29,4 +29,4 @@ communication around the project. We do not tolerate any form of harassment.
    translating
    codeofconduct
 
-.. _open a GitHub discussion: https://github.com/pretalx/pretalx/discussions/new
+.. _open a GitHub discussion: https://github.com/imanage/imanage/discussions/new

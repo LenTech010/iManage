@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 
@@ -15,7 +15,7 @@ def test_can_see_talk_list(client, django_assert_num_queries, event):
     with django_assert_num_queries(6):
         response = client.get(event.urls.talks, follow=True, HTTP_ACCEPT="text/html")
     assert response.status_code == 200
-    assert "<pretalx-schedule" in response.text
+    assert "<imanage-schedule" in response.text
 
 
 @pytest.mark.django_db

@@ -8,12 +8,12 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'doc/**'
-      - 'src/pretalx/locale/**'
+      - 'src/imanage/locale/**'
   pull_request:
     branches: [ main ]
     paths-ignore:
       - 'doc/**'
-      - 'src/pretalx/locale/**'
+      - 'src/imanage/locale/**'
   workflow_dispatch:
 
 permissions:
@@ -49,9 +49,9 @@ jobs:
         image: postgres:16
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: pretalx
+          POSTGRES_DB: imanage
         options: >-
-          --health-cmd "pg_isready -U postgres -d pretalx"
+          --health-cmd "pg_isready -U postgres -d imanage"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -94,7 +94,7 @@ jobs:
       - name: Run tests
         run: just test-parallel auto -p no:sugar
         env:
-          PRETALX_CONFIG_FILE: 'src/tests/ci_${{ matrix.database }}.cfg'
+          IMANAGE_CONFIG_FILE: 'src/tests/ci_${{ matrix.database }}.cfg'
       - name: Coverage comment
         id: coverage_comment
         uses: py-cov-action/python-coverage-comment-action@v3

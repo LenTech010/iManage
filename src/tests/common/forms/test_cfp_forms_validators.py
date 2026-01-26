@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.core.exceptions import ValidationError
 
-from pretalx.common.forms.validators import ZXCVBNValidator
+from imanage.common.forms.validators import ZXCVBNValidator
 
 
 @pytest.mark.parametrize(

@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 from datetime import datetime, timedelta
@@ -8,8 +8,8 @@ import dateutil.parser
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.room import RoomOrgaSerializer, RoomSerializer
-from pretalx.api.versions import LEGACY
+from imanage.api.serializers.room import RoomOrgaSerializer, RoomSerializer
+from imanage.api.versions import LEGACY
 
 
 @pytest.mark.django_db
@@ -132,7 +132,7 @@ def test_legacy_room_api(client, orga_user_token, room):
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     content = json.loads(response.text)
@@ -153,7 +153,7 @@ def test_invalid_api_version(client, orga_user_token, room):
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": "YOLO",
+            "Imanage-Version": "YOLO",
         },
     )
     assert response.status_code == 400
@@ -177,7 +177,7 @@ def test_orga_can_create_rooms(client, orga_user_write_token, event):
     assert response.status_code == 201, response.text
     with scope(event=event):
         room = event.rooms.get(name="newtestroom")
-        assert room.logged_actions().filter(action_type="pretalx.room.create").exists()
+        assert room.logged_actions().filter(action_type="imanage.room.create").exists()
 
 
 @pytest.mark.django_db
@@ -196,7 +196,7 @@ def test_orga_cannot_create_rooms_readonly_token(client, orga_user_token, event)
         assert not event.rooms.filter(name="newtestroom").exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.room.create")
+            .filter(action_type="imanage.room.create")
             .exists()
         )
 
@@ -217,7 +217,7 @@ def test_orga_can_update_rooms(client, orga_user_write_token, event, room):
     with scope(event=room.event):
         room.refresh_from_db()
         assert room.name == "newtestroom"
-        action = room.logged_actions().get(action_type="pretalx.room.update")
+        action = room.logged_actions().get(action_type="imanage.room.update")
         assert action.data["changes"] == {
             "name": {"old": "Testroom", "new": "newtestroom"}
         }
@@ -239,7 +239,7 @@ def test_orga_cannot_update_rooms_readonly_token(client, orga_user_token, room):
         room.refresh_from_db()
         assert room.name != "newtestroom"
         assert (
-            not room.logged_actions().filter(action_type="pretalx.room.update").exists()
+            not room.logged_actions().filter(action_type="imanage.room.update").exists()
         )
 
 
@@ -255,7 +255,7 @@ def test_orga_can_delete_rooms(client, orga_user_write_token, event, room):
     assert response.status_code == 204
     with scope(event=room.event):
         assert event.rooms.all().count() == 0
-        assert event.logged_actions().filter(action_type="pretalx.room.delete").exists()
+        assert event.logged_actions().filter(action_type="imanage.room.delete").exists()
 
 
 @pytest.mark.django_db

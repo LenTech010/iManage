@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 
-from pretalx.common.signals import EventPluginSignal, _populate_app_cache
+from imanage.common.signals import EventPluginSignal, _populate_app_cache
 from tests.dummy_signals import footer_link, footer_link_test
 
 

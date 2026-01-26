@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope
 
-from pretalx.schedule.models import Schedule
+from imanage.schedule.models import Schedule
 
 
 @pytest.fixture

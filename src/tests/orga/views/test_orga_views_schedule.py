@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -10,8 +10,8 @@ from django.urls import reverse
 from django.utils.timezone import now
 from django_scopes import scope
 
-from pretalx.event.models import Event
-from pretalx.schedule.models import Schedule
+from imanage.event.models import Event
+from imanage.schedule.models import Schedule
 
 
 @pytest.mark.django_db
@@ -411,7 +411,7 @@ def test_edit_room(orga_client, event, room):
         assert event.rooms.count() == 1
         assert str(event.rooms.first().name) == "A room"
         assert event.rooms.first().availabilities.count() == 0
-        action = room.logged_actions().get(action_type="pretalx.room.update")
+        action = room.logged_actions().get(action_type="imanage.room.update")
         assert action.data["changes"]["guid"]["new"]
         assert not action.data["changes"]["guid"]["old"]
         assert action.data["changes"]["name"]["new"] == {"en": "A room"}

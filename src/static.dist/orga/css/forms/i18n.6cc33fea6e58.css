@@ -1,0 +1,1278 @@
+/*
+ * SPDX-FileCopyrightText: 2017-present Tobias Kunze
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.form-group:has(.i18n-form-group) .optional {
+  display: none;
+}
+
+.i18n-form-group {
+  input[lang]:not([type="checkbox"]):not([type="radio"]),
+  textarea[lang],
+  .mail-preview[lang] {
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 34px;
+  }
+
+  textarea[lang],
+  .mail-preview[lang] {
+    background-position: 10px 12px;
+  }
+
+  &.i18n-form-single-language {
+    input[lang]:not([type="checkbox"]):not([type="radio"]),
+    textarea[lang],
+    .mail-preview[lang],
+    input[lang] + label {
+      background: none !important;
+      padding: 0.375rem 0.75rem;
+    }
+  }
+}
+.i18n-form-group input[lang]:not([type="checkbox"]):not([type="radio"]),
+.i18n-form-group textarea {
+  border-top-width: 0;
+  border-radius: 0;
+
+  &:first-child {
+    border-top-width: 1px;
+    border-top-left-radius: var(--size-border-radius);
+    border-top-right-radius: var(--size-border-radius);
+  }
+  &:last-child {
+    border-bottom-right-radius: var(--size-border-radius);
+    border-bottom-left-radius: var(--size-border-radius);
+  }
+}
+.i18n-form-single-language input[lang],
+.i18n-form-single-language textarea[lang],
+.i18n-form-single-language input[lang] + label {
+  background: none !important;
+  padding: 0.375rem 0.75rem;
+  &::placeholder {
+    opacity: 0;
+  }
+}
+div[lang="ad"],
+input[lang="ad"],
+textarea[lang="ad"] {
+  background-image: url("/static/vendored/flags/ad.cc750844215a.png");
+}
+div[lang="ae"],
+input[lang="ae"],
+textarea[lang="ae"] {
+  background-image: url("/static/vendored/flags/ae.7391e6b6df7b.png");
+}
+div[lang="af"],
+input[lang="af"],
+textarea[lang="af"] {
+  background-image: url("/static/vendored/flags/af.ae7c58272ae4.png");
+}
+div[lang="ag"],
+input[lang="ag"],
+textarea[lang="ag"] {
+  background-image: url("/static/vendored/flags/ag.390af4c36d46.png");
+}
+div[lang="ai"],
+input[lang="ai"],
+textarea[lang="ai"] {
+  background-image: url("/static/vendored/flags/ai.08cf0788a582.png");
+}
+div[lang="al"],
+input[lang="al"],
+textarea[lang="al"] {
+  background-image: url("/static/vendored/flags/al.7c5bc720b2cf.png");
+}
+div[lang="am"],
+input[lang="am"],
+textarea[lang="am"] {
+  background-image: url("/static/vendored/flags/am.fd5d9d1d864e.png");
+}
+div[lang="an"],
+input[lang="an"],
+textarea[lang="an"] {
+  background-image: url("/static/vendored/flags/an.7d7d682a9dc9.png");
+}
+div[lang="ao"],
+input[lang="ao"],
+textarea[lang="ao"] {
+  background-image: url("/static/vendored/flags/ao.41a8aa1e11f7.png");
+}
+div[lang="ar"],
+input[lang="ar"],
+textarea[lang="ar"] {
+  background-image: url("/static/vendored/flags/arab-league.87a3ae64b446.png");
+}
+div[lang="as"],
+input[lang="as"],
+textarea[lang="as"] {
+  background-image: url("/static/vendored/flags/as.96e49204e758.png");
+}
+div[lang="at"],
+input[lang="at"],
+textarea[lang="at"] {
+  background-image: url("/static/vendored/flags/at.62bf1a565369.png");
+}
+div[lang="au"],
+input[lang="au"],
+textarea[lang="au"] {
+  background-image: url("/static/vendored/flags/au.2fba49c88880.png");
+}
+div[lang="aw"],
+input[lang="aw"],
+textarea[lang="aw"] {
+  background-image: url("/static/vendored/flags/aw.6e82279ceb47.png");
+}
+div[lang="ax"],
+input[lang="ax"],
+textarea[lang="ax"] {
+  background-image: url("/static/vendored/flags/ax.27708378fcc0.png");
+}
+div[lang="az"],
+input[lang="az"],
+textarea[lang="az"] {
+  background-image: url("/static/vendored/flags/az.d63f5c99e25e.png");
+}
+div[lang="ba"],
+input[lang="ba"],
+textarea[lang="ba"] {
+  background-image: url("/static/vendored/flags/ba.cbb6ce46c69e.png");
+}
+div[lang="bb"],
+input[lang="bb"],
+textarea[lang="bb"] {
+  background-image: url("/static/vendored/flags/bb.47c8aea41766.png");
+}
+div[lang="bd"],
+input[lang="bd"],
+textarea[lang="bd"] {
+  background-image: url("/static/vendored/flags/bd.f02d8deb9de2.png");
+}
+div[lang="be"],
+input[lang="be"],
+textarea[lang="be"] {
+  background-image: url("/static/vendored/flags/be.2404b88a07bd.png");
+}
+div[lang="bf"],
+input[lang="bf"],
+textarea[lang="bf"] {
+  background-image: url("/static/vendored/flags/bf.cc65efa74cd7.png");
+}
+div[lang="bg"],
+input[lang="bg"],
+textarea[lang="bg"] {
+  background-image: url("/static/vendored/flags/bg.77b2183ab10c.png");
+}
+div[lang="bh"],
+input[lang="bh"],
+textarea[lang="bh"] {
+  background-image: url("/static/vendored/flags/bh.5bbf6106968b.png");
+}
+div[lang="bi"],
+input[lang="bi"],
+textarea[lang="bi"] {
+  background-image: url("/static/vendored/flags/bi.427c72cd341f.png");
+}
+div[lang="bj"],
+input[lang="bj"],
+textarea[lang="bj"] {
+  background-image: url("/static/vendored/flags/bj.67bd2e990cc7.png");
+}
+div[lang="bm"],
+input[lang="bm"],
+textarea[lang="bm"] {
+  background-image: url("/static/vendored/flags/bm.cf195bf19216.png");
+}
+div[lang="bn"],
+input[lang="bn"],
+textarea[lang="bn"] {
+  background-image: url("/static/vendored/flags/bn.4911cd2a8fae.png");
+}
+div[lang="bo"],
+input[lang="bo"],
+textarea[lang="bo"] {
+  background-image: url("/static/vendored/flags/bo.151854ff619d.png");
+}
+div[lang="pt-BR"],
+input[lang="pt-BR"],
+textarea[lang="pt-BR"] {
+  background-image: url("/static/vendored/flags/br.54c40b8a9ad7.png");
+}
+div[lang="bs"],
+input[lang="bs"],
+textarea[lang="bs"] {
+  background-image: url("/static/vendored/flags/bs.8b45f84cb140.png");
+}
+div[lang="bt"],
+input[lang="bt"],
+textarea[lang="bt"] {
+  background-image: url("/static/vendored/flags/bt.2f13e87c1868.png");
+}
+div[lang="bv"],
+input[lang="bv"],
+textarea[lang="bv"] {
+  background-image: url("/static/vendored/flags/bv.559ce5baaee3.png");
+}
+div[lang="bw"],
+input[lang="bw"],
+textarea[lang="bw"] {
+  background-image: url("/static/vendored/flags/bw.15d59270fb25.png");
+}
+div[lang="by"],
+input[lang="by"],
+textarea[lang="by"] {
+  background-image: url("/static/vendored/flags/by.9e18ac464c49.png");
+}
+div[lang="bz"],
+input[lang="bz"],
+textarea[lang="bz"] {
+  background-image: url("/static/vendored/flags/bz.6e14aaafe632.png");
+}
+div[lang="ca"],
+input[lang="ca"],
+textarea[lang="ca"] {
+  background-image: url("/static/vendored/flags/ca.8618709a45d8.png");
+}
+div[lang="cc"],
+input[lang="cc"],
+textarea[lang="cc"] {
+  background-image: url("/static/vendored/flags/cc.ebbfb19d7997.png");
+}
+div[lang="cd"],
+input[lang="cd"],
+textarea[lang="cd"] {
+  background-image: url("/static/vendored/flags/cd.34e2a72a9cb9.png");
+}
+div[lang="cf"],
+input[lang="cf"],
+textarea[lang="cf"] {
+  background-image: url("/static/vendored/flags/cf.252d14145f4c.png");
+}
+div[lang="cg"],
+input[lang="cg"],
+textarea[lang="cg"] {
+  background-image: url("/static/vendored/flags/cg.b5bed6c75a72.png");
+}
+div[lang="ch"],
+input[lang="ch"],
+textarea[lang="ch"] {
+  background-image: url("/static/vendored/flags/ch.e67b19a77671.png");
+}
+div[lang="ci"],
+input[lang="ci"],
+textarea[lang="ci"] {
+  background-image: url("/static/vendored/flags/ci.90e8d52c2151.png");
+}
+div[lang="ck"],
+input[lang="ck"],
+textarea[lang="ck"] {
+  background-image: url("/static/vendored/flags/ck.e70409285b72.png");
+}
+div[lang="cl"],
+input[lang="cl"],
+textarea[lang="cl"] {
+  background-image: url("/static/vendored/flags/cl.dc7b3be27813.png");
+}
+div[lang="cm"],
+input[lang="cm"],
+textarea[lang="cm"] {
+  background-image: url("/static/vendored/flags/cm.f5cdc865bf36.png");
+}
+div[lang="cn"],
+input[lang="cn"],
+textarea[lang="cn"] {
+  background-image: url("/static/vendored/flags/cn.a82ff00f39ef.png");
+}
+div[lang="zh-hans"],
+input[lang="zh-hans"],
+textarea[lang="zh-hans"] {
+  background-image: url("/static/vendored/flags/cn.a82ff00f39ef.png");
+}
+div[lang="co"],
+input[lang="co"],
+textarea[lang="co"] {
+  background-image: url("/static/vendored/flags/co.4bd223b284a0.png");
+}
+div[lang="cr"],
+input[lang="cr"],
+textarea[lang="cr"] {
+  background-image: url("/static/vendored/flags/cr.cd28a01f91e8.png");
+}
+div[lang="cs"],
+input[lang="cs"],
+textarea[lang="cs"] {
+  background-image: url("/static/vendored/flags/cz.815b6d2bf60a.png");
+}
+div[lang="cu"],
+input[lang="cu"],
+textarea[lang="cu"] {
+  background-image: url("/static/vendored/flags/cu.9d5366e9b01d.png");
+}
+div[lang="cv"],
+input[lang="cv"],
+textarea[lang="cv"] {
+  background-image: url("/static/vendored/flags/cv.2f4edfdcba4c.png");
+}
+div[lang="cx"],
+input[lang="cx"],
+textarea[lang="cx"] {
+  background-image: url("/static/vendored/flags/cx.8efc55a14b90.png");
+}
+div[lang="cy"],
+input[lang="cy"],
+textarea[lang="cy"] {
+  background-image: url("/static/vendored/flags/cy.f29741d622fe.png");
+}
+div[lang="de"],
+input[lang="de"],
+textarea[lang="de"],
+input[lang="de-formal"],
+textarea[lang="de-formal"] {
+  background-image: url("/static/vendored/flags/de.ddabae687eca.png");
+}
+div[lang="dj"],
+input[lang="dj"],
+textarea[lang="dj"] {
+  background-image: url("/static/vendored/flags/dj.197e6fc2579e.png");
+}
+div[lang="dk"],
+input[lang="dk"],
+textarea[lang="dk"] {
+  background-image: url("/static/vendored/flags/dk.fe926c8271b3.png");
+}
+div[lang="dm"],
+input[lang="dm"],
+textarea[lang="dm"] {
+  background-image: url("/static/vendored/flags/dm.85845da8ae28.png");
+}
+div[lang="do"],
+input[lang="do"],
+textarea[lang="do"] {
+  background-image: url("/static/vendored/flags/do.153949105845.png");
+}
+div[lang="dz"],
+input[lang="dz"],
+textarea[lang="dz"] {
+  background-image: url("/static/vendored/flags/dz.c57f3c0951ba.png");
+}
+div[lang="ec"],
+input[lang="ec"],
+textarea[lang="ec"] {
+  background-image: url("/static/vendored/flags/ec.0152114421e2.png");
+}
+div[lang="ee"],
+input[lang="ee"],
+textarea[lang="ee"] {
+  background-image: url("/static/vendored/flags/ee.1cdfaaa10ff1.png");
+}
+div[lang="eg"],
+input[lang="eg"],
+textarea[lang="eg"] {
+  background-image: url("/static/vendored/flags/eg.09c48d3562f0.png");
+}
+div[lang="eh"],
+input[lang="eh"],
+textarea[lang="eh"] {
+  background-image: url("/static/vendored/flags/eh.7dd5a46a34be.png");
+}
+div[lang="er"],
+input[lang="er"],
+textarea[lang="er"] {
+  background-image: url("/static/vendored/flags/er.481d394ac9a4.png");
+}
+div[lang="es"],
+input[lang="es"],
+textarea[lang="es"] {
+  background-image: url("/static/vendored/flags/es.d6693ce2a634.png");
+}
+div[lang="et"],
+input[lang="et"],
+textarea[lang="et"] {
+  background-image: url("/static/vendored/flags/et.73763e46da89.png");
+}
+div[lang="fi"],
+input[lang="fi"],
+textarea[lang="fi"] {
+  background-image: url("/static/vendored/flags/fi.e30bd2493de7.png");
+}
+div[lang="fj"],
+input[lang="fj"],
+textarea[lang="fj"] {
+  background-image: url("/static/vendored/flags/fj.7c3e78e31bb3.png");
+}
+div[lang="fk"],
+input[lang="fk"],
+textarea[lang="fk"] {
+  background-image: url("/static/vendored/flags/fk.9627317fe9a5.png");
+}
+div[lang="fm"],
+input[lang="fm"],
+textarea[lang="fm"] {
+  background-image: url("/static/vendored/flags/fm.d3767ea95466.png");
+}
+div[lang="fo"],
+input[lang="fo"],
+textarea[lang="fo"] {
+  background-image: url("/static/vendored/flags/fo.d0e6b0a3fdb4.png");
+}
+div[lang="fr"],
+input[lang="fr"],
+textarea[lang="fr"] {
+  background-image: url("/static/vendored/flags/fr.c1cf1874c330.png");
+}
+div[lang="ga"],
+input[lang="ga"],
+textarea[lang="ga"] {
+  background-image: url("/static/vendored/flags/ga.972da84bdea1.png");
+}
+div[lang="gb"],
+input[lang="gb"],
+textarea[lang="gb"] {
+  background-image: url("/static/vendored/flags/gb.0894999b1088.png");
+}
+div[lang="gd"],
+input[lang="gd"],
+textarea[lang="gd"] {
+  background-image: url("/static/vendored/flags/gd.95b8b79fafc6.png");
+}
+div[lang="ge"],
+input[lang="ge"],
+textarea[lang="ge"] {
+  background-image: url("/static/vendored/flags/ge.aa40721b7a17.png");
+}
+div[lang="gf"],
+input[lang="gf"],
+textarea[lang="gf"] {
+  background-image: url("/static/vendored/flags/gf.c1cf1874c330.png");
+}
+div[lang="gh"],
+input[lang="gh"],
+textarea[lang="gh"] {
+  background-image: url("/static/vendored/flags/gh.12da850e724d.png");
+}
+div[lang="gi"],
+input[lang="gi"],
+textarea[lang="gi"] {
+  background-image: url("/static/vendored/flags/gi.0ca5a4db2ac1.png");
+}
+div[lang="gl"],
+input[lang="gl"],
+textarea[lang="gl"] {
+  background-image: url("/static/vendored/flags/gl.073b6bf37f6e.png");
+}
+div[lang="gm"],
+input[lang="gm"],
+textarea[lang="gm"] {
+  background-image: url("/static/vendored/flags/gm.a7d785fa41e6.png");
+}
+div[lang="gn"],
+input[lang="gn"],
+textarea[lang="gn"] {
+  background-image: url("/static/vendored/flags/gn.acba9c908c29.png");
+}
+div[lang="gp"],
+input[lang="gp"],
+textarea[lang="gp"] {
+  background-image: url("/static/vendored/flags/gp.c2dc0a2062b2.png");
+}
+div[lang="gq"],
+input[lang="gq"],
+textarea[lang="gq"] {
+  background-image: url("/static/vendored/flags/gq.70f64b2b38b8.png");
+}
+div[lang="el"],
+input[lang="el"],
+textarea[lang="el"] {
+  background-image: url("/static/vendored/flags/gr.fd9b321b80be.png");
+}
+div[lang="gs"],
+input[lang="gs"],
+textarea[lang="gs"] {
+  background-image: url("/static/vendored/flags/gs.3b510d36dc70.png");
+}
+div[lang="gt"],
+input[lang="gt"],
+textarea[lang="gt"] {
+  background-image: url("/static/vendored/flags/gt.384e9d38421a.png");
+}
+div[lang="gu"],
+input[lang="gu"],
+textarea[lang="gu"] {
+  background-image: url("/static/vendored/flags/gu.2d058f7cea36.png");
+}
+div[lang="gw"],
+input[lang="gw"],
+textarea[lang="gw"] {
+  background-image: url("/static/vendored/flags/gw.35eb1d9b8821.png");
+}
+div[lang="gy"],
+input[lang="gy"],
+textarea[lang="gy"] {
+  background-image: url("/static/vendored/flags/gy.d816170967c6.png");
+}
+div[lang="hk"],
+input[lang="hk"],
+textarea[lang="hk"] {
+  background-image: url("/static/vendored/flags/hk.389d0451c5c2.png");
+}
+div[lang="hm"],
+input[lang="hm"],
+textarea[lang="hm"] {
+  background-image: url("/static/vendored/flags/hm.2fba49c88880.png");
+}
+div[lang="hn"],
+input[lang="hn"],
+textarea[lang="hn"] {
+  background-image: url("/static/vendored/flags/hn.ac9242c256af.png");
+}
+div[lang="hr"],
+input[lang="hr"],
+textarea[lang="hr"] {
+  background-image: url("/static/vendored/flags/hr.0868c49000b2.png");
+}
+div[lang="ht"],
+input[lang="ht"],
+textarea[lang="ht"] {
+  background-image: url("/static/vendored/flags/ht.b5360c0f01d5.png");
+}
+div[lang="hu"],
+input[lang="hu"],
+textarea[lang="hu"] {
+  background-image: url("/static/vendored/flags/hu.6c6fce8a6fd0.png");
+}
+div[lang="id"],
+input[lang="id"],
+textarea[lang="id"] {
+  background-image: url("/static/vendored/flags/id.fed538f9c8cd.png");
+}
+div[lang="ie"],
+input[lang="ie"],
+textarea[lang="ie"] {
+  background-image: url("/static/vendored/flags/ie.48e42d0d1451.png");
+}
+div[lang="il"],
+input[lang="il"],
+textarea[lang="il"] {
+  background-image: url("/static/vendored/flags/il.a135fcdefe8a.png");
+}
+div[lang="in"],
+input[lang="in"],
+textarea[lang="in"] {
+  background-image: url("/static/vendored/flags/in.50d62cba8134.png");
+}
+div[lang="io"],
+input[lang="io"],
+textarea[lang="io"] {
+  background-image: url("/static/vendored/flags/io.38afe5a0e981.png");
+}
+div[lang="iq"],
+input[lang="iq"],
+textarea[lang="iq"] {
+  background-image: url("/static/vendored/flags/iq.39cfe476621a.png");
+}
+div[lang="ir"],
+input[lang="ir"],
+textarea[lang="ir"] {
+  background-image: url("/static/vendored/flags/ir.2ac099e19054.png");
+}
+div[lang="is"],
+input[lang="is"],
+textarea[lang="is"] {
+  background-image: url("/static/vendored/flags/is.7fffd4f1acab.png");
+}
+div[lang="it"],
+input[lang="it"],
+textarea[lang="it"] {
+  background-image: url("/static/vendored/flags/it.784f7eb333f0.png");
+}
+div[lang="jm"],
+input[lang="jm"],
+textarea[lang="jm"] {
+  background-image: url("/static/vendored/flags/jm.a582c95e205f.png");
+}
+div[lang="jo"],
+input[lang="jo"],
+textarea[lang="jo"] {
+  background-image: url("/static/vendored/flags/jo.9dd19e8da307.png");
+}
+div[lang="jp"],
+input[lang="jp"],
+textarea[lang="jp"],
+input[lang="ja-jp"],
+textarea[lang="ja-jp"] {
+  background-image: url("/static/vendored/flags/jp.10958397bc7c.png");
+}
+div[lang="ke"],
+input[lang="ke"],
+textarea[lang="ke"] {
+  background-image: url("/static/vendored/flags/ke.357152ed37ec.png");
+}
+div[lang="kg"],
+input[lang="kg"],
+textarea[lang="kg"] {
+  background-image: url("/static/vendored/flags/kg.192033ce169b.png");
+}
+div[lang="kh"],
+input[lang="kh"],
+textarea[lang="kh"] {
+  background-image: url("/static/vendored/flags/kh.8658c066eb4f.png");
+}
+div[lang="ki"],
+input[lang="ki"],
+textarea[lang="ki"] {
+  background-image: url("/static/vendored/flags/ki.703ced92b97c.png");
+}
+div[lang="km"],
+input[lang="km"],
+textarea[lang="km"] {
+  background-image: url("/static/vendored/flags/km.cc942486999d.png");
+}
+div[lang="kn"],
+input[lang="kn"],
+textarea[lang="kn"] {
+  background-image: url("/static/vendored/flags/kn.f096727a7612.png");
+}
+div[lang="kp"],
+input[lang="kp"],
+textarea[lang="kp"] {
+  background-image: url("/static/vendored/flags/kp.0eaa3e8dc84b.png");
+}
+div[lang="kr"],
+input[lang="kr"],
+textarea[lang="kr"] {
+  background-image: url("/static/vendored/flags/kr.cf63c15bf955.png");
+}
+div[lang="kw"],
+input[lang="kw"],
+textarea[lang="kw"] {
+  background-image: url("/static/vendored/flags/kw.2e0485cdb9ca.png");
+}
+div[lang="ky"],
+input[lang="ky"],
+textarea[lang="ky"] {
+  background-image: url("/static/vendored/flags/ky.da2c56cc2568.png");
+}
+div[lang="kz"],
+input[lang="kz"],
+textarea[lang="kz"] {
+  background-image: url("/static/vendored/flags/kz.6d51066ba152.png");
+}
+div[lang="la"],
+input[lang="la"],
+textarea[lang="la"] {
+  background-image: url("/static/vendored/flags/la.3375d707535d.png");
+}
+div[lang="lb"],
+input[lang="lb"],
+textarea[lang="lb"] {
+  background-image: url("/static/vendored/flags/lb.dad5d86f0d90.png");
+}
+div[lang="lc"],
+input[lang="lc"],
+textarea[lang="lc"] {
+  background-image: url("/static/vendored/flags/lc.18c05f2c79f8.png");
+}
+div[lang="li"],
+input[lang="li"],
+textarea[lang="li"] {
+  background-image: url("/static/vendored/flags/li.822034b39b46.png");
+}
+div[lang="lk"],
+input[lang="lk"],
+textarea[lang="lk"] {
+  background-image: url("/static/vendored/flags/lk.4e90c553f186.png");
+}
+div[lang="lr"],
+input[lang="lr"],
+textarea[lang="lr"] {
+  background-image: url("/static/vendored/flags/lr.3b6d8d720721.png");
+}
+div[lang="ls"],
+input[lang="ls"],
+textarea[lang="ls"] {
+  background-image: url("/static/vendored/flags/ls.c228783a0785.png");
+}
+div[lang="lt"],
+input[lang="lt"],
+textarea[lang="lt"] {
+  background-image: url("/static/vendored/flags/lt.95efec9db9d2.png");
+}
+div[lang="lu"],
+input[lang="lu"],
+textarea[lang="lu"] {
+  background-image: url("/static/vendored/flags/lu.3be0b3a6096e.png");
+}
+div[lang="lv"],
+input[lang="lv"],
+textarea[lang="lv"] {
+  background-image: url("/static/vendored/flags/lv.6ffae4cc6503.png");
+}
+div[lang="ly"],
+input[lang="ly"],
+textarea[lang="ly"] {
+  background-image: url("/static/vendored/flags/ly.3f9d6e8cba5f.png");
+}
+div[lang="ma"],
+input[lang="ma"],
+textarea[lang="ma"] {
+  background-image: url("/static/vendored/flags/ma.c936b9f794de.png");
+}
+div[lang="mc"],
+input[lang="mc"],
+textarea[lang="mc"] {
+  background-image: url("/static/vendored/flags/mc.63c6fd073106.png");
+}
+div[lang="md"],
+input[lang="md"],
+textarea[lang="md"] {
+  background-image: url("/static/vendored/flags/md.e414980c55af.png");
+}
+div[lang="me"],
+input[lang="me"],
+textarea[lang="me"] {
+  background-image: url("/static/vendored/flags/me.7a2ee5d7f1bc.png");
+}
+div[lang="mg"],
+input[lang="mg"],
+textarea[lang="mg"] {
+  background-image: url("/static/vendored/flags/mg.5aea24a18ca7.png");
+}
+div[lang="mh"],
+input[lang="mh"],
+textarea[lang="mh"] {
+  background-image: url("/static/vendored/flags/mh.948dd15821a6.png");
+}
+div[lang="mk"],
+input[lang="mk"],
+textarea[lang="mk"] {
+  background-image: url("/static/vendored/flags/mk.617997cbcaaf.png");
+}
+div[lang="ml"],
+input[lang="ml"],
+textarea[lang="ml"] {
+  background-image: url("/static/vendored/flags/ml.d951cb1c43a8.png");
+}
+div[lang="mm"],
+input[lang="mm"],
+textarea[lang="mm"] {
+  background-image: url("/static/vendored/flags/mm.82ad2104b549.png");
+}
+div[lang="mn"],
+input[lang="mn"],
+textarea[lang="mn"] {
+  background-image: url("/static/vendored/flags/mn.4adb9a834188.png");
+}
+div[lang="mo"],
+input[lang="mo"],
+textarea[lang="mo"] {
+  background-image: url("/static/vendored/flags/mo.6339bdf0e24c.png");
+}
+div[lang="mp"],
+input[lang="mp"],
+textarea[lang="mp"] {
+  background-image: url("/static/vendored/flags/mp.929b9802e7bf.png");
+}
+div[lang="mq"],
+input[lang="mq"],
+textarea[lang="mq"] {
+  background-image: url("/static/vendored/flags/mq.be5fb2cd33e8.png");
+}
+div[lang="mr"],
+input[lang="mr"],
+textarea[lang="mr"] {
+  background-image: url("/static/vendored/flags/mr.6c1cc8a1babe.png");
+}
+div[lang="ms"],
+input[lang="ms"],
+textarea[lang="ms"] {
+  background-image: url("/static/vendored/flags/ms.bfddbc2aae07.png");
+}
+div[lang="mt"],
+input[lang="mt"],
+textarea[lang="mt"] {
+  background-image: url("/static/vendored/flags/mt.7a7ee4f98185.png");
+}
+div[lang="mu"],
+input[lang="mu"],
+textarea[lang="mu"] {
+  background-image: url("/static/vendored/flags/mu.48d5cbc23fed.png");
+}
+div[lang="mv"],
+input[lang="mv"],
+textarea[lang="mv"] {
+  background-image: url("/static/vendored/flags/mv.24c90cfb0c88.png");
+}
+div[lang="mw"],
+input[lang="mw"],
+textarea[lang="mw"] {
+  background-image: url("/static/vendored/flags/mw.1d2b8e369b2d.png");
+}
+div[lang="mx"],
+input[lang="mx"],
+textarea[lang="mx"] {
+  background-image: url("/static/vendored/flags/mx.479a865f838c.png");
+}
+div[lang="my"],
+input[lang="my"],
+textarea[lang="my"] {
+  background-image: url("/static/vendored/flags/my.e1c0f262c141.png");
+}
+div[lang="mz"],
+input[lang="mz"],
+textarea[lang="mz"] {
+  background-image: url("/static/vendored/flags/mz.159c85011041.png");
+}
+div[lang="na"],
+input[lang="na"],
+textarea[lang="na"] {
+  background-image: url("/static/vendored/flags/na.e582101531b6.png");
+}
+div[lang="nc"],
+input[lang="nc"],
+textarea[lang="nc"] {
+  background-image: url("/static/vendored/flags/nc.ad8bf708e9db.png");
+}
+div[lang="ne"],
+input[lang="ne"],
+textarea[lang="ne"] {
+  background-image: url("/static/vendored/flags/ne.f2eccd65605d.png");
+}
+div[lang="nf"],
+input[lang="nf"],
+textarea[lang="nf"] {
+  background-image: url("/static/vendored/flags/nf.c624a221dae9.png");
+}
+div[lang="ng"],
+input[lang="ng"],
+textarea[lang="ng"] {
+  background-image: url("/static/vendored/flags/ng.0c506131e184.png");
+}
+div[lang="ni"],
+input[lang="ni"],
+textarea[lang="ni"] {
+  background-image: url("/static/vendored/flags/ni.f43a5f354885.png");
+}
+div[lang="nl"],
+input[lang="nl"],
+textarea[lang="nl"] {
+  background-image: url("/static/vendored/flags/nl.6186550ebc77.png");
+}
+div[lang="no"],
+input[lang="no"],
+textarea[lang="no"] {
+  background-image: url("/static/vendored/flags/no.559ce5baaee3.png");
+}
+div[lang="np"],
+input[lang="np"],
+textarea[lang="np"] {
+  background-image: url("/static/vendored/flags/np.52c16445053d.png");
+}
+div[lang="nr"],
+input[lang="nr"],
+textarea[lang="nr"] {
+  background-image: url("/static/vendored/flags/nr.2fb04b747876.png");
+}
+div[lang="nu"],
+input[lang="nu"],
+textarea[lang="nu"] {
+  background-image: url("/static/vendored/flags/nu.9a2f682db640.png");
+}
+div[lang="nz"],
+input[lang="nz"],
+textarea[lang="nz"] {
+  background-image: url("/static/vendored/flags/nz.179cc39a58e3.png");
+}
+div[lang="om"],
+input[lang="om"],
+textarea[lang="om"] {
+  background-image: url("/static/vendored/flags/om.7b002bc8c4ab.png");
+}
+div[lang="pa"],
+input[lang="pa"],
+textarea[lang="pa"] {
+  background-image: url("/static/vendored/flags/pa.64795009d69b.png");
+}
+div[lang="pe"],
+input[lang="pe"],
+textarea[lang="pe"] {
+  background-image: url("/static/vendored/flags/pe.d1ed0462edb8.png");
+}
+div[lang="pf"],
+input[lang="pf"],
+textarea[lang="pf"] {
+  background-image: url("/static/vendored/flags/pf.e59d18e48cf0.png");
+}
+div[lang="pg"],
+input[lang="pg"],
+textarea[lang="pg"] {
+  background-image: url("/static/vendored/flags/pg.48f68aaeefaa.png");
+}
+div[lang="ph"],
+input[lang="ph"],
+textarea[lang="ph"] {
+  background-image: url("/static/vendored/flags/ph.8ff2d08518d3.png");
+}
+div[lang="pk"],
+input[lang="pk"],
+textarea[lang="pk"] {
+  background-image: url("/static/vendored/flags/pk.3bd18971ec17.png");
+}
+div[lang="pl"],
+input[lang="pl"],
+textarea[lang="pl"] {
+  background-image: url("/static/vendored/flags/pl.fad0e96c20f2.png");
+}
+div[lang="pm"],
+input[lang="pm"],
+textarea[lang="pm"] {
+  background-image: url("/static/vendored/flags/pm.ba41b8c34907.png");
+}
+div[lang="pn"],
+input[lang="pn"],
+textarea[lang="pn"] {
+  background-image: url("/static/vendored/flags/pn.e4dcc857f534.png");
+}
+div[lang="pr"],
+input[lang="pr"],
+textarea[lang="pr"] {
+  background-image: url("/static/vendored/flags/pr.40b7fb1a4c1e.png");
+}
+div[lang="ps"],
+input[lang="ps"],
+textarea[lang="ps"] {
+  background-image: url("/static/vendored/flags/ps.68d5f99924c6.png");
+}
+div[lang="pt"],
+input[lang="pt"],
+textarea[lang="pt"] {
+  background-image: url("/static/vendored/flags/pt.5b8ab69ac521.png");
+}
+div[lang="pt-pt"],
+input[lang="pt-pt"],
+textarea[lang="pt-pt"] {
+  background-image: url("/static/vendored/flags/pt.5b8ab69ac521.png");
+}
+div[lang="pw"],
+input[lang="pw"],
+textarea[lang="pw"] {
+  background-image: url("/static/vendored/flags/pw.f2bff7cd01d8.png");
+}
+div[lang="py"],
+input[lang="py"],
+textarea[lang="py"] {
+  background-image: url("/static/vendored/flags/py.b9d3d10b185a.png");
+}
+div[lang="qa"],
+input[lang="qa"],
+textarea[lang="qa"] {
+  background-image: url("/static/vendored/flags/qa.c1dc363a27f5.png");
+}
+div[lang="re"],
+input[lang="re"],
+textarea[lang="re"] {
+  background-image: url("/static/vendored/flags/re.c1cf1874c330.png");
+}
+div[lang="ro"],
+input[lang="ro"],
+textarea[lang="ro"] {
+  background-image: url("/static/vendored/flags/ro.d038c9c152c5.png");
+}
+div[lang="rs"],
+input[lang="rs"],
+textarea[lang="rs"] {
+  background-image: url("/static/vendored/flags/rs.5b672e3ee633.png");
+}
+div[lang="ru"],
+input[lang="ru"],
+textarea[lang="ru"] {
+  background-image: url("/static/vendored/flags/ru.0d31ef75adef.png");
+}
+div[lang="rw"],
+input[lang="rw"],
+textarea[lang="rw"] {
+  background-image: url("/static/vendored/flags/rw.bef92348e3ea.png");
+}
+div[lang="sa"],
+input[lang="sa"],
+textarea[lang="sa"] {
+  background-image: url("/static/vendored/flags/sa.605884cec6f4.png");
+}
+div[lang="sb"],
+input[lang="sb"],
+textarea[lang="sb"] {
+  background-image: url("/static/vendored/flags/sb.5e4b74f8a611.png");
+}
+div[lang="sc"],
+input[lang="sc"],
+textarea[lang="sc"] {
+  background-image: url("/static/vendored/flags/sc.39650e922851.png");
+}
+div[lang="sd"],
+input[lang="sd"],
+textarea[lang="sd"] {
+  background-image: url("/static/vendored/flags/sd.b972f90fea33.png");
+}
+div[lang="se"],
+input[lang="se"],
+textarea[lang="se"] {
+  background-image: url("/static/vendored/flags/se.4c01f06db233.png");
+}
+div[lang="sg"],
+input[lang="sg"],
+textarea[lang="sg"] {
+  background-image: url("/static/vendored/flags/sg.8af65159c137.png");
+}
+div[lang="sh"],
+input[lang="sh"],
+textarea[lang="sh"] {
+  background-image: url("/static/vendored/flags/sh.e707aacb0986.png");
+}
+div[lang="si"],
+input[lang="si"],
+textarea[lang="si"] {
+  background-image: url("/static/vendored/flags/si.d94ea79a5a8e.png");
+}
+div[lang="sj"],
+input[lang="sj"],
+textarea[lang="sj"] {
+  background-image: url("/static/vendored/flags/sj.559ce5baaee3.png");
+}
+div[lang="sk"],
+input[lang="sk"],
+textarea[lang="sk"] {
+  background-image: url("/static/vendored/flags/sk.5a7edc7e4492.png");
+}
+div[lang="sl"],
+input[lang="sl"],
+textarea[lang="sl"] {
+  background-image: url("/static/vendored/flags/sl.73904ec1cf4f.png");
+}
+div[lang="sm"],
+input[lang="sm"],
+textarea[lang="sm"] {
+  background-image: url("/static/vendored/flags/sm.56e3c1b483bf.png");
+}
+div[lang="sn"],
+input[lang="sn"],
+textarea[lang="sn"] {
+  background-image: url("/static/vendored/flags/sn.501a5fab662d.png");
+}
+div[lang="so"],
+input[lang="so"],
+textarea[lang="so"] {
+  background-image: url("/static/vendored/flags/so.4be2ffc4d06d.png");
+}
+div[lang="sr"],
+input[lang="sr"],
+textarea[lang="sr"] {
+  background-image: url("/static/vendored/flags/sr.8f9aca73767b.png");
+}
+div[lang="st"],
+input[lang="st"],
+textarea[lang="st"] {
+  background-image: url("/static/vendored/flags/st.ab272a50ea65.png");
+}
+div[lang="sv"],
+input[lang="sv"],
+textarea[lang="sv"] {
+  background-image: url("/static/vendored/flags/sv.c6c853766dfb.png");
+}
+div[lang="sy"],
+input[lang="sy"],
+textarea[lang="sy"] {
+  background-image: url("/static/vendored/flags/sy.a0886eca3ef8.png");
+}
+div[lang="sz"],
+input[lang="sz"],
+textarea[lang="sz"] {
+  background-image: url("/static/vendored/flags/sz.e97675a21b52.png");
+}
+div[lang="tc"],
+input[lang="tc"],
+textarea[lang="tc"] {
+  background-image: url("/static/vendored/flags/tc.50733ccc6700.png");
+}
+div[lang="td"],
+input[lang="td"],
+textarea[lang="td"] {
+  background-image: url("/static/vendored/flags/td.6c8d3f6c96bc.png");
+}
+div[lang="tf"],
+input[lang="tf"],
+textarea[lang="tf"] {
+  background-image: url("/static/vendored/flags/tf.f7ccbaa513a2.png");
+}
+div[lang="tg"],
+input[lang="tg"],
+textarea[lang="tg"] {
+  background-image: url("/static/vendored/flags/tg.5c62720575f9.png");
+}
+div[lang="th"],
+input[lang="th"],
+textarea[lang="th"] {
+  background-image: url("/static/vendored/flags/th.af85286bf1ca.png");
+}
+div[lang="tj"],
+input[lang="tj"],
+textarea[lang="tj"] {
+  background-image: url("/static/vendored/flags/tj.5cc548d1858d.png");
+}
+div[lang="tk"],
+input[lang="tk"],
+textarea[lang="tk"] {
+  background-image: url("/static/vendored/flags/tk.896fb1a34638.png");
+}
+div[lang="tl"],
+input[lang="tl"],
+textarea[lang="tl"] {
+  background-image: url("/static/vendored/flags/tl.093e76da6759.png");
+}
+div[lang="tm"],
+input[lang="tm"],
+textarea[lang="tm"] {
+  background-image: url("/static/vendored/flags/tm.b36ce71226fa.png");
+}
+div[lang="tn"],
+input[lang="tn"],
+textarea[lang="tn"] {
+  background-image: url("/static/vendored/flags/tn.ae9947d99c48.png");
+}
+div[lang="to"],
+input[lang="to"],
+textarea[lang="to"] {
+  background-image: url("/static/vendored/flags/to.ce868fde2d77.png");
+}
+div[lang="tr"],
+input[lang="tr"],
+textarea[lang="tr"] {
+  background-image: url("/static/vendored/flags/tr.31ea1f705854.png");
+}
+div[lang="tt"],
+input[lang="tt"],
+textarea[lang="tt"] {
+  background-image: url("/static/vendored/flags/tt.9ead47e1d486.png");
+}
+div[lang="tv"],
+input[lang="tv"],
+textarea[lang="tv"] {
+  background-image: url("/static/vendored/flags/tv.6fec556dd8bd.png");
+}
+div[lang="tw"],
+input[lang="tw"],
+textarea[lang="tw"],
+input[lang="zh-hant"],
+textarea[lang="zh-hant"] {
+  background-image: url("/static/vendored/flags/tw.0e41af2b3ca0.png");
+}
+div[lang="tz"],
+input[lang="tz"],
+textarea[lang="tz"] {
+  background-image: url("/static/vendored/flags/tz.c846788492ef.png");
+}
+div[lang="ua"],
+input[lang="ua"],
+textarea[lang="ua"] {
+  background-image: url("/static/vendored/flags/ua.7ef7a6f5def3.png");
+}
+div[lang="ug"],
+input[lang="ug"],
+textarea[lang="ug"] {
+  background-image: url("/static/vendored/flags/ug.17e134aa84a0.png");
+}
+div[lang="um"],
+input[lang="um"],
+textarea[lang="um"] {
+  background-image: url("/static/vendored/flags/um.f0f12f4afacc.png");
+}
+div[lang="us"],
+input[lang="us"],
+textarea[lang="us"] {
+  background-image: url("/static/vendored/flags/us.968591e00509.png");
+}
+div[lang="uy"],
+input[lang="uy"],
+textarea[lang="uy"] {
+  background-image: url("/static/vendored/flags/uy.9ca8f3d9b1b1.png");
+}
+div[lang="uz"],
+input[lang="uz"],
+textarea[lang="uz"] {
+  background-image: url("/static/vendored/flags/uz.37e4bdb64229.png");
+}
+div[lang="va"],
+input[lang="va"],
+textarea[lang="va"] {
+  background-image: url("/static/vendored/flags/va.493642ad6bf3.png");
+}
+div[lang="vc"],
+input[lang="vc"],
+textarea[lang="vc"] {
+  background-image: url("/static/vendored/flags/vc.60eec8d579d5.png");
+}
+div[lang="ve"],
+input[lang="ve"],
+textarea[lang="ve"] {
+  background-image: url("/static/vendored/flags/ve.3aee24fa5f6a.png");
+}
+div[lang="vg"],
+input[lang="vg"],
+textarea[lang="vg"] {
+  background-image: url("/static/vendored/flags/vg.79ef17575149.png");
+}
+div[lang="vi"],
+input[lang="vi"],
+textarea[lang="vi"] {
+  background-image: url("/static/vendored/flags/vi.c95b9175142c.png");
+}
+div[lang="vn"],
+input[lang="vn"],
+textarea[lang="vn"] {
+  background-image: url("/static/vendored/flags/vn.638136b1a6f5.png");
+}
+div[lang="vu"],
+input[lang="vu"],
+textarea[lang="vu"] {
+  background-image: url("/static/vendored/flags/vu.c37b82a52cdf.png");
+}
+div[lang="wf"],
+input[lang="wf"],
+textarea[lang="wf"] {
+  background-image: url("/static/vendored/flags/wf.86cc1aa337eb.png");
+}
+div[lang="ws"],
+input[lang="ws"],
+textarea[lang="ws"] {
+  background-image: url("/static/vendored/flags/ws.68183f64328d.png");
+}
+div[lang="ye"],
+input[lang="ye"],
+textarea[lang="ye"] {
+  background-image: url("/static/vendored/flags/ye.290e09160bb2.png");
+}
+div[lang="yt"],
+input[lang="yt"],
+textarea[lang="yt"] {
+  background-image: url("/static/vendored/flags/yt.f46c7cd7b247.png");
+}
+div[lang="za"],
+input[lang="za"],
+textarea[lang="za"] {
+  background-image: url("/static/vendored/flags/za.98e1044d0ffd.png");
+}
+div[lang="zm"],
+input[lang="zm"],
+textarea[lang="zm"] {
+  background-image: url("/static/vendored/flags/zm.ec69def9e77d.png");
+}
+div[lang="zw"],
+input[lang="zw"],
+textarea[lang="zw"] {
+  background-image: url("/static/vendored/flags/zw.e7ae0b7e3c49.png");
+}
+div[lang="en"],
+input[lang="en"],
+textarea[lang="en"] {
+  background-image: url("/static/vendored/flags/gb.0894999b1088.png");
+}

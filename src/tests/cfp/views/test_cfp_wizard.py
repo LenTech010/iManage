@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 #
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: Michael Reichert
@@ -16,8 +16,8 @@ from django.http.request import QueryDict
 from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
 
-from pretalx.submission.forms import InfoForm
-from pretalx.submission.models import Submission, SubmissionStates, SubmissionType, Tag
+from imanage.submission.forms import InfoForm
+from imanage.submission.models import Submission, SubmissionStates, SubmissionType, Tag
 
 
 class TestWizard:
@@ -825,7 +825,7 @@ class TestWizard:
 
 @pytest.mark.django_db
 def test_infoform_set_submission_type(event, other_event):
-    # https://github.com/pretalx/pretalx/issues/642
+    # https://github.com/imanage/imanage/issues/642
     with scopes_disabled():
         assert len(SubmissionType.objects.all()) > 1
     with scope(event=event):
@@ -838,7 +838,7 @@ def test_infoform_set_submission_type(event, other_event):
 
 @pytest.mark.django_db
 def test_infoform_set_submission_type_2nd_event(event, other_event, submission_type):
-    # https://github.com/pretalx/pretalx/issues/642
+    # https://github.com/imanage/imanage/issues/642
     with scopes_disabled():
         assert len(SubmissionType.objects.all()) > 1
     with scope(event=event):

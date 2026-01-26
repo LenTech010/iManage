@@ -1,17 +1,17 @@
 .. SPDX-FileCopyrightText: 2019-present Tobias Kunze
 .. SPDX-License-Identifier: CC-BY-SA-4.0
 
-Contributing Code to pretalx
+Contributing Code to imanage
 ============================
 
 Pull Request Workflow
 ---------------------
 
-If you want to add some change to pretalx itself or its documentation, you can
+If you want to add some change to imanage itself or its documentation, you can
 do so by opening a Pull Request on GitHub_.
 
 If you are not familiar with GitHub, the workflow is basically this: You
-register an account on GitHub, then you “fork” pretalx, and work on your copy
+register an account on GitHub, then you “fork” imanage, and work on your copy
 of it until you’re done. Then, you submit your changes as a Pull Request. We’ll
 review the PR and help you make any changes required to get it merged.  Have a
 look at the `GitHub documentation`_ and other documentation on git for further
@@ -41,7 +41,7 @@ so we’d like to ask you to follow these style guide notes:
 Code
 ~~~~
 
-Generally, pretalx Python code follows `PEP8`_. We run ``flake8``, ``isort``
+Generally, imanage Python code follows `PEP8`_. We run ``flake8``, ``isort``
 and ``black`` as style checkers, so those should help you if you’re not sure
 how to format something. They are configured via the ``setup.cfg`` file in the
 ``src`` directory, and can be run like this::
@@ -89,9 +89,9 @@ If you want to address or close issues, please do so in the commit message
 body. ``Closes #123`` or ``Refs #123`` will close the issue or show the
 reference in the issue log on GitHub.
 
-.. _GitHub: https://github.com/pretalx/pretalx
+.. _GitHub: https://github.com/imanage/imanage
 .. _GitHub documentation: https://docs.github.com/en/pull-requests
-.. _small: https://github.com/pretalx/pretalx/issues?q=is%3Aissue+is%3Aopen+label%3Asize%3Asmall
+.. _small: https://github.com/imanage/imanage/issues?q=is%3Aissue+is%3Aopen+label%3Asize%3Asmall
 .. _PEP8: https://legacy.python.org/dev/peps/pep-0008/
 .. _Django project style guide: https://docs.djangoproject.com/en/stable/internals/contributing/writing-code/coding-style/
 .. _prettier: https://prettier.io/

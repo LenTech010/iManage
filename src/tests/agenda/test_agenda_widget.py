@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.urls import reverse
@@ -24,7 +24,7 @@ def test_event_css_no_color(event, client):
         ("#0000ff", False),
         ("#800000", False),  # Maroon
         # Medium/light colors - need dark text override
-        ("#3aa57c", False),  # pretalx green
+        ("#3aa57c", False),  # imanage green
         ("#ffffff", True),
         ("#ffff00", True),
         ("#00ffff", True),

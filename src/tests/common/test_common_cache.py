@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2019-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import random
 
@@ -9,8 +9,8 @@ from django.test import TestCase, override_settings
 from django.utils.timezone import now
 from django_scopes import scopes_disabled
 
-from pretalx.common.cache import ObjectRelatedCache
-from pretalx.event.models import Event, Organiser
+from imanage.common.cache import ObjectRelatedCache
+from imanage.event.models import Event, Organiser
 
 
 @override_settings(

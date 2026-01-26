@@ -4,7 +4,7 @@
 Cookie usage
 ============
 
-pretalx only sets technically necessary cookies – no tracking, no third-party cookies, no consent banner required.
+imanage only sets technically necessary cookies – no tracking, no third-party cookies, no consent banner required.
 
 .. list-table::
    :header-rows: 1
@@ -14,15 +14,15 @@ pretalx only sets technically necessary cookies – no tracking, no third-party 
      - Content
      - Lifetime
      - Reason
-   * - ``pretalx_csrftoken``
+   * - ``imanage_csrftoken``
      - Random ID
      - 365 days
      - Protects form submissions against `CSRF attacks <https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_.
-   * - ``pretalx_session``
+   * - ``imanage_session``
      - Session ID
      - 14 days
      - Keeps you logged in and maintains state across page loads. Only set when needed.
-   * - ``pretalx_language``
+   * - ``imanage_language``
      - Language code
      - 10 years
      - Remembers your language preference. Only set when you change the language.

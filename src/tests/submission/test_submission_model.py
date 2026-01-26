@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django_scopes import scope
 
-from pretalx.common.exceptions import SubmissionError
-from pretalx.submission.models import Answer, Submission, SubmissionStates
-from pretalx.submission.models.submission import submission_image_path
+from imanage.common.exceptions import SubmissionError
+from imanage.submission.models import Answer, Submission, SubmissionStates
+from imanage.submission.models.submission import submission_image_path
 
 
 @pytest.mark.parametrize(
@@ -308,8 +308,8 @@ def test_submission_change_slot_count(accepted_submission):
 
 @pytest.mark.django_db
 def test_submission_assign_code(submission, monkeypatch):
-    from pretalx.common.models import mixins as models_mixins
-    from pretalx.submission.models import submission as pretalx_submission
+    from imanage.common.models import mixins as models_mixins
+    from imanage.submission.models import submission as imanage_submission
 
     called = -1
     submission_codes = [submission.code, submission.code, "abcdef"]
@@ -320,7 +320,7 @@ def test_submission_assign_code(submission, monkeypatch):
         return submission_codes[called]
 
     monkeypatch.setattr(models_mixins, "get_random_string", yield_random_codes)
-    new_submission = pretalx_submission.Submission()
+    new_submission = imanage_submission.Submission()
     assert not new_submission.code
     new_submission.assign_code()
     assert new_submission.code == "abcdef"
@@ -462,7 +462,7 @@ def test_pending_state(submission, state, pending_state):
 
 @pytest.mark.django_db
 def test_editable_with_access_code_requirement(submission, track):
-    from pretalx.submission.models import SubmitterAccessCode
+    from imanage.submission.models import SubmitterAccessCode
 
     with scope(event=submission.event):
         submission.state = SubmissionStates.DRAFT
@@ -498,7 +498,7 @@ def test_editable_with_access_code_requirement(submission, track):
 
 @pytest.mark.django_db
 def test_editable_with_access_code_for_submission_type(submission):
-    from pretalx.submission.models import SubmitterAccessCode
+    from imanage.submission.models import SubmitterAccessCode
 
     with scope(event=submission.event):
         submission.state = SubmissionStates.DRAFT

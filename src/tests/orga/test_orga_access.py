@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.test import override_settings
@@ -125,7 +125,7 @@ def test_dev_settings_warning(orga_client, event):
 @pytest.mark.django_db
 @override_settings(DEBUG=True)
 def test_update_check_warning(orga_user, orga_client, event):
-    from pretalx.common.models.settings import GlobalSettings
+    from imanage.common.models.settings import GlobalSettings
 
     orga_user.is_administrator = True
     orga_user.save()

@@ -1,0 +1,49 @@
+<!--
+SPDX-FileCopyrightText: 2017-present Tobias Kunze
+SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+-->
+
+{% extends "orga/submission/base.html" %}
+
+{% load i18n %}
+{% load rules %}
+{% load static %}
+
+{% block submission_content %}
+    <div class="container-fluid data-grid">
+        <div class="row">
+            <div class="col-md-3 label">
+                {% translate "Title" %}
+            </div>
+            <div class="col-md-9 value">
+                {{ submission.title }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 label">
+                {% translate "Session Type" %}
+            </div>
+            <div class="col-md-9 value">
+                {{ submission.submission_type.name }}
+            </div>
+        </div>
+        {% if submission.track %}
+        <div class="row">
+            <div class="col-md-3 label">
+                {% translate "Track" %}
+            </div>
+            <div class="col-md-9 value">
+                {{ submission.track.name }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-3 label">
+                {% translate "Abstract" %}
+            </div>
+            <div class="col-md-9 value">
+                {{ submission.abstract|default:"-" }}
+            </div>
+        </div>
+    </div>
+{% endblock submission_content %}

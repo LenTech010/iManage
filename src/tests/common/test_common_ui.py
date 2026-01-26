@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 
-from pretalx.common.ui import has_good_contrast
+from imanage.common.ui import has_good_contrast
 
 
 @pytest.mark.parametrize(
@@ -16,7 +16,7 @@ from pretalx.common.ui import has_good_contrast
         ("#800000", True),  # Maroon
         ("#800080", True),  # Purple
         # Medium colors - may or may not pass depending on exact shade
-        ("#3aa57c", False),  # pretalx green - ~2.99:1, doesn't pass 4.5
+        ("#3aa57c", False),  # imanage green - ~2.99:1, doesn't pass 4.5
         ("#008000", True),  # Dark green - 5.14:1, passes
         # Light colors - should NOT have good contrast with white text
         ("#ffffff", False),  # White
@@ -59,5 +59,5 @@ def test_has_good_contrast_custom_threshold(color, threshold, expected):
 )
 def test_has_good_contrast_invalid_input_returns_true(invalid_color):
     # Invalid colors should return True (assume good contrast) to avoid
-    # breaking the UI - the default pretalx color has good contrast
+    # breaking the UI - the default imanage color has good contrast
     assert has_good_contrast(invalid_color) is True

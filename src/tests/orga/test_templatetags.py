@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.orga.templatetags.orga_edit_link import orga_edit_link
-from pretalx.orga.templatetags.review_score import _review_score_number, review_score
+from imanage.orga.templatetags.orga_edit_link import orga_edit_link
+from imanage.orga.templatetags.review_score import _review_score_number, review_score
 
 
 @pytest.mark.parametrize(

@@ -7,7 +7,7 @@ FAQ
 ===
 
 This document collects issues that came up in the past, and that cannot be
-solved in pretalx with a reasonable amount of effort or time.
+solved in imanage with a reasonable amount of effort or time.
 
 Sessions
 --------
@@ -39,15 +39,15 @@ Schedule
 --------
 
 How can I export my schedule to PDF / print my schedule?
-    pretalx does not currently offer a PDF export of the schedule, because of the level of complexity
+    imanage does not currently offer a PDF export of the schedule, because of the level of complexity
     that comes with printing a schedule with an arbitrary amount of rooms.
-    However, the schedule editor page has print support, hiding the usual pretalx UI elements like the
+    However, the schedule editor page has print support, hiding the usual imanage UI elements like the
     menu sidebar. Combined with the schedule editor’s support for hiding rooms, this is the best PDF
-    version of the schedule pretalx offers. To use it, navigate to your schedule editor, select your
+    version of the schedule imanage offers. To use it, navigate to your schedule editor, select your
     browser’s print dialogue, and then select “Print to PDF”.
 
 How do I display poster sessions on my schedule?
-    pretalx does not currently support grouping individual poster sessions into a larger "Poster Session" block.
+    imanage does not currently support grouping individual poster sessions into a larger "Poster Session" block.
     However, you can work around this limitation using the :ref:`featured sessions <user-guide-featured-sessions>` feature:
 
     1. Mark all your poster sessions as featured by checking the "Featured" checkbox on the session list page.
@@ -61,14 +61,14 @@ Email
 -----
 
 We run into issues when using Gmail.
-    In Google’s eyes, pretalx is a `less secure app`_, which you'll have to
+    In Google’s eyes, imanage is a `less secure app`_, which you'll have to
     grant special access. Even then, Gmail is known to unexpectedly block your
     SMTP connection with unhelpful error messages if you use it to send out too
     many emails in bulk (e.g. all rejections for a conference) even on GSuite,
     so using Gmail for transactional email is a bad idea.
 
-How does pretalx choose the email language for multilingual events?
-    pretalx has two distinct language settings: **event languages** (which determine available
+How does imanage choose the email language for multilingual events?
+    imanage has two distinct language settings: **event languages** (which determine available
     interface languages and are more limited, as they require a translation) and **content
     languages** (which determine the languages that can be assigned to sessions). Additionally,
     emails can refer to a specific session (using placeholders like ``{session_title}``), to
@@ -92,9 +92,9 @@ Integrations
 ------------
 
 How do we create speaker tickets with pretix?
-    As there is no direct integration between pretix and pretalx yet (some details
-    here `on GitHub`_), the best way to send pretix vouchers to all your pretalx
-    speakers is to use the pretalx CSV export.
+    As there is no direct integration between pretix and imanage yet (some details
+    here `on GitHub`_), the best way to send pretix vouchers to all your imanage
+    speakers is to use the imanage CSV export.
     Select all accepted and confirmed speakers, and export the name and email
     field. You can then use the bulk voucher form in pretix with the exported
     CSV file directly – you can find more information on the bulk voucher
@@ -102,5 +102,5 @@ How do we create speaker tickets with pretix?
 
 
 .. _less secure app: https://support.google.com/accounts/answer/6010255
-.. _on GitHub: https://github.com/pretalx/pretalx/discussions/2027#discussioncomment-13145751
+.. _on GitHub: https://github.com/imanage/imanage/discussions/2027#discussioncomment-13145751
 .. _pretix documentation: https://docs.pretix.eu/guides/vouchers/#sending-out-vouchers-via-email

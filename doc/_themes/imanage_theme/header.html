@@ -1,0 +1,42 @@
+<!--
+SPDX-FileCopyrightText: 2019-present Tobias Kunze
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<header>
+  <a id="logourl" href="/" class="mobile-hide">
+    <img src="/_static/logo_white.svg" />
+  </a>
+
+  <div id="spacer"></div>
+
+  {%- if builder != 'singlehtml' %}
+  <div role="search" id="header-search">
+    <form id="rtd-search-form" action="{{ pathto('search') }}" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+  {%- endif %}
+
+  <div id="related" class="mobile-hide">
+    <div class="dropdown">
+      <div class="dropdown-title">Support us</div>
+      <div class="dropdown-body">
+        <div class="dropdown-item"><a href="https://imanage.com/p/pricing">Hosted imanage</a></div>
+        <div class="dropdown-item"><a href="https://imanage.com/p/pricing">imanage support</a></div>
+        <div class="dropdown-item"><a href="https://rixx.de/funding">Developer support</a></div>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div class="dropdown-title">Resources</div>
+      <div class="dropdown-body">
+        <div class="dropdown-item"><a href="https://imanage.com/p/about/">Website</a></div>
+        <div class="dropdown-item"><a href="https://imanage.com/p/news/">Blog</a></div>
+        <div class="dropdown-item"><a href="https://imanage.com/p/try/">Try imanage</a></div>
+        <div class="dropdown-item"><a href="https://github.com/imanage/imanage/">Source code</a></div>
+      </div>
+    </div>
+  </div>
+</header>

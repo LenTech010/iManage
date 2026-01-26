@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 
-from pretalx.common.text.console import get_separator, print_line
+from imanage.common.text.console import get_separator, print_line
 
 
 @pytest.mark.parametrize(

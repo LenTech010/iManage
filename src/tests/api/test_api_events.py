@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 
-from pretalx.api.serializers.event import EventListSerializer, EventSerializer
+from imanage.api.serializers.event import EventListSerializer, EventSerializer
 
 
 @pytest.mark.django_db

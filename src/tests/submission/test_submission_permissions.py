@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.submission.models import Submission, SubmissionStates
-from pretalx.submission.rules import (
+from imanage.submission.models import Submission, SubmissionStates
+from imanage.submission.rules import (
     can_be_accepted,
     can_be_canceled,
     can_be_confirmed,

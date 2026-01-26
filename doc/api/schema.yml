@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: pretalx API
+  title: imanage API
   version: ''
 paths:
   /api/:
     get:
       operationId: api_retrieve
-      description: Returns a link to the REST API, as well as the pretalx and API
+      description: Returns a link to the REST API, as well as the imanage and API
         versions.
       summary: API Root
       tags:
@@ -90,7 +90,7 @@ paths:
             enum:
             - submission_type
             - track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -168,7 +168,7 @@ paths:
             enum:
             - submission_type
             - track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -289,7 +289,7 @@ paths:
             - question
             - question.submission_types
             - question.tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -385,7 +385,7 @@ paths:
             - question
             - question.submission_types
             - question.tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -575,7 +575,7 @@ paths:
             enum:
             - speaker
             - submission
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -661,7 +661,7 @@ paths:
             enum:
             - speaker
             - submission
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -947,7 +947,7 @@ paths:
             - question
             - question.submission_types
             - question.tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -1030,7 +1030,7 @@ paths:
             - question
             - question.submission_types
             - question.tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -1207,7 +1207,7 @@ paths:
             - options
             - submission_types
             - tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: query
         name: is_public
         schema:
@@ -1335,7 +1335,7 @@ paths:
             - options
             - submission_types
             - tracks
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -1594,7 +1594,7 @@ paths:
             - submission.tags
             - submission.track
             - user
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -1764,7 +1764,7 @@ paths:
             - scores.category
             - submission
             - user
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -2308,7 +2308,7 @@ paths:
             - slots.submission.speakers
             - slots.submission.submission_type
             - slots.submission.track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -2457,7 +2457,7 @@ paths:
             - submission.speakers
             - submission.submission_type
             - submission.track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: query
         name: is_visible
         schema:
@@ -2543,7 +2543,7 @@ paths:
             - submission.speakers
             - submission.submission_type
             - submission.track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -2670,7 +2670,7 @@ paths:
             enum:
             - limit_tracks
             - limit_types
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -2748,7 +2748,7 @@ paths:
             enum:
             - limit_tracks
             - limit_types
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -2919,7 +2919,7 @@ paths:
             - answers
             - answers.question
             - submissions
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: page
         required: false
         in: query
@@ -2968,7 +2968,7 @@ paths:
             - answers
             - answers.question
             - submissions
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: user__code__iexact
         schema:
@@ -3303,7 +3303,7 @@ paths:
             - submission_type
             - tags
             - track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: query
         name: is_featured
         schema:
@@ -3462,7 +3462,7 @@ paths:
             - submission_type
             - tags
             - track
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       tags:
       - submissions
       responses:
@@ -4490,7 +4490,7 @@ paths:
             - invites
             - limit_tracks
             - members
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - name: o
         required: false
         in: query
@@ -4569,7 +4569,7 @@ paths:
             - invites
             - limit_tracks
             - members
-        description: Select fields to <a href="https://docs.pretalx.org/api/fundamentals/#expanding-linked-resources">expand</a>.
+        description: Select fields to <a href="https://docs.imanage.org/api/fundamentals/#expanding-linked-resources">expand</a>.
       - in: path
         name: id
         schema:
@@ -4869,7 +4869,7 @@ components:
         answer_file:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         submission:
           type: string
@@ -4911,7 +4911,7 @@ components:
         answer_file:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         submission:
           type: string
@@ -4946,7 +4946,7 @@ components:
         answer_file:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         submission:
           type: string
@@ -5078,7 +5078,7 @@ components:
         answer_file:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         options:
           type: array
@@ -5158,7 +5158,7 @@ components:
           type: string
           nullable: true
           title: Main event colour
-          description: 'Provide a hex value like #00ff00 if you want to style pretalx
+          description: 'Provide a hex value like #00ff00 if you want to style imanage
             in your event’s colour scheme.'
           pattern: '#([0-9A-Fa-f]{3}){1,2}'
           maxLength: 7
@@ -5171,7 +5171,7 @@ components:
         logo:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         header_image:
           type: string
@@ -5943,7 +5943,7 @@ components:
           - $ref: '#/components/schemas/Multi-language string'
           nullable: true
           description: Will appear just like this text below the custom input field.
-            You can use <a href="https://docs.pretalx.org/user/markdown/" target="_blank"
+            You can use <a href="https://docs.imanage.org/user/markdown/" target="_blank"
             rel="noopener">Markdown</a> here.
         default_answer:
           type: string
@@ -6089,7 +6089,7 @@ components:
           - $ref: '#/components/schemas/Multi-language string'
           nullable: true
           description: Will appear just like this text below the custom input field.
-            You can use <a href="https://docs.pretalx.org/user/markdown/" target="_blank"
+            You can use <a href="https://docs.imanage.org/user/markdown/" target="_blank"
             rel="noopener">Markdown</a> here.
         default_answer:
           type: string
@@ -6249,7 +6249,7 @@ components:
           - $ref: '#/components/schemas/Multi-language string'
           nullable: true
           description: Will appear just like this text below the custom input field.
-            You can use <a href="https://docs.pretalx.org/user/markdown/" target="_blank"
+            You can use <a href="https://docs.imanage.org/user/markdown/" target="_blank"
             rel="noopener">Markdown</a> here.
         default_answer:
           type: string
@@ -6701,7 +6701,7 @@ components:
           - $ref: '#/components/schemas/Multi-language string'
           nullable: true
           description: This text will be shown in the public changelog and the RSS
-            feed. You can use <a href="https://docs.pretalx.org/user/markdown/" target="_blank"
+            feed. You can use <a href="https://docs.imanage.org/user/markdown/" target="_blank"
             rel="noopener">Markdown</a> here.
         slots:
           type: array
@@ -6806,12 +6806,12 @@ components:
         text:
           allOf:
           - $ref: '#/components/schemas/Multi-language string'
-          description: You can use <a href="https://docs.pretalx.org/user/markdown/"
+          description: You can use <a href="https://docs.imanage.org/user/markdown/"
             target="_blank" rel="noopener">Markdown</a> here.
         resource:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         limit_tracks:
           type: array
@@ -6848,12 +6848,12 @@ components:
         text:
           allOf:
           - $ref: '#/components/schemas/Multi-language string'
-          description: You can use <a href="https://docs.pretalx.org/user/markdown/"
+          description: You can use <a href="https://docs.imanage.org/user/markdown/"
             target="_blank" rel="noopener">Markdown</a> here.
         resource:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         limit_tracks:
           type: array
@@ -6965,7 +6965,7 @@ components:
         avatar:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
       required:
       - email
@@ -7048,7 +7048,7 @@ components:
         image:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         resources:
           type: array
@@ -7132,7 +7132,7 @@ components:
         image:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         resources:
           type: array
@@ -7278,7 +7278,7 @@ components:
         image:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
         pending_state:
           nullable: true
@@ -7373,7 +7373,7 @@ components:
         image:
           type: str
           description: When reading data, a URL pointing to a downloadable file. When
-            writing adata, a reference to a file uploaded via the <a href="https://docs.pretalx.org/api/fundamentals/#file-uploads">file
+            writing adata, a reference to a file uploaded via the <a href="https://docs.imanage.org/api/fundamentals/#file-uploads">file
             uploads endpoint</a>.
       required:
       - submission_type
@@ -7564,7 +7564,7 @@ components:
           type: boolean
           title: Show tag publicly
           description: Public tags can be selected by submitters in the CfP if you
-            activate the tags field. In a future release of pretalx, public tags may
+            activate the tags field. In a future release of imanage, public tags may
             also be shown in the public schedule.
       required:
       - color
@@ -7596,7 +7596,7 @@ components:
           type: boolean
           title: Show tag publicly
           description: Public tags can be selected by submitters in the CfP if you
-            activate the tags field. In a future release of pretalx, public tags may
+            activate the tags field. In a future release of imanage, public tags may
             also be shown in the public schedule.
       required:
       - color
@@ -7968,9 +7968,9 @@ components:
         * `question.reminder` - Custom fields reminder
         * `schedule.new` - New schedule published
 servers:
-- url: https://pretalx.com
+- url: https://imanage.com
 externalDocs:
-  url: https://docs.pretalx.org/api/
+  url: https://docs.imanage.org/api/
 tags:
 - name: root
   description: The API root endpoint provides version information and links to the
@@ -7983,14 +7983,14 @@ tags:
     This is the only API endpoint that does not use the event setting on your access
     token, as teams exist outside the event structure.
 - name: submissions
-  description: Submissions are the central component of pretalx. The submissions available
+  description: Submissions are the central component of imanage. The submissions available
     to an authenticated user via the API depend on their permissions within the event,
     the current review phase, and so on. To a non-authenticated user, only submissions
     that are a part of the current public schedule will be visible. Note that changing
     the speakers and state of a submission requires you to use the individual action
     endpoints rather than a plain update.
   externalDocs:
-    url: https://docs.pretalx.org/user/sessions/
+    url: https://docs.imanage.org/user/sessions/
     description: User documentation
 - name: speakers
   description: Speakers can currently only updated, not created or deleted, as a speaker
@@ -7998,14 +7998,14 @@ tags:
     will see additional fields in the API, in line with the response to the update
     actions.
 - name: schedules
-  description: In pretalx, an event’s schedule is versioned, and each version is a
+  description: In imanage, an event’s schedule is versioned, and each version is a
     schedule object in the API. In addition to the normal ID based routing, you can
     use the `latest` shortcut to see the current public schedule, and as organiser,
     the `wip` shortcut will show the current unpublished working copy. As retrieving
-    the fully expanded endpoint is expensive on the pretalx side, consider using the
+    the fully expanded endpoint is expensive on the imanage side, consider using the
     redirect offered at ``by-version/?latest=1`` to check for a new release.
 - name: slots
-  description: Every block in a published pretalx schedule is a talk slot. Note that
+  description: Every block in a published imanage schedule is a talk slot. Note that
     there are talk slots without associated submission (e.g. breaks). Each slot belongs
     to a schedule version – refer to the schedule endpoint for further documentation.
     Note that slots cannot be created or deleted via the API – this happens automatically
@@ -8019,19 +8019,19 @@ tags:
   description: Submission types define the types of proposals that can be submitted
     to an event, including their default duration.
   externalDocs:
-    url: https://docs.pretalx.org/user/sessions/#session-types
+    url: https://docs.imanage.org/user/sessions/#session-types
     description: User documentation
 - name: tags
   description: Tags are currently only used in the organiser backend and not publicly.
     As such, all tag endpoints require authentication.
   externalDocs:
-    url: https://docs.pretalx.org/user/sessions/#tags
+    url: https://docs.imanage.org/user/sessions/#tags
     description: User documentation
 - name: tracks
   description: Tracks are a way to organise proposals and talks into categories, usually
     for thematic grouping.
   externalDocs:
-    url: https://docs.pretalx.org/user/sessions/#tracks
+    url: https://docs.imanage.org/user/sessions/#tracks
     description: User documentation
 - name: questions
   description: The questions resource represents all fields created by organisers
@@ -8061,7 +8061,7 @@ tags:
   description: Access codes can be used to grant access to restricted tracks, or to
     allow for proposals to be submitted past the public deadline.
 - name: file-uploads
-  description: Upload files for further use in other resources of the pretalx API.
+  description: Upload files for further use in other resources of the imanage API.
   externalDocs:
-    url: https://docs.pretalx.org/api/fundamentals/#file-uploads
+    url: https://docs.imanage.org/api/fundamentals/#file-uploads
     description: API documentation

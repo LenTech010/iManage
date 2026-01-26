@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 #
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: Johan Van de Wauw
@@ -13,10 +13,10 @@ from django.core import mail as djmail
 from django.urls import reverse
 from django_scopes import scope
 
-from pretalx.event.models import Event
-from pretalx.mail.models import QueuedMail
-from pretalx.submission.models import Question, QuestionTarget
-from pretalx.submission.models.question import QuestionRequired
+from imanage.event.models import Event
+from imanage.mail.models import QueuedMail
+from imanage.submission.models import Question, QuestionTarget
+from imanage.submission.models.question import QuestionRequired
 
 
 @pytest.mark.django_db
@@ -837,7 +837,7 @@ def test_can_remind_answered_submission_question(
     count,
 ):
     with scope(event=event):
-        from pretalx.submission.models.question import Answer
+        from imanage.submission.models.question import Answer
 
         question.question_required = QuestionRequired.REQUIRED
         question.deadline = None

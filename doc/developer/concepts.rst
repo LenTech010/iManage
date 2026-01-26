@@ -7,11 +7,11 @@ Concepts and Terminology
 The Components
 --------------
 
-pretalx is split into a range of components (also called “apps”, following the
+imanage is split into a range of components (also called “apps”, following the
 Django terminology). These are the most important ones:
 
 **common**
-    Templates, models, and utility methods used in all areas of pretalx live here.
+    Templates, models, and utility methods used in all areas of imanage live here.
 
 **event**
     This component contains all models and methods regarding events, organisers,
@@ -21,7 +21,7 @@ Django terminology). These are the most important ones:
     Everything concerning email sending and templating takes place here.
 
 **person**
-    The custom pretalx user model, as well as speaker profiles.
+    The custom imanage user model, as well as speaker profiles.
 
 **schedule**
     All matters regarding schedules, scheduling, talk slots, conflict resolution,
@@ -44,23 +44,23 @@ Django terminology). These are the most important ones:
     This frontend component holds all templates and views for the organiser backend.
 
 **api**
-    All matters regarding the RESTful pretalx API live here.
+    All matters regarding the RESTful imanage API live here.
 
 
 The Concepts
 ------------
 
-This is how pretalx sees the world – so if anything here strikes you as very
-wrong, chances are pretalx will not work well for you. If this happens, please
+This is how imanage sees the world – so if anything here strikes you as very
+wrong, chances are imanage will not work well for you. If this happens, please
 let us know by `opening an issue`_!
 
 Persons
 ~~~~~~~
 
-pretalx tries to treat its users as the persons they actually are. This
+imanage tries to treat its users as the persons they actually are. This
 involves allowing people to be both organisers and speakers at one or multiple
 events. Even submitting proposals to an event and then reviewing other
-proposals is something pretalx allows (although the submitter will never be
+proposals is something imanage allows (although the submitter will never be
 able to see the reviews their own submission received).
 
 It is expected that people can take part in as many events as they like, in any
@@ -82,7 +82,7 @@ with them.
 Submissions and Reviews
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**Submissions** (or: proposals) are a cornerstone of how pretalx’s
+**Submissions** (or: proposals) are a cornerstone of how imanage’s
 understanding of the world. A submission will have at least a title and as many
 other fields as the organisers have specified, either by requiring or removing
 the built-in fields, or by adding questions of their own. A submission will
@@ -112,4 +112,4 @@ differences between versions.
 will have one slot per schedule, but submissions can also have more than that,
 for example if a workshop will be held twice.
 
-.. _opening an issue: https://github.com/pretalx/pretalx/issues/new
+.. _opening an issue: https://github.com/imanage/imanage/issues/new

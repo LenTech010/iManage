@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.submission.models import SubmissionType
+from imanage.submission.models import SubmissionType
 
 
 @pytest.mark.parametrize(

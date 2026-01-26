@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -10,8 +10,8 @@ from django.forms import ValidationError
 from django.utils import timezone
 from django_scopes import scope
 
-from pretalx.common.forms.fields import AvailabilitiesField
-from pretalx.schedule.models import Availability, Room
+from imanage.common.forms.fields import AvailabilitiesField
+from imanage.schedule.models import Availability, Room
 
 timezone.activate(ZoneInfo("UTC"))
 
@@ -141,7 +141,7 @@ def test_validate_availability_tz_success(availabilities_field, avail):
 
 @pytest.mark.django_db
 def test_validate_availability_daylightsaving(availabilities_field):
-    # https://github.com/pretalx/pretalx/issues/460
+    # https://github.com/imanage/imanage/issues/460
     availabilities_field.event.timezone = "Europe/Berlin"
     availabilities_field.event.date_from = dt.date(2018, 10, 22)
     availabilities_field.event.date_to = dt.date(2018, 10, 28)

@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import os
@@ -11,7 +11,7 @@ import responses
 from django.core.management import call_command
 from django_scopes import scope
 
-from pretalx.event.models import Event
+from imanage.event.models import Event
 
 
 @pytest.mark.django_db
@@ -19,7 +19,7 @@ from pretalx.event.models import Event
 def test_common_runperiodic():
     responses.add(
         responses.POST,
-        "https://pretalx.com/.update_check/",
+        "https://imanage.com/.update_check/",
         json="{}",
         status=404,
         content_type="application/json",
@@ -80,8 +80,8 @@ def test_common_custom_makemessages_does_not_blow_up():
                 "git",
                 "checkout",
                 "--",
-                "pretalx/locale/de_DE",
-                "pretalx/locale/django.pot",
+                "imanage/locale/de_DE",
+                "imanage/locale/django.pot",
             ]
         )
 

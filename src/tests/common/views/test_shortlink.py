@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.person.models import SpeakerProfile
+from imanage.person.models import SpeakerProfile
 
 
 @pytest.mark.django_db
@@ -32,7 +32,7 @@ def test_shortlink_submission_no_access(client, submission, event):
 
 @pytest.mark.django_db
 def test_shortlink_user_admin_access(client, speaker, event):
-    from pretalx.person.models import User
+    from imanage.person.models import User
 
     admin_user = User.objects.create_user("admin@example.com", is_administrator=True)
     client.force_login(admin_user)

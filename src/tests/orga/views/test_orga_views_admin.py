@@ -1,13 +1,13 @@
 # SPDX-FileCopyrightText: 2019-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 import responses
 
-from pretalx.common.models.settings import GlobalSettings
-from pretalx.person.models import User
+from imanage.common.models.settings import GlobalSettings
+from imanage.person.models import User
 
 
 @pytest.mark.django_db
@@ -44,16 +44,16 @@ def test_update_notice_displayed(client, user):
     client.login(email="dummy@dummy.dummy", password="dummy")
 
     r = client.get("/orga/", follow=True)
-    assert "pretalx automatically checks for updates in the background" not in r.text
+    assert "imanage automatically checks for updates in the background" not in r.text
 
     user.is_administrator = True
     user.save()
     r = client.get("/orga/", follow=True)
-    assert "pretalx automatically checks for updates in the background" in r.text
+    assert "imanage automatically checks for updates in the background" in r.text
 
     client.get("/orga/admin/update/")  # Click it
     r = client.get("/orga/", follow=True)
-    assert "pretalx automatically checks for updates in the background" not in r.text
+    assert "imanage automatically checks for updates in the background" not in r.text
 
 
 @pytest.mark.django_db
@@ -84,7 +84,7 @@ def test_settings(client, user):
 def test_trigger(client, user):
     responses.add_callback(
         responses.POST,
-        "https://pretalx.com/.update_check/",
+        "https://imanage.com/.update_check/",
         callback=request_callback_updatable,
         content_type="application/json",
     )

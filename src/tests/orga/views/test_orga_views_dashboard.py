@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 
@@ -49,13 +49,13 @@ def test_dashboard_event_list(
 def test_event_dashboard(
     orga_user, orga_client, review_user, speaker, event, test_user, slot, query
 ):
-    from pretalx.common.models.log import ActivityLog
+    from imanage.common.models.log import ActivityLog
 
     ActivityLog.objects.create(
         event=event,
         person=speaker,
         content_object=slot.submission,
-        action_type="pretalx.submission.create",
+        action_type="imanage.submission.create",
     )
     if test_user == "speaker":
         orga_client.force_login(speaker)

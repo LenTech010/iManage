@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 #
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: Radomir Mijovic
@@ -9,9 +9,9 @@ import json
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.question import AnswerOptionSerializer, QuestionSerializer
-from pretalx.api.versions import LEGACY
-from pretalx.submission.models import AnswerOption, QuestionVariant
+from imanage.api.serializers.question import AnswerOptionSerializer, QuestionSerializer
+from imanage.api.versions import LEGACY
+from imanage.submission.models import AnswerOption, QuestionVariant
 
 
 @pytest.mark.django_db
@@ -143,7 +143,7 @@ def test_organiser_can_create_question(event, orga_user_write_token, client):
         assert question.help_text == "hellllp"
         assert (
             question.logged_actions()
-            .filter(action_type="pretalx.question.create")
+            .filter(action_type="imanage.question.create")
             .exists()
         )
 
@@ -202,7 +202,7 @@ def test_organiser_cannot_create_question_readonly_token(
         assert event.questions.all().count() == count
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.question.create")
+            .filter(action_type="imanage.question.create")
             .exists()
         )
 
@@ -380,7 +380,7 @@ def test_organiser_can_delete_question(event, orga_user_write_token, client):
         assert not event.questions.filter(pk=pk).exists()
         assert (
             event.logged_actions()
-            .filter(action_type="pretalx.question.delete")
+            .filter(action_type="imanage.question.delete")
             .exists()
         )
 
@@ -403,7 +403,7 @@ def test_organiser_cannot_delete_question_readonly_token(
         assert event.questions.filter(pk=pk).exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.question.delete")
+            .filter(action_type="imanage.question.delete")
             .exists()
         )
 
@@ -428,7 +428,7 @@ def test_organiser_cannot_delete_answered_question(
         assert event.questions.filter(pk=pk).exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.question.delete")
+            .filter(action_type="imanage.question.delete")
             .exists()
         )
 
@@ -447,7 +447,7 @@ def test_no_legacy_question_create(event, orga_user_write_token, client):
         content_type="application/json",
         headers={
             "Authorization": f"Token {orga_user_write_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     assert response.status_code == 400, response.text
@@ -905,7 +905,7 @@ def test_answer_create_logs_to_submission(
     with scope(event=submission.event):
         assert submission.logged_actions().count() == initial_log_count + 1
         log = submission.logged_actions().latest("timestamp")
-        assert log.action_type == "pretalx.submission.update"
+        assert log.action_type == "imanage.submission.update"
         assert "changes" in log.data
         assert log.data["changes"][f"question-{question.pk}"]["new"] == "Test answer"
 
@@ -934,7 +934,7 @@ def test_answer_update_via_api_logs_to_parent(client, orga_user_write_token, ans
     with scope(event=answer.question.event):
         assert submission.logged_actions().count() == initial_log_count + 1
         log = submission.logged_actions().latest("timestamp")
-        assert log.action_type == "pretalx.submission.update"
+        assert log.action_type == "imanage.submission.update"
         assert "changes" in log.data
         key = f"question-{answer.question_id}"
         assert log.data["changes"][key]["old"] == old_answer

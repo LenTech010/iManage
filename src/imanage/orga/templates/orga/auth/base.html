@@ -1,0 +1,46 @@
+<!--
+SPDX-FileCopyrightText: 2017-present Tobias Kunze
+SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+-->
+
+{% load form_media %}
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock title %} :: imanage</title>
+        <link rel="stylesheet" type="text/css" href="{% static "common/css/base.css" %}" />
+        <link rel="stylesheet" type="text/css" href="{% static "common/css/_variables.css" %}" />
+        <link rel="stylesheet" type="text/css" href="{% static "orga/css/auth.css" %}" />
+        {% form_media %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#3aa57c">
+
+        {% include "common/includes/favicon.html" %}
+
+        <script defer src="{% static 'common/js/base.js' %}"></script>
+        {% block scripts %}{% endblock scripts %}
+
+    </head>
+    <body class="auth-body">
+        <div id="wrapper" class="{% if not request.event.primary_color %}bg-yellow{% endif %}"{% if request.event.primary_color %} style="background-color: {{ request.event.primary_color }}"{% endif %}>
+            {% if request.event.logo %}
+                <img height="150" width="auto" src="{{ request.event.logo.url }}" id="event-logo" alt="{% translate "The event’s logo" %}">
+            {% else %}
+                <h1 class="imanage-logo">Imanage</h1>
+            {% endif %}
+            <p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="card card-inverse card-{{ message.tags }} mb-3 text-center">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </p>
+            <div class="card">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </body>
+</html>

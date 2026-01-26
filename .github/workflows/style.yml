@@ -7,14 +7,14 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'src/pretalx/locale/**'
-      - 'src/pretalx/static/**'
+      - 'src/imanage/locale/**'
+      - 'src/imanage/static/**'
       - 'doc/**'
   pull_request:
     branches: [ main ]
     paths-ignore:
-      - 'src/pretalx/locale/**'
-      - 'src/pretalx/static/**'
+      - 'src/imanage/locale/**'
+      - 'src/imanage/static/**'
       - 'doc/**'
 
 concurrency:

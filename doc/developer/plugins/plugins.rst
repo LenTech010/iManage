@@ -9,12 +9,12 @@
 Creating a plugin
 =================
 
-You can extend pretalx with custom Python code using the official plugin API.
+You can extend imanage with custom Python code using the official plugin API.
 Think of every plugin as an independent Django application living in its own
 python package installed like any other python module.
 
-The communication between pretalx and the plugins happens using Django’s
-`signal dispatcher`_ feature. The core modules of pretalx expose signals which
+The communication between imanage and the plugins happens using Django’s
+`signal dispatcher`_ feature. The core modules of imanage expose signals which
 you can read about on the next pages.
 
 .. highlight:: console
@@ -25,15 +25,15 @@ You will need some boilerplate for every plugin to get started. To save you
 time, we created a `cookiecutter`_ template that you can use like this::
 
    (env)$ pip install cookiecutter
-   (env)$ cookiecutter https://github.com/pretalx/pretalx-plugin-cookiecutter
+   (env)$ cookiecutter https://github.com/imanage/imanage-plugin-cookiecutter
 
 This will ask you some questions and then create a project folder for your plugin.
-Afterwards install your plugin into pretalx::
+Afterwards install your plugin into imanage::
 
-   (env)$ cd pretalx-pluginname
+   (env)$ cd imanage-pluginname
    (env)$ python -m pip install -e .
 
-If you already had it running, you’ll now have to restart your pretalx
+If you already had it running, you’ll now have to restart your imanage
 development server process for it to recognise the new plugin. Your plugin
 should now show up in the startup message the server prints to the console.
 
@@ -42,13 +42,13 @@ About this Documentation
 
 The following pages go into detail about the types of plugins
 supported. While these instructions don’t assume that you know a lot about
-pretalx, they do assume that you have prior knowledge about Django (e.g. its
+imanage, they do assume that you have prior knowledge about Django (e.g. its
 view layer, how its ORM works, topics covered in the Django tutorial.).
 
 Plugin metadata
 ----------------
 
-The plugin metadata lives inside a ``PretalxPluginMeta`` class inside your
+The plugin metadata lives inside a ``ImanagePluginMeta`` class inside your
 configuration class. The metadata class must define the following attributes:
 
 .. rst-class:: rest-resource-table
@@ -77,44 +77,44 @@ A working example would be::
 
 
     class FacebookApp(AppConfig):
-        name = "pretalx_facebook"
+        name = "imanage_facebook"
         verbose_name = _("Facebook")
 
-        class PretalxPluginMeta:
+        class ImanagePluginMeta:
             name = _("Facebook")
-            author = _("the pretalx team")
+            author = _("the imanage team")
             version = "1.0.0"
             visible = True
             description = _("This plugin allows you to post talks to facebook.")
             category = "INTEGRATION"
 
 
-    default_app_config = "pretalx_facebook.FacebookApp"
+    default_app_config = "imanage_facebook.FacebookApp"
 
 Plugin registration
 -------------------
 
 .. highlight:: toml
 
-Somehow, pretalx needs to know that your plugin exists at all. For this purpose, we
+Somehow, imanage needs to know that your plugin exists at all. For this purpose, we
 make use of the `entry point`_ feature of setuptools. To register a plugin that lives
 in a separate python package, your ``pyproject.toml`` should contain something like this::
 
-    [project.entry-points."pretalx.plugin"]
-    pretalx_facebook = "pretalx_facebook:PretalxPluginMeta"
+    [project.entry-points."imanage.plugin"]
+    imanage_facebook = "imanage_facebook:ImanagePluginMeta"
 
 
-This will automatically make pretalx discover this plugin as soon as you have
+This will automatically make imanage discover this plugin as soon as you have
 installed it e.g.  through ``pip``. During development, you can run ``pip
 install -e .`` inside your plugin source directory to make it discoverable.
-Make sure you do this in the same virtualenv as you're using for pretalx.
+Make sure you do this in the same virtualenv as you're using for imanage.
 
 Signals
 -------
 
 .. highlight:: python
 
-pretalx defines signals which your plugin can listen for. We will go into the
+imanage defines signals which your plugin can listen for. We will go into the
 details of the different signals in the following pages. We suggest that you
 put your signal receivers into a ``signals`` submodule of your plugin. You
 should extend your ``AppConfig`` (see above) by the following method to make
@@ -148,8 +148,8 @@ Models
 
 Often, you’ll want to store additional data in your plugin. As your plugin is a
 Django application, you can define models in the usual way, and generate
-migrations for them, by running ``python -m pretalx makemigrations``. Your
-migrations will be applied when running ``python -m pretalx migrate`` just like
+migrations for them, by running ``python -m imanage makemigrations``. Your
+migrations will be applied when running ``python -m imanage migrate`` just like
 any other migration.
 
 .. highlight:: console
@@ -158,13 +158,13 @@ Please note that to generate your **first** migration, you will have to specify
 your plugin’s app name explicitly in order for Django to pick it up, like
 this::
 
-    python -m pretalx makemigrations pretalx_facebook
+    python -m imanage makemigrations imanage_facebook
 
 Views
 -----
 
 Your plugin may define custom views. If you put an ``urls`` submodule into your
-plugin module, pretalx will automatically import it and include it into the root
+plugin module, imanage will automatically import it and include it into the root
 URL configuration with the namespace ``plugins:<label>:``, where ``<label>`` is
 your Django application label.
 
@@ -172,11 +172,11 @@ You can see examples of how this works on the following pages, particularly
 the “Writing a … plugin” pages.
 
 .. note:: We recommend that non-backend-URLs start with a /p/ to avoid collisions
-   with event names and current/future pretalx URLs.
+   with event names and current/future imanage URLs.
 
 .. WARNING:: If you define custom URLs and views, you are on your own
    with checking that the calling user has logged in, has appropriate permissions,
-   and more. You can use mixins and permissions from pretalx to help you with this,
+   and more. You can use mixins and permissions from imanage to help you with this,
    but by default, all views are public to all users, authenticated or not.
 
 Forms
@@ -185,11 +185,11 @@ Forms
 Your plugin may define custom forms, which can be used to extend existing forms in
 the organisers area.
 
-pretalx will add the additional form fields to the form that is being rendered.
+imanage will add the additional form fields to the form that is being rendered.
 Receivers for the various form signals can return Django forms, which will then
 be rendered in the template. If your form defines a ``label`` attribute, it
 will be used to render a separate heading for the form fields to set them apart
-from the regular pretalx part of the form. pretalx will also include any
+from the regular imanage part of the form. imanage will also include any
 JavaScript or CSS files defined in ``form.Media``.
 
 Your form should behave like a normal Django form. On a ``POST`` request, its
@@ -199,14 +199,14 @@ so, its ``save()`` method will be called. Please note that this will happen
 the new data on the instance.
 
 In combination with defining your own models, form signals are a powerful tool
-that allows you to enrich pretalx forms with additional information. For
+that allows you to enrich imanage forms with additional information. For
 example, you can create a form that allows users to add additional notes to a
-review by listening to the ``pretalx.orga.signals.review_form`` signal and
+review by listening to the ``imanage.orga.signals.review_form`` signal and
 returning a form that contains a text field for the notes::
 
     from django import forms
     from django.db import models
-    from pretalx.submission.models.review import Review
+    from imanage.submission.models.review import Review
 
     class ReviewNotes(models.Model):
         review = models.ForeignKey(
@@ -240,11 +240,11 @@ Configuration
 
 Occasionally, your plugin may need system-level configuration that does not
 need its own API. In this case, you can ask users to provide this configuration
-via their ``pretalx.cfg`` file. Ask them to put their configuration in a
-section with the title ``[plugin:your_plugin_name]``, which pretalx will then
+via their ``imanage.cfg`` file. Ask them to put their configuration in a
+section with the title ``[plugin:your_plugin_name]``, which imanage will then
 provide in ``settings.PLUGIN_SETTINGS[your_plugin_name]``, like this::
 
-   [plugin:pretalx_soap]
+   [plugin:imanage_soap]
    endpoint=https://example.com
    api_key=123456
 
@@ -253,7 +253,7 @@ provide in ``settings.PLUGIN_SETTINGS[your_plugin_name]``, like this::
 Which you can use in your code like this::
 
    from django.conf import settings
-   assert settings.PLUGIN_SETTINGS["pretalx_soap"]["endpoint"] == "https://example.com"
+   assert settings.PLUGIN_SETTINGS["imanage_soap"]["endpoint"] == "https://example.com"
 
 .. _Django application: https://docs.djangoproject.com/en/stable/ref/applications/
 .. _signal dispatcher: https://docs.djangoproject.com/en/stable/topics/signals/

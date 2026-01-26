@@ -87,7 +87,7 @@ plugin
 plugins
 prepend
 prepended
-pretalx
+imanage
 pretix
 px
 pytest

@@ -18,16 +18,16 @@ You will obtain two code snippets that look *roughly* like the following. The
 first should be embedded into the ``<head>`` part of your website, if possible.
 If this is inconvenient, you can put it in the ``<body>`` part as well::
 
-    <script type="text/javascript" src="https://pretalx.com/democon/schedule/widget/v2.en.js"></script>
+    <script type="text/javascript" src="https://imanage.com/democon/schedule/widget/v2.en.js"></script>
 
 The second snippet should be embedded at the position where the widget should show up::
 
-    <pretalx-schedule event-url="https://pretalx.com/democon/" locale="en" style="--pretalx-clr-primary: #3aa57c"></pretalx-schedule>
+    <imanage-schedule event-url="https://imanage.com/democon/" locale="en" style="--imanage-clr-primary: #3aa57c"></imanage-schedule>
     <noscript>
-       <div class="pretalx-widget">
-            <div class="pretalx-widget-info-message">
+       <div class="imanage-widget">
+            <div class="imanage-widget-info-message">
                 JavaScript is disabled in your browser. To access our schedule without JavaScript,
-                please <a target="_blank" href="https://pretalx.com/democon/schedule/">click here</a>.
+                please <a target="_blank" href="https://imanage.com/democon/schedule/">click here</a>.
             </div>
         </div>
     </noscript>
@@ -45,16 +45,16 @@ Your embedded widget could look like the following:
 
 .. raw:: html
 
-    <script type="text/javascript" src="https://pretalx.com/democon/schedule/widget/v2.en.js" async></script>
+    <script type="text/javascript" src="https://imanage.com/democon/schedule/widget/v2.en.js" async></script>
 
     <div style="overflow-x: auto; width: calc(100% + 100px); padding-right: 12px">
-    <pretalx-schedule event-url="https://pretalx.com/democon/" locale="en" style="--pretalx-clr-primary: #3aa57c;"></pretalx-schedule>
+    <imanage-schedule event-url="https://imanage.com/democon/" locale="en" style="--imanage-clr-primary: #3aa57c;"></imanage-schedule>
     </div>
     <noscript>
-       <div class="pretalx-widget">
-            <div class="pretalx-widget-info-message">
+       <div class="imanage-widget">
+            <div class="imanage-widget-info-message">
                 JavaScript is disabled in your browser. To access our schedule without JavaScript,
-                please <a target="_blank" href="https://pretalx.com/democon/schedule/">click here</a>.
+                please <a target="_blank" href="https://imanage.com/democon/schedule/">click here</a>.
             </div>
         </div>
     </noscript>

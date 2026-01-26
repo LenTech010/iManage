@@ -6,10 +6,10 @@
 The development setup
 =====================
 
-To contribute to pretalx, it’s useful to run pretalx locally on your device so you can test your
+To contribute to imanage, it’s useful to run imanage locally on your device so you can test your
 changes. First of all, you need install some packages on your operating system:
 
-If you want to install pretalx on a server for actual usage, go to the :ref:`administrator-index`
+If you want to install imanage on a server for actual usage, go to the :ref:`administrator-index`
 instead.
 
 External dependencies
@@ -41,8 +41,8 @@ Get a copy of the source code
 -----------------------------
 You can clone our git repository::
 
-    git clone https://github.com/pretalx/pretalx.git
-    cd pretalx/
+    git clone https://github.com/imanage/imanage.git
+    cd imanage/
 
 
 Working with the code
@@ -77,7 +77,7 @@ stage the event in question should be in. The available choices are ``cfp``
 a schedule and the event is currently running), and ``over``. ``schedule`` is
 the default value.
 
-If you want to see pretalx in a different language than English, you have to compile our language
+If you want to see imanage in a different language than English, you have to compile our language
 files::
 
     $ just run compilemessages
@@ -130,7 +130,7 @@ first breaking test.
 Working with mails
 ^^^^^^^^^^^^^^^^^^
 
-When running in development mode, Pretalx uses Django’s console email backend.
+When running in development mode, Imanage uses Django’s console email backend.
 This means the development server will print any emails to its stdout, instead
 of sending them via SMTP.
 
@@ -157,13 +157,13 @@ translate and update the ``*.po`` files accordingly::
 
     $ just makemessages
 
-To actually see pretalx in your language, you have to compile the ``*.po`` files to their optimised
+To actually see imanage in your language, you have to compile the ``*.po`` files to their optimised
 binary ``*.mo`` counterparts::
 
     $ just run compilemessages
 
-pretalx by default supports events in English, German, or French, or all three. To translate
-pretalx to a new language, add the language code and natural name to the ``LANGUAGES`` variable in
+imanage by default supports events in English, German, or French, or all three. To translate
+imanage to a new language, add the language code and natural name to the ``LANGUAGES`` variable in
 the ``settings.py``. Depending on the completeness of your changes, and your commitment to maintain
 them in the future, we can talk about merging them into core.
 

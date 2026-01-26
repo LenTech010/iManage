@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 
@@ -8,10 +8,10 @@ from django.core import mail as djmail
 from django.utils.timezone import now
 from django_scopes import scope
 
-from pretalx.mail.models import QueuedMail
-from pretalx.schedule.models import Schedule, TalkSlot
-from pretalx.schedule.models.slot import SlotType
-from pretalx.submission.models import Submission
+from imanage.mail.models import QueuedMail
+from imanage.schedule.models import Schedule, TalkSlot
+from imanage.schedule.models.slot import SlotType
+from imanage.submission.models import Submission
 
 
 @pytest.mark.django_db
@@ -109,7 +109,7 @@ def test_unfreeze(slot):
 
 @pytest.mark.django_db
 def test_unfreeze_bug72(slot):
-    # https://github.com/pretalx/pretalx/issues/72
+    # https://github.com/imanage/imanage/issues/72
     event = slot.event
 
     with scope(event=event):

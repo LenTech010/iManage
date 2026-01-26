@@ -73,7 +73,7 @@ Enforcement
 -----------
 
 Instances of abusive, harassing, or otherwise unacceptable behaviour may be
-reported to the project team at support@pretalx.com. The project team will
+reported to the project team at support@imanage.com. The project team will
 review and investigate all complaints, and will respond in a way that it deems
 appropriate to the circumstances. The project team is obligated to respect the
 privacy and security of the reporter of any incident.
@@ -81,7 +81,7 @@ privacy and security of the reporter of any incident.
 Notes
 -----
 
-As pretalx is currently a single-maintainer project, some of the above does not
+As imanage is currently a single-maintainer project, some of the above does not
 apply directly to the project in its current state: If Tobias Kunze, the
 current maintainer, fails to uphold this Code of Conduct, there is no other
 leadership to hold him accountable or to address a complaint to. I have

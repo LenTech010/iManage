@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django import forms
 from django_scopes import scope
 
-from pretalx.common.forms.fields import HoneypotField
-from pretalx.submission.forms.question import QuestionsForm
-from pretalx.submission.forms.submission import InfoForm
-from pretalx.submission.models import QuestionVariant
+from imanage.common.forms.fields import HoneypotField
+from imanage.submission.forms.question import QuestionsForm
+from imanage.submission.forms.submission import InfoForm
+from imanage.submission.models import QuestionVariant
 
 
 @pytest.mark.django_db

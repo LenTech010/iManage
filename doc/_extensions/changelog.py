@@ -125,7 +125,7 @@ def release_role(name, rawtext, text, lineno, inliner, *args, **kwargs):
         return [inliner.problematic(rawtext, rawtext, msg)], [msg]
     number, date = match.group(1), match.group(2)
     text = number
-    url = f"https://pypi.org/project/pretalx/{number.strip('v')}/"
+    url = f"https://pypi.org/project/imanage/{number.strip('v')}/"
     return [_build_release_node(number, url=url, date=date)], []
 
 
@@ -134,7 +134,7 @@ def collect_releases(entries):
         {
             "release": _build_release_node(
                 "next",
-                "https://github.com/pretalx/pretalx/commits/main/",
+                "https://github.com/imanage/imanage/commits/main/",
                 text="Next Release",
             ),
             "entries": defaultdict(list),
@@ -177,7 +177,7 @@ def construct_issue_nodes(issue, description):
                 description[index][subindex : subindex + 1] = lst
 
     if issue.number:
-        ref = f"https://github.com/pretalx/pretalx/issues/{issue.number}"
+        ref = f"https://github.com/imanage/imanage/issues/{issue.number}"
         identifier = nodes.reference("", "#" + issue.number, refuri=ref)
         github_link = [nodes.inline(text=" ("), identifier, nodes.inline(text=")")]
         description[0].extend(github_link)

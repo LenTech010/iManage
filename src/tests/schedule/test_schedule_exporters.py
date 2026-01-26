@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 
 import pytest
 from django_scopes import scope
 
-from pretalx.schedule.exporters import ScheduleData
+from imanage.schedule.exporters import ScheduleData
 
 
 def test_schedule_data_empty_methods():

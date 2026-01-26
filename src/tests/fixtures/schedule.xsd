@@ -6,7 +6,7 @@ Schema for an XML representation of a conference schedule with speakers, talks a
 https://c3voc.de/wiki/schedule
 
 
-Publicly first automatically produced by [pentabarf](https://github.com/nevs/pentabarf), extended by [frab](https://frab.github.io/frab/] and continuously supported by [pretalx](https://pretalx.com/p/about/) and [osem](https://osem.io/).
+Publicly first automatically produced by [pentabarf](https://github.com/nevs/pentabarf), extended by [frab](https://frab.github.io/frab/] and continuously supported by [Imanage](https://imanage.com/p/about/) and [osem](https://osem.io/).
 
 Media Type registration:
 https://www.iana.org/assignments/media-types/application/vnd.c3voc.schedule+xml
@@ -140,8 +140,8 @@ Clients consuming this format include
       <xs:element type="httpURI" name="origin_url" minOccurs="0"/>
     </xs:all>
     <!-- short identifier of the submission, replacing the old "id" attribute -->
-    <xs:attribute name="code" type="pretalx-random-code" use="optional"/>
-    <!-- legacy numeric identifier from pretalx, might be non unique when submission has multiple time slots, c.f. https://docs.pretalx.org/developer/concepts/#schedules-and-slots -->
+    <xs:attribute name="code" type="imanage-random-code" use="optional"/>
+    <!-- legacy numeric identifier from Imanage, might be non unique when submission has multiple time slots, c.f. https://docs.imanage.org/developer/concepts/#schedules-and-slots -->
     <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
     <!-- unique identifier for this event/instance introduced by frab, guaranteed to be unique across all systems -->
     <xs:attribute name="guid" type="uuid" use="required"/>
@@ -175,7 +175,7 @@ Clients consuming this format include
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="pretalx-random-code">
+  <xs:simpleType name="imanage-random-code">
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-9A-Z]{6}"/>
     </xs:restriction>

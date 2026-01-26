@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope, scopes_disabled
 
-from pretalx.submission.models.question import QuestionRequired
+from imanage.submission.models.question import QuestionRequired
 
 
 @pytest.mark.django_db
@@ -131,7 +131,7 @@ def test_orga_can_edit_speaker_with_custom_field_consolidated_log(
         logs = profile.logged_actions()
         new_log_count = logs.count()
         assert new_log_count == initial_log_count + 1
-        update_log = logs.filter(action_type="pretalx.user.profile.update").first()
+        update_log = logs.filter(action_type="imanage.user.profile.update").first()
         assert update_log
         assert update_log.changes
         assert update_log.changes["name"]["old"] == old_name

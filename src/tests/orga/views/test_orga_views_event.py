@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -10,7 +10,7 @@ from django.core import mail as djmail
 from django.utils.timezone import now
 from django_scopes import scope
 
-from pretalx.event.models import Event
+from imanage.event.models import Event
 
 
 def get_settings_form_data(event):
@@ -184,7 +184,7 @@ def test_add_custom_css_as_administrator(event, administrator_client, path):
     ),
 )
 def test_change_custom_domain(event, orga_client, monkeypatch, domain, result):
-    from pretalx.orga.forms.event import socket
+    from imanage.orga.forms.event import socket
 
     yessocket = lambda x: True  # noqa
     monkeypatch.setattr(socket, "gethostbyname", yessocket)
@@ -202,7 +202,7 @@ def test_change_custom_domain(event, orga_client, monkeypatch, domain, result):
 def test_change_custom_domain_to_unavailable_domain(
     event, orga_client, other_event, monkeypatch
 ):
-    from pretalx.orga.forms.event import socket
+    from imanage.orga.forms.event import socket
 
     def nosocket(param):
         raise OSError
@@ -893,7 +893,7 @@ def test_event_history_detail_view_with_changes(
     with scope(event=event):
         key = f"question-{question.pk}"
         log = submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=orga_user,
             orga=True,
             old_data={"title": "Old Title", "abstract": "Old abstract", key: "Blue"},
@@ -918,7 +918,7 @@ def test_event_history_detail_view_requires_permission(
 ):
     with scope(event=event):
         log = submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=orga_user,
             orga=True,
             old_data={"title": "Old Title"},
@@ -941,7 +941,7 @@ def test_event_history_detail_view_scoping(
 ):
     with scope(event=event):
         log = submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=orga_user,
             orga=True,
             old_data={"title": "Old"},

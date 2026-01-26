@@ -6,7 +6,7 @@
 Plugin development
 ==================
 
-The following pages will help you create your first pretalx plugin, and will
+The following pages will help you create your first imanage plugin, and will
 show you common plugin patterns and functionality in the “Writing a … plugin”
 sections.
 
@@ -24,5 +24,5 @@ a plugin, please add it to our `plugin list`_!
    exporter
    authentication
 
-.. _plugin idea collection: https://github.com/pretalx/pretalx/wiki/Plugin-ideas
-.. _plugin list: https://github.com/pretalx/pretalx/wiki/Plugins
+.. _plugin idea collection: https://github.com/imanage/imanage/wiki/Plugin-ideas
+.. _plugin list: https://github.com/imanage/imanage/wiki/Plugins

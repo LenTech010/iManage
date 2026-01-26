@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 
-from pretalx.person.models import UserApiToken
-from pretalx.person.models.auth_token import (
+from imanage.person.models import UserApiToken
+from imanage.person.models.auth_token import (
     ENDPOINTS,
     READ_PERMISSIONS,
     WRITE_PERMISSIONS,

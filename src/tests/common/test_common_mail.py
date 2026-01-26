@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django.core import mail as djmail
 
-from pretalx.common.mail import mail_send_task
+from imanage.common.mail import mail_send_task
 
 
 @pytest.mark.django_db

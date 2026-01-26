@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import textwrap
@@ -27,7 +27,7 @@ def test_can_see_schedule(
     assert response.status_code == 200
     with scope(event=event):
         assert event.schedules.count() == 2
-        test_string = "<pretalx-schedule" if version == "js" else slot.submission.title
+        test_string = "<imanage-schedule" if version == "js" else slot.submission.title
         assert test_string in response.text
 
 
@@ -84,7 +84,7 @@ def test_orga_can_see_wip_schedule(orga_client, event, slot, version):
     response = orga_client.get(url, follow=True, HTTP_ACCEPT="text/html")
     assert response.status_code == 200
     with scope(event=event):
-        test_string = "<pretalx-schedule" if version == "js" else slot.submission.title
+        test_string = "<imanage-schedule" if version == "js" else slot.submission.title
         assert test_string in response.text
 
 
@@ -103,7 +103,7 @@ def test_can_see_schedule_with_broken_accept_header(client, event):
     response = client.get(event.urls.schedule, follow=True, HTTP_ACCEPT="foo/bar")
     assert response.status_code == 200
     with scope(event=event):
-        assert "<pretalx-schedule" in response.text
+        assert "<imanage-schedule" in response.text
 
 
 @pytest.mark.django_db
@@ -325,7 +325,7 @@ def test_versioned_schedule_page(
     with scope(event=event):
         event.release_schedule("new schedule")
         event.current_schedule.talks.update(is_visible=False)
-        test_string = "<pretalx-schedule" if version == "js" else slot.submission.title
+        test_string = "<imanage-schedule" if version == "js" else slot.submission.title
 
     url = event.urls.schedule if version == "js" else event.urls.schedule_nojs
     with django_assert_num_queries(queries_main):

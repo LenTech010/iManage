@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 import os
@@ -15,9 +15,9 @@ from django.urls import reverse
 from django_scopes import scope
 from lxml import etree
 
-from pretalx.agenda.tasks import export_schedule_html, is_html_export_stale
-from pretalx.event.models import Event
-from pretalx.submission.models import Resource
+from imanage.agenda.tasks import export_schedule_html, is_html_export_stale
+from imanage.event.models import Event
+from imanage.submission.models import Resource
 
 
 @pytest.mark.skipif(
@@ -345,8 +345,8 @@ def test_schedule_export_schedule_html_task_nozip(mocker, event):
 def test_schedule_orga_trigger_export_without_celery(
     mocker, orga_client, django_assert_max_num_queries, event
 ):
-    mocker.patch("pretalx.agenda.tasks.export_schedule_html.apply_async")
-    from pretalx.agenda.tasks import export_schedule_html
+    mocker.patch("imanage.agenda.tasks.export_schedule_html.apply_async")
+    from imanage.agenda.tasks import export_schedule_html
 
     with django_assert_max_num_queries(39):
         response = orga_client.post(
@@ -364,8 +364,8 @@ def test_schedule_orga_trigger_export_without_celery(
 def test_schedule_orga_trigger_export_with_celery(
     mocker, orga_client, django_assert_max_num_queries, event
 ):
-    mocker.patch("pretalx.agenda.tasks.export_schedule_html.apply_async")
-    from pretalx.agenda.tasks import export_schedule_html
+    mocker.patch("imanage.agenda.tasks.export_schedule_html.apply_async")
+    from imanage.agenda.tasks import export_schedule_html
 
     with django_assert_max_num_queries(39):
         response = orga_client.post(
@@ -601,7 +601,7 @@ def test_is_html_export_stale_no_schedule(event):
     }
 )
 def test_is_html_export_stale_cache_flag(schedule):
-    from pretalx.agenda.management.commands.export_schedule_html import (
+    from imanage.agenda.management.commands.export_schedule_html import (
         get_export_zip_path,
     )
 
@@ -622,7 +622,7 @@ def test_is_html_export_stale_cache_flag(schedule):
 
 @pytest.mark.django_db
 def test_is_html_export_stale_no_zip(schedule):
-    from pretalx.agenda.management.commands.export_schedule_html import (
+    from imanage.agenda.management.commands.export_schedule_html import (
         get_export_zip_path,
     )
 
@@ -639,13 +639,13 @@ def test_is_html_export_stale_no_zip(schedule):
 @override_settings(CELERY_TASK_ALWAYS_EAGER=False)
 def test_schedule_download_starts_async_task(mocker, orga_client, schedule):
     mocker.patch(
-        "pretalx.agenda.tasks.is_html_export_stale",
+        "imanage.agenda.tasks.is_html_export_stale",
         return_value=True,
     )
     mock_result = mocker.MagicMock()
     mock_result.id = "test-task-id"
     mocker.patch(
-        "pretalx.agenda.tasks.export_schedule_html.apply_async",
+        "imanage.agenda.tasks.export_schedule_html.apply_async",
         return_value=mock_result,
     )
 
@@ -663,7 +663,7 @@ def test_schedule_download_htmx_polling_pending(mocker, orga_client, schedule):
     mock_result = mocker.MagicMock()
     mock_result.ready.return_value = False
     mocker.patch(
-        "pretalx.orga.views.schedule.AsyncResult",
+        "imanage.orga.views.schedule.AsyncResult",
         return_value=mock_result,
     )
 
@@ -683,7 +683,7 @@ def test_schedule_download_htmx_polling_success(mocker, orga_client, schedule):
     mock_result.ready.return_value = True
     mock_result.successful.return_value = True
     mocker.patch(
-        "pretalx.orga.views.schedule.AsyncResult",
+        "imanage.orga.views.schedule.AsyncResult",
         return_value=mock_result,
     )
 
@@ -704,7 +704,7 @@ def test_schedule_download_htmx_polling_failure(mocker, orga_client, schedule):
     mock_result.ready.return_value = True
     mock_result.successful.return_value = False
     mocker.patch(
-        "pretalx.orga.views.schedule.AsyncResult",
+        "imanage.orga.views.schedule.AsyncResult",
         return_value=mock_result,
     )
 
@@ -723,7 +723,7 @@ def test_schedule_download_non_htmx_waiting(mocker, orga_client, schedule):
     mock_result = mocker.MagicMock()
     mock_result.ready.return_value = False
     mocker.patch(
-        "pretalx.orga.views.schedule.AsyncResult",
+        "imanage.orga.views.schedule.AsyncResult",
         return_value=mock_result,
     )
 
@@ -742,7 +742,7 @@ def test_schedule_download_non_htmx_failure(mocker, orga_client, schedule):
     mock_result.ready.return_value = True
     mock_result.successful.return_value = False
     mocker.patch(
-        "pretalx.orga.views.schedule.AsyncResult",
+        "imanage.orga.views.schedule.AsyncResult",
         return_value=mock_result,
     )
 
@@ -758,11 +758,11 @@ def test_schedule_download_non_htmx_failure(mocker, orga_client, schedule):
 @pytest.mark.django_db
 def test_schedule_download_missing_zip(mocker, orga_client, schedule):
     mocker.patch(
-        "pretalx.orga.views.schedule.is_html_export_stale",
+        "imanage.orga.views.schedule.is_html_export_stale",
         return_value=False,
     )
     mocker.patch(
-        "pretalx.orga.views.schedule.get_export_zip_path",
+        "imanage.orga.views.schedule.get_export_zip_path",
         return_value=Path("/nonexistent/path.zip"),
     )
 

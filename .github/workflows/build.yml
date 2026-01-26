@@ -7,12 +7,12 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'src/pretalx/locale/**'
+      - 'src/imanage/locale/**'
       - 'doc/**'
   pull_request:
     branches: [ main ]
     paths-ignore:
-      - 'src/pretalx/locale/**'
+      - 'src/imanage/locale/**'
       - 'doc/**'
 
 permissions:
@@ -67,6 +67,6 @@ jobs:
           mkdir test_venv
           python -m venv test_venv
           . test_venv/bin/activate
-          pip install dist/pretalx*whl
-          python -m pretalx help
-          python -m pretalx migrate
+          pip install dist/imanage*whl
+          python -m imanage help
+          python -m imanage migrate

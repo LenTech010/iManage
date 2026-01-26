@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope, scopes_disabled
 
-from pretalx.person.models.user import User, avatar_path
-from pretalx.submission.models.question import Answer
+from imanage.person.models.user import User, avatar_path
+from imanage.submission.models.question import Answer
 
 
 @pytest.mark.parametrize(

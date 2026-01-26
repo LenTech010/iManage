@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.agenda.rules import is_agenda_visible, is_speaker_viewable
+from imanage.agenda.rules import is_agenda_visible, is_speaker_viewable
 
 
 @pytest.mark.django_db

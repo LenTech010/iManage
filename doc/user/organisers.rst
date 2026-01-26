@@ -6,7 +6,7 @@
 Organisers & Teams
 ==================
 
-pretalx uses a hierarchy of organisers, teams, and events to structure access
+imanage uses a hierarchy of organisers, teams, and events to structure access
 and permissions. This page explains how to create teams, manage team members,
 and configure permissions.
 
@@ -23,7 +23,7 @@ Organisers
 
 An organiser represents the entity responsible for running events – this could
 be a company, a community, an institution, or any other group. Every event in
-pretalx belongs to exactly one organiser.
+imanage belongs to exactly one organiser.
 
 Grouping events under an organiser has several benefits: you can manage team
 access across multiple events at once, and team members can create new events
@@ -34,9 +34,9 @@ your tracks, review settings, email templates, venue setup etc. from scratch.
 Setting up an Organiser
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-On `pretalx.com <https://pretalx.com>`_, an organiser account is created for
-you automatically when you `sign up <https://pretalx.com/p/try>`_. If you are
-using a self-hosted pretalx instance, contact your administrator to have an
+On `imanage.com <https://imanage.com>`_, an organiser account is created for
+you automatically when you `sign up <https://imanage.com/p/try>`_. If you are
+using a self-hosted imanage instance, contact your administrator to have an
 organiser account created for you.
 
 .. _`user-guide-teams`:
@@ -131,7 +131,7 @@ Can create events
 Can change teams and permissions
    Members can create, edit, and delete teams, invite new members, and modify
    permissions. At least one team must have this permission to ensure the
-   organiser can always be administered. pretalx will prevent you from removing
+   organiser can always be administered. imanage will prevent you from removing
    the permission, removing the last team member, or deleting a team if it
    would result in nobody remaining with this permission.
 
@@ -178,7 +178,7 @@ members to. Enter an email address and click **Add**. To invite multiple people,
 click **Add multiple team members?** to enter several addresses at once, one per
 line.
 
-pretalx always sends an invitation email, even if the address belongs to an
+imanage always sends an invitation email, even if the address belongs to an
 existing account. Recipients must click the link in the email to join the team.
 Until they accept, they appear as pending invitations, where you can resend or
 retract the invitation.
@@ -194,7 +194,7 @@ can create one on the same page. If you already have an account, log in to
 complete the process.
 
 When you open an invitation with a logged-in account, you can accept it, or
-choose to log in with a different account. pretalx will not automatically
+choose to log in with a different account. imanage will not automatically
 accept the invitation when you follow the link, in order to give you the option
 to accept it from a different account.
 

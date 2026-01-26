@@ -4,21 +4,21 @@
 Management commands
 ===================
 
-pretalx comes with commands that you can execute from the command line. Run
-them in the same environment you installed pretalx in. If you followed the
-installation guide, you should run them as the ``pretalx`` user, and either
+imanage comes with commands that you can execute from the command line. Run
+them in the same environment you installed imanage in. If you followed the
+installation guide, you should run them as the ``imanage`` user, and either
 use the ``/var/pretax/venv/bin/python`` executable, or activate the virtual
-environment by running ``source /var/pretalx/venv/bin/activate``.
+environment by running ``source /var/imanage/venv/bin/activate``.
 
 .. highlight:: console
 
-All commands are run with the ``python -m pretalx`` prefix::
+All commands are run with the ``python -m imanage`` prefix::
 
-  python -m pretalx <command> [<flags>] [<options>]
+  python -m imanage <command> [<flags>] [<options>]
 
-You can add the ``--no-pretalx-information`` flag to any of these commands
-to suppress the printing of the pretalx debug startup header, or set
-``PRETALX_NO_INITIAL_LOG=1`` (or any other non-empty).
+You can add the ``--no-imanage-information`` flag to any of these commands
+to suppress the printing of the imanage debug startup header, or set
+``IMANAGE_NO_INITIAL_LOG=1`` (or any other non-empty).
 
 Database commands
 -----------------
@@ -26,11 +26,11 @@ Database commands
 ``migrate``
 ~~~~~~~~~~~
 
-The ``migrate`` command updates the database tables to conform to what pretalx
+The ``migrate`` command updates the database tables to conform to what imanage
 expects. Please execute it once upon installation and then on every update. As
 ``migrate`` touches the database, you should have a backup of the state before
 the command run.
-Running ``migrate`` if pretalx has no pending database changes  is harmless. It
+Running ``migrate`` if imanage has no pending database changes  is harmless. It
 will result in no changes to the database.
 
 If migrations touch upon large populated tables, they may run for some time.
@@ -41,7 +41,7 @@ behaviour.
 ~~~~~~~~~~~~~~~~~~
 
 If you ran into trouble during ``migrate``, run ``showmigrations``. It will
-show you the current state of all pretalx migrations. It may be useful debug
+show you the current state of all imanage migrations. It may be useful debug
 output to include in bug reports about database problems.
 
 ``clearsessions``
@@ -57,21 +57,21 @@ Debug commands
 ``shell``
 ~~~~~~~~~
 
-The ``shell`` command opens a Python shell with the pretalx configuration and
+The ``shell`` command opens a Python shell with the imanage configuration and
 environment. If you have ``ipython`` installed, an IPython shell will open,
 though you can change to plain Python with ``-i python``.
-pretalx models will be imported automatically.
+imanage models will be imported automatically.
 
 If you only want to access data within a single event, run the command within
 an event scope to prevent accidentally accessing other event data (a reassuring
 level of protection if you have to use the shell to write to the database!)::
 
-    $ python -m pretalx shell --event myevent
+    $ python -m imanage shell --event myevent
 
 If you are absolutely sure that you want to access all events, disable the
 scoping protection::
 
-    $ python -m pretalx shell --unsafe-disable-scopes
+    $ python -m imanage shell --unsafe-disable-scopes
 
 ``print_settings``
 ~~~~~~~~~~~~~~~~~~
@@ -83,13 +83,13 @@ passwords, so sanitise it before pasting it anywhere.
 .. highlight:: python
 
 If you don’t want to install a library for debugging, you can run these
-commands in the pretalx ``shell`` command::
+commands in the imanage ``shell`` command::
 
     >>> from django.conf import settings
     >>> from pprint import pprint
     >>> pprint(settings.__dict__)
 
-Core pretalx commands
+Core imanage commands
 ---------------------
 
 ``rebuild``
@@ -106,7 +106,7 @@ installed plugins, so if translations are not showing up, re-running the
 
 Run this command with ``--npm-install`` to install or update all frontend
 dependencies. This option will automatically be used the first time when
-pretalx detects that you don’t have a ``node_modules`` directory, but it’s your
+imanage detects that you don’t have a ``node_modules`` directory, but it’s your
 responsibility to use it during updates. It’s not the default as running ``npm
 install`` can take a long time.
 
@@ -114,7 +114,7 @@ install`` can take a long time.
 ~~~~~~~~
 
 The ``init`` command allows you to create a superuser and an organiser. It is
-useful to give you all the tools to start configuring pretalx in the web
+useful to give you all the tools to start configuring imanage in the web
 interface. Please run this command once in the beginning. You can abort the
 command at any time, and it will not write anything to the database.
 
@@ -126,7 +126,7 @@ phase (creation of a superuser), set the environment variables
 documentation of the non-interactive mode of the corresponding Django command
 <https://docs.djangoproject.com/en/stable/ref/django-admin/#createsuperuser>`_).
 For the second phase (creation of an organiser), set the environment variables
-``PRETALX_INIT_ORGANISER_NAME`` and ``PRETALX_INIT_ORGANISER_SLUG``.
+``IMANAGE_INIT_ORGANISER_NAME`` and ``IMANAGE_INIT_ORGANISER_SLUG``.
 
 ``createsuperuser``
 ~~~~~~~~~~~~~~~~~~~
@@ -186,12 +186,12 @@ Development commands
 ~~~~~~~~~~~~~~~~
 
 This command regenerates translation files. It should only be used during
-pretalx development (:ref:`developer-translations`).
+imanage development (:ref:`developer-translations`).
 
 ``makemigrations``
 ~~~~~~~~~~~~~~~~~~
 
 This command generates new migration files for database changed. It should ONLY
-be used during pretalx development, even if you are running a custom
-installation, or if the console output of pretalx tells you to run it in case
+be used during imanage development, even if you are running a custom
+installation, or if the console output of imanage tells you to run it in case
 of changes to database models.

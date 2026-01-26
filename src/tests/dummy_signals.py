@@ -1,19 +1,19 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 from django.dispatch import receiver
 
-from pretalx.agenda.recording import BaseRecordingProvider
-from pretalx.agenda.signals import register_recording_provider
-from pretalx.cfp.signals import footer_link, html_above_profile_page, html_head
-from pretalx.common.signals import register_locales
-from pretalx.orga.signals import (
+from imanage.agenda.recording import BaseRecordingProvider
+from imanage.agenda.signals import register_recording_provider
+from imanage.cfp.signals import footer_link, html_above_profile_page, html_head
+from imanage.common.signals import register_locales
+from imanage.orga.signals import (
     activate_event,
     nav_event,
     nav_event_settings,
     nav_global,
 )
-from pretalx.submission.signals import submission_state_change
+from imanage.submission.signals import submission_state_change
 
 
 @receiver(register_locales)
@@ -31,7 +31,7 @@ def footer_link_test(sender, request, **kwargs):
 @receiver(html_head)
 def html_head_test(sender, request, **kwargs):
     if sender.slug != "ignore_signal":
-        return '<meta property="pretalx:foo" content="bar">'
+        return '<meta property="imanage:foo" content="bar">'
 
 
 @receiver(html_above_profile_page)

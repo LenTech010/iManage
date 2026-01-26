@@ -6,7 +6,7 @@
 Maintenance and Updates
 =======================
 
-If you host your own pretalx instance, you also need to care about the
+If you host your own imanage instance, you also need to care about the
 availability of your service and the safety about your data yourself.
 This page gives you some information that you may need to do so.
 
@@ -25,7 +25,7 @@ Database
     schedule.
 
 Data directory
-    The data directory of your pretalx configuration may contain files that you
+    The data directory of your imanage configuration may contain files that you
     want to back up. If you did not specify a secret in your config file, back
     up the ``.secret`` text file in the data directory. If you lose the secret,
     all active user sessions will be invalid. You should
@@ -42,8 +42,8 @@ only use it for non-critical, temporary or cached data.
 Monitoring
 ----------
 
-To monitor whether your pretalx instance is running, you can issue a GET
-request to https://pretalx.example.org/healthcheck/. This endpoint tests if
+To monitor whether your imanage instance is running, you can issue a GET
+request to https://imanage.example.org/healthcheck/. This endpoint tests if
 the connection to the database and to the configured cache is working
 correctly. If everything appears to work fine, an empty response with status
 code ``200`` is returned. If there is a problem, a status code in the ``5xx``
@@ -56,15 +56,15 @@ Updates
 .. warning:: While we try hard not to issue breaking updates, **please perform
              a backup before every upgrade**.
 
-If you run your own pretalx instance, you will have to take care of updates,
-including both system updates and pretalx updates. We highly recommend that you
-update to the latest pretalx version as soon as it is available, as it may
+If you run your own imanage instance, you will have to take care of updates,
+including both system updates and imanage updates. We highly recommend that you
+update to the latest imanage version as soon as it is available, as it may
 contain security fixes as well as new features.
 
 Release Cycle
 ~~~~~~~~~~~~~
 
-pretalx uses the following versioning scheme:
+imanage uses the following versioning scheme:
 
 - Feature releases have a version in the format ``YEAR.NUMBER.0``, so e.g.
   v2025.2.0 is the second release issued in 2025. Feature releases are
@@ -80,7 +80,7 @@ pretalx uses the following versioning scheme:
   functional changes unless those functional changes are required to fix a
   security issue. Bugfix releases are only issued for the latest feature release.
 
-pretalx provides an update check that is turned on by default, and that will
+imanage provides an update check that is turned on by default, and that will
 send you an email when a new update becomes available. We do not use this
 update check to collect any identifiable data about your instance, and we
 highly recommend that you do not turn it off, as skipping updates may introduce
@@ -92,7 +92,7 @@ release history on GitHub_.
 
 When we issue a new feature release, we also provide compatible releases for
 all plugins developed by us, so we recommend that you update your installed
-plugins at the same time as the core pretalx system. Most plugins follow
+plugins at the same time as the core imanage system. Most plugins follow
 a ``MAJOR.MINOR.PATCH`` version number scheme.
 
 Performing Updates
@@ -106,30 +106,30 @@ important upgrade notes and warnings. Also, make sure you have a current
 backup.
 
 Next, execute the following commands in the same environment as your
-installation. This may be your pretalx user, or a virtualenv, if you chose a
+installation. This may be your imanage user, or a virtualenv, if you chose a
 different installation path.
 
 .. highlight:: console
 
-These commands update pretalx first, then the database, then the static files.
+These commands update imanage first, then the database, then the static files.
 Once you have executed these steps without seeing any errors, do not forget to
 restart your service(s)::
 
-    (env)$ pip3 install --upgrade-strategy eager -U pretalx
-    (env)$ python -m pretalx check --deploy
-    (env)$ python -m pretalx migrate
-    (env)$ python -m pretalx rebuild --npm-install
-    # systemctl restart pretalx-web
-    # systemctl restart pretalx-worker  # If you’re running celery
+    (env)$ pip3 install --upgrade-strategy eager -U imanage
+    (env)$ python -m imanage check --deploy
+    (env)$ python -m imanage migrate
+    (env)$ python -m imanage rebuild --npm-install
+    # systemctl restart imanage-web
+    # systemctl restart imanage-worker  # If you’re running celery
 
 Installing a fixed release
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to upgrade pretalx to a specific release, you can pin the version
-in the pip command. Substitute ``pretalx`` with ``pretalx==1.2.3`` in the pip
+If you want to upgrade imanage to a specific release, you can pin the version
+in the pip command. Substitute ``imanage`` with ``imanage==1.2.3`` in the pip
 install line above like this::
 
-    (env)$ pip3 install --user --upgrade-strategy eager pretalx==1.2.3
+    (env)$ pip3 install --user --upgrade-strategy eager imanage==1.2.3
 
 .. _installing-a-commit:
 
@@ -137,11 +137,11 @@ Installing a commit or a branch version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you’re sure that you know what you’re doing, you can also install a specific
-commit or branch of pretalx. You can replace ``main`` with a short or long
+commit or branch of imanage. You can replace ``main`` with a short or long
 commit ID for a specific commit::
 
-    (env)$ pip3 install --user --upgrade-strategy eager -U "git+https://github.com/pretalx/pretalx.git@main#egg=pretalx"
+    (env)$ pip3 install --user --upgrade-strategy eager -U "git+https://github.com/imanage/imanage.git@main#egg=imanage"
 
-.. _blog: https://pretalx.com/p/news/
-.. _GitHub: https://github.com/pretalx/pretalx/releases
-.. _PyPI: https://pypi.org/project/pretalx/#history
+.. _blog: https://imanage.com/p/news/
+.. _GitHub: https://github.com/imanage/imanage/releases
+.. _PyPI: https://pypi.org/project/imanage/#history

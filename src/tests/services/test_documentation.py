@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import configparser
 import importlib
@@ -12,7 +12,7 @@ from django.dispatch import Signal
 
 here = Path(__file__).parent
 doc_dir = here / "../../../doc"
-base_dir = here / "../../pretalx"
+base_dir = here / "../../imanage"
 
 plugin_docs = (doc_dir / "developer/plugins/general.rst").read_text()
 command_docs = (doc_dir / "administrator/commands.rst").read_text()
@@ -21,7 +21,7 @@ command_docs = (doc_dir / "administrator/commands.rst").read_text()
 def test_documentation_includes_config_options():
     doc_text = (doc_dir / "administrator/configure.rst").read_text()
     config = configparser.RawConfigParser()
-    config = config.read(here / "../../pretalx.example.cfg")
+    config = config.read(here / "../../imanage.example.cfg")
 
     for category in config:
         for key in category:

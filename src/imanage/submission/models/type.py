@@ -1,0 +1,134 @@
+# SPDX-FileCopyrightText: 2017-present Tobias Kunze
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+
+from django.db import models
+from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
+from i18nfield.fields import I18nCharField
+
+from imanage.agenda.rules import is_agenda_visible
+from imanage.common.models.fields import DateTimeField
+from imanage.common.models.mixins import ImanageModel
+from imanage.common.urls import EventUrls
+from imanage.event.rules import can_change_event_settings
+from imanage.submission.rules import is_cfp_open, orga_can_change_submissions
+
+
+def pleasing_number(number):
+    if int(number) == number:
+        return int(number)
+    return number
+
+
+class SubmissionType(ImanageModel):
+    """Each :class:`~imanage.submission.models.submission.Submission` has one
+    SubmissionType.
+
+    SubmissionTypes are used to group submissions by default duration (which
+    can be overridden on a per-submission basis), and to be able to offer
+    different deadlines for some parts of the
+    :class:`~imanage.event.models.event.Event`.
+    """
+
+    event = models.ForeignKey(
+        to="event.Event", related_name="submission_types", on_delete=models.CASCADE
+    )
+    name = I18nCharField(max_length=100, verbose_name=_("name"))
+    default_duration = models.PositiveIntegerField(
+        default=30,
+        verbose_name=_("default duration"),
+        help_text=_("Default duration in minutes"),
+    )
+    deadline = DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("Deadline"),
+        help_text=_(
+            "If you want a different deadline than the global deadline for this session type, enter it here."
+        ),
+    )
+    requires_access_code = models.BooleanField(
+        verbose_name=_("Requires access code"),
+        help_text=_(
+            "This session type will only be shown to submitters with a matching access code."
+        ),
+        default=False,
+    )
+
+    log_prefix = "imanage.submission_type"
+
+    class Meta:
+        ordering = ["default_duration"]
+        rules_permissions = {
+            "list": is_cfp_open | is_agenda_visible | orga_can_change_submissions,
+            "view": is_cfp_open | is_agenda_visible | orga_can_change_submissions,
+            "orga_list": orga_can_change_submissions,
+            "orga_view": orga_can_change_submissions,
+            "create": can_change_event_settings,
+            "update": can_change_event_settings,
+            "delete": can_change_event_settings,
+        }
+
+    class urls(EventUrls):
+        base = edit = "{self.event.cfp.urls.types}{self.pk}/"
+        default = "{base}default"
+        delete = "{base}delete/"
+        prefilled_cfp = "{self.event.cfp.urls.public}?submission_type={self.slug}"
+
+    def __str__(self) -> str:
+        """Used in choice drop downs."""
+        if not self.default_duration:
+            return str(self.name)
+        if self.default_duration >= 60 * 24:
+            days = round(self.default_duration / 60 / 24, 1)
+            if days == 1:
+                return _("{name} (1 day)").format(name=self.name)
+            return _("{name} ({duration} days)").format(
+                name=self.name,
+                duration=pleasing_number(days),
+            )
+        if self.default_duration > 90:
+            hours = self.default_duration // 60
+            minutes = self.default_duration % 60
+            if hours == 1 and minutes:
+                duration = _("1 hour, {minutes} minutes").format(minutes=minutes)
+            elif hours == 1:
+                duration = _("1 hour")
+            elif minutes:
+                duration = _("{hours} hours, {minutes} minutes").format(
+                    hours=hours, minutes=minutes
+                )
+            else:
+                duration = _("{hours} hours").format(hours=hours)
+            return f"{self.name} ({duration})"
+        return _("{name} ({duration} minutes)").format(
+            name=self.name, duration=self.default_duration
+        )
+
+    @property
+    def log_parent(self):
+        return self.event
+
+    @property
+    def slug(self) -> str:
+        """The slug makes tracks more readable in URLs.
+
+        It consists of the ID, followed by a slugified (and, in lookups,
+        optional) form of the submission type name.
+        """
+        return f"{self.id}-{slugify(self.name)}"
+
+    def update_duration(self):
+        """Updates the duration of all.
+
+        :class:`~imanage.schedule.models.slot.TalkSlot` objects of
+        :class:`~imanage.submission.models.submission.Submission` objects of
+        this type.
+
+        Runs only for submissions that do not override their default
+        duration. Should be called whenever ``duration`` changes.
+        """
+        for submission in self.submissions.filter(duration__isnull=True):
+            submission.update_duration()
+
+    update_duration.alters_data = True

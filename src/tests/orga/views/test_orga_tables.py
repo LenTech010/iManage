@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import datetime as dt
 import json
@@ -7,8 +7,8 @@ import json
 import pytest
 from django_scopes import scope
 
-from pretalx.event.models import Event
-from pretalx.submission.models import Answer, Submission, SubmissionType
+from imanage.event.models import Event
+from imanage.submission.models import Answer, Submission, SubmissionType
 
 
 @pytest.mark.django_db

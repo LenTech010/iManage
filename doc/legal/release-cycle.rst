@@ -7,9 +7,9 @@ Release cycle
 .. note::
 
    This page is only relevant for self-hosted installations.
-   `pretalx.com <https://pretalx.com>`_ users are always on the latest version – and sometimes even get early access to new features before they are included in a release.
+   `imanage.com <https://imanage.com>`_ users are always on the latest version – and sometimes even get early access to new features before they are included in a release.
 
-pretalx follows a `calendar versioning <https://calver.org/>`_ scheme with
+imanage follows a `calendar versioning <https://calver.org/>`_ scheme with
 version numbers of the form ``YEAR.NUMBER.PATCH`` (e.g. 2025.2.0 is the second
 feature release of 2025).
 
@@ -24,13 +24,13 @@ We therefore recommend staying up to date with feature releases to ensure you re
 Plugins
 -------
 
-Plugins developed by us are released in sync with pretalx feature releases.
-We recommend updating plugins and pretalx at the same time.
+Plugins developed by us are released in sync with imanage feature releases.
+We recommend updating plugins and imanage at the same time.
 We cannot guarantee backwards compatibility of new releases with plugins not released by us.
 However, we include changes to plugin APIs and potential breaking changes in our :doc:`detailed release notes </changelog>`, which plugin authors are encouraged to refer to.
 
 Announcements
 -------------
 
-All releases are announced on `our blog <https://pretalx.com/p/news>`_, with a detailed changelog available in our :doc:`release notes </changelog>`.
-Releases are also published on `GitHub <https://github.com/pretalx/pretalx/releases>`_ and `PyPI <https://pypi.org/project/pretalx/>`_.
+All releases are announced on `our blog <https://imanage.com/p/news>`_, with a detailed changelog available in our :doc:`release notes </changelog>`.
+Releases are also published on `GitHub <https://github.com/imanage/imanage/releases>`_ and `PyPI <https://pypi.org/project/imanage/>`_.

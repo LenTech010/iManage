@@ -1,20 +1,20 @@
 # SPDX-FileCopyrightText: 2020-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import json
 
 import pytest
 from django_scopes import scope
 
-from pretalx.api.serializers.submission import (
+from imanage.api.serializers.submission import (
     SubmissionOrgaSerializer,
     SubmissionSerializer,
     SubmissionTypeSerializer,
     TagSerializer,
     TrackSerializer,
 )
-from pretalx.api.versions import LEGACY
-from pretalx.submission.models import SubmissionInvitation, SubmissionStates
+from imanage.api.versions import LEGACY
+from imanage.submission.models import SubmissionInvitation, SubmissionStates
 
 
 @pytest.mark.django_db
@@ -394,7 +394,7 @@ def test_orga_can_see_single_legacy_tag(client, orga_user_token, tag):
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     content = json.loads(response.text)
@@ -432,7 +432,7 @@ def test_orga_can_create_tags(client, orga_user_write_token, event):
     assert response.status_code == 201
     with scope(event=event):
         tag = event.tags.get(tag="newtesttag")
-        assert tag.logged_actions().filter(action_type="pretalx.tag.create").exists()
+        assert tag.logged_actions().filter(action_type="imanage.tag.create").exists()
 
 
 @pytest.mark.django_db
@@ -467,7 +467,7 @@ def test_orga_cannot_create_tags_readonly_token(client, orga_user_token, event):
     with scope(event=event):
         assert not event.tags.filter(tag="newtesttag").exists()
         assert (
-            not event.logged_actions().filter(action_type="pretalx.tag.create").exists()
+            not event.logged_actions().filter(action_type="imanage.tag.create").exists()
         )
 
 
@@ -487,7 +487,7 @@ def test_orga_can_update_tags(client, orga_user_write_token, event, tag):
     with scope(event=tag.event):
         tag.refresh_from_db()
         assert tag.tag == "newtesttag"
-        assert tag.logged_actions().filter(action_type="pretalx.tag.update").exists()
+        assert tag.logged_actions().filter(action_type="imanage.tag.update").exists()
 
 
 @pytest.mark.django_db
@@ -506,7 +506,7 @@ def test_orga_cannot_update_tags_readonly_token(client, orga_user_token, tag):
         tag.refresh_from_db()
         assert tag.tag != "newtesttag"
         assert (
-            not tag.logged_actions().filter(action_type="pretalx.tag.update").exists()
+            not tag.logged_actions().filter(action_type="imanage.tag.update").exists()
         )
 
 
@@ -523,7 +523,7 @@ def test_orga_can_delete_tags(client, orga_user_write_token, event, tag):
     assert response.status_code == 204
     with scope(event=tag.event):
         assert event.tags.all().count() == 0
-        assert event.logged_actions().filter(action_type="pretalx.tag.delete").exists()
+        assert event.logged_actions().filter(action_type="imanage.tag.delete").exists()
 
 
 @pytest.mark.django_db
@@ -604,7 +604,7 @@ def test_no_legacy_track_api(client, orga_user_token, track):
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     assert response.status_code == 400, response.text
@@ -626,7 +626,7 @@ def test_orga_can_create_tracks(client, orga_user_write_token, event):
     with scope(event=event):
         track = event.tracks.get(name="newtesttrack")
         assert (
-            track.logged_actions().filter(action_type="pretalx.track.create").exists()
+            track.logged_actions().filter(action_type="imanage.track.create").exists()
         )
 
 
@@ -646,7 +646,7 @@ def test_orga_cannot_create_tracks_readonly_token(client, orga_user_token, event
         assert not event.tracks.filter(name="newtesttrack").exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.track.create")
+            .filter(action_type="imanage.track.create")
             .exists()
         )
 
@@ -668,7 +668,7 @@ def test_orga_can_update_tracks(client, orga_user_write_token, event, track):
         track.refresh_from_db()
         assert track.name == "newtesttrack"
         assert (
-            track.logged_actions().filter(action_type="pretalx.track.update").exists()
+            track.logged_actions().filter(action_type="imanage.track.update").exists()
         )
 
 
@@ -689,7 +689,7 @@ def test_orga_cannot_update_tracks_readonly_token(client, orga_user_token, track
         assert track.name != "newtesttrack"
         assert (
             not track.logged_actions()
-            .filter(action_type="pretalx.track.update")
+            .filter(action_type="imanage.track.update")
             .exists()
         )
 
@@ -707,7 +707,7 @@ def test_orga_can_delete_tracks(client, orga_user_write_token, event, track):
     with scope(event=track.event):
         assert event.tracks.all().count() == 0
         assert (
-            event.logged_actions().filter(action_type="pretalx.track.delete").exists()
+            event.logged_actions().filter(action_type="imanage.track.delete").exists()
         )
 
 
@@ -808,7 +808,7 @@ def test_no_legacy_submission_type_api(client, orga_user_token, submission_type)
         follow=True,
         headers={
             "Authorization": f"Token {orga_user_token.token}",
-            "Pretalx-Version": LEGACY,
+            "Imanage-Version": LEGACY,
         },
     )
     assert response.status_code == 400, response.text
@@ -831,7 +831,7 @@ def test_orga_can_create_submission_types(client, orga_user_write_token, event):
         submission_type = event.submission_types.get(name="newtesttype")
         assert (
             submission_type.logged_actions()
-            .filter(action_type="pretalx.submission_type.create")
+            .filter(action_type="imanage.submission_type.create")
             .exists()
         )
 
@@ -854,7 +854,7 @@ def test_orga_cannot_create_submission_types_readonly_token(
         assert not event.submission_types.filter(name="newtesttype").exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.submission_type.create")
+            .filter(action_type="imanage.submission_type.create")
             .exists()
         )
 
@@ -879,7 +879,7 @@ def test_orga_can_update_submission_types(
         assert submission_type.name == "newtesttype"
         assert (
             submission_type.logged_actions()
-            .filter(action_type="pretalx.submission_type.update")
+            .filter(action_type="imanage.submission_type.update")
             .exists()
         )
 
@@ -903,7 +903,7 @@ def test_orga_cannot_update_submission_types_readonly_token(
         assert submission_type.name != "newtesttype"
         assert (
             not submission_type.logged_actions()
-            .filter(action_type="pretalx.submission_type.update")
+            .filter(action_type="imanage.submission_type.update")
             .exists()
         )
 
@@ -924,7 +924,7 @@ def test_orga_can_delete_submission_types(
         assert not event.submission_types.filter(pk=submission_type.pk).exists()
         assert (
             event.logged_actions()
-            .filter(action_type="pretalx.submission_type.delete")
+            .filter(action_type="imanage.submission_type.delete")
             .exists()
         )
 
@@ -957,7 +957,7 @@ def test_orga_can_create_submission(
         assert submission.state == SubmissionStates.SUBMITTED
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.create")
+            .filter(action_type="imanage.submission.create")
             .exists()
         )
 
@@ -1010,7 +1010,7 @@ def test_orga_cannot_create_submission_readonly_token(
         assert not event.submissions.filter(title="New Submission").exists()
         assert (
             not event.logged_actions()
-            .filter(action_type="pretalx.submission.create")
+            .filter(action_type="imanage.submission.create")
             .exists()
         )
 
@@ -1034,7 +1034,7 @@ def test_orga_can_update_submission(client, orga_user_write_token, submission):
         assert submission.title == "Updated Submission"
         update_log = (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.update")
+            .filter(action_type="imanage.submission.update")
             .first()
         )
         assert "changes" in update_log.json_data
@@ -1078,7 +1078,7 @@ def test_orga_cannot_update_submission_readonly_token(
         assert submission.title != "Updated Submission"
         assert (
             not submission.logged_actions()
-            .filter(action_type="pretalx.submission.update")
+            .filter(action_type="imanage.submission.update")
             .exists()
         )
 
@@ -1099,7 +1099,7 @@ def test_orga_can_accept_submission(client, orga_user_write_token, submission):
         assert submission.state == SubmissionStates.ACCEPTED
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.accept")
+            .filter(action_type="imanage.submission.accept")
             .exists()
         )
 
@@ -1121,7 +1121,7 @@ def test_orga_cannot_accept_submission_readonly_token(
         assert submission.state == SubmissionStates.SUBMITTED
         assert (
             not submission.logged_actions()
-            .filter(action_type="pretalx.submission.accept")
+            .filter(action_type="imanage.submission.accept")
             .exists()
         )
 
@@ -1142,7 +1142,7 @@ def test_orga_can_reject_submission(client, orga_user_write_token, submission):
         assert submission.state == SubmissionStates.REJECTED
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.reject")
+            .filter(action_type="imanage.submission.reject")
             .exists()
         )
 
@@ -1164,7 +1164,7 @@ def test_orga_cannot_reject_submission_readonly_token(
         assert submission.state == SubmissionStates.SUBMITTED
         assert (
             not submission.logged_actions()
-            .filter(action_type="pretalx.submission.reject")
+            .filter(action_type="imanage.submission.reject")
             .exists()
         )
 
@@ -1188,7 +1188,7 @@ def test_orga_can_confirm_submission(
         assert accepted_submission.state == SubmissionStates.CONFIRMED
         assert (
             accepted_submission.logged_actions()
-            .filter(action_type="pretalx.submission.confirm")
+            .filter(action_type="imanage.submission.confirm")
             .exists()
         )
 
@@ -1211,7 +1211,7 @@ def test_orga_cannot_confirm_submission_readonly_token(
         assert accepted_submission.state == SubmissionStates.ACCEPTED
         assert (
             not accepted_submission.logged_actions()
-            .filter(action_type="pretalx.submission.confirm")
+            .filter(action_type="imanage.submission.confirm")
             .exists()
         )
 
@@ -1233,7 +1233,7 @@ def test_orga_can_cancel_submission(client, orga_user_write_token, accepted_subm
         assert accepted_submission.state == SubmissionStates.CANCELED
         assert (
             accepted_submission.logged_actions()
-            .filter(action_type="pretalx.submission.cancel")
+            .filter(action_type="imanage.submission.cancel")
             .exists()
         )
 
@@ -1256,7 +1256,7 @@ def test_orga_cannot_cancel_submission_readonly_token(
         assert accepted_submission.state == SubmissionStates.ACCEPTED
         assert (
             not accepted_submission.logged_actions()
-            .filter(action_type="pretalx.submission.cancel")
+            .filter(action_type="imanage.submission.cancel")
             .exists()
         )
 
@@ -1280,7 +1280,7 @@ def test_orga_can_make_submitted_submission(
         assert rejected_submission.state == SubmissionStates.SUBMITTED
         assert (
             rejected_submission.logged_actions()
-            .filter(action_type="pretalx.submission.make_submitted")
+            .filter(action_type="imanage.submission.make_submitted")
             .exists()
         )
 
@@ -1303,7 +1303,7 @@ def test_orga_cannot_make_submitted_submission_readonly_token(
         assert rejected_submission.state == SubmissionStates.REJECTED
         assert (
             not rejected_submission.logged_actions()
-            .filter(action_type="pretalx.submission.make_submitted")
+            .filter(action_type="imanage.submission.make_submitted")
             .exists()
         )
 
@@ -1330,7 +1330,7 @@ def test_orga_can_add_speaker_to_submission(
         assert speaker in submission.speakers.all()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.speakers.add")
+            .filter(action_type="imanage.submission.speakers.add")
             .exists()
         )
 
@@ -1357,7 +1357,7 @@ def test_orga_cannot_add_speaker_to_submission_readonly_token(
         assert speaker not in submission.speakers.all()
         assert (
             not submission.logged_actions()
-            .filter(action_type="pretalx.submission.speakers.add")
+            .filter(action_type="imanage.submission.speakers.add")
             .exists()
         )
 
@@ -1384,7 +1384,7 @@ def test_orga_can_remove_speaker_from_submission(
         assert speaker not in submission.speakers.all()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.speakers.remove")
+            .filter(action_type="imanage.submission.speakers.remove")
             .exists()
         )
 
@@ -1410,7 +1410,7 @@ def test_orga_cannot_remove_speaker_from_submission_readonly_token(
         assert speaker in submission.speakers.all()
         assert (
             not submission.logged_actions()
-            .filter(action_type="pretalx.submission.speakers.remove")
+            .filter(action_type="imanage.submission.speakers.remove")
             .exists()
         )
 
@@ -1634,14 +1634,14 @@ def test_orga_can_see_submission_log(
 ):
     with scope(event=submission.event):
         submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=orga_user,
             orga=True,
             old_data={"title": "Old Title"},
             new_data={"title": "New Title"},
         )
         submission.log_action(
-            "pretalx.submission.create",
+            "imanage.submission.create",
             person=orga_user,
             orga=True,
             data={"title": submission.title},
@@ -1673,7 +1673,7 @@ def test_reviewer_can_see_submission_log(
 ):
     with scope(event=submission.event):
         submission.log_action(
-            "pretalx.submission.update",
+            "imanage.submission.update",
             person=review_user,
             orga=True,
             data={"note": "Reviewed"},
@@ -1695,7 +1695,7 @@ def test_log_endpoint_pagination(client, orga_user_write_token, submission, orga
     with scope(event=submission.event):
         for i in range(15):
             submission.log_action(
-                f"pretalx.submission.update.{i}",
+                f"imanage.submission.update.{i}",
                 person=orga_user,
                 orga=True,
                 data={"iteration": i},
@@ -1732,7 +1732,7 @@ def test_orga_can_invite_speaker(client, orga_user_write_token, submission):
         assert submission.invitations.filter(email="newinvitee@example.com").exists()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.invitation.send")
+            .filter(action_type="imanage.submission.invitation.send")
             .exists()
         )
 
@@ -1837,7 +1837,7 @@ def test_orga_can_retract_invitation(client, orga_user_write_token, submission):
         assert not SubmissionInvitation.objects.filter(pk=invitation_id).exists()
         assert (
             submission.logged_actions()
-            .filter(action_type="pretalx.submission.invitation.retract")
+            .filter(action_type="imanage.submission.invitation.retract")
             .exists()
         )
 

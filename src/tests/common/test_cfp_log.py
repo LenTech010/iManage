@@ -1,17 +1,17 @@
 # SPDX-FileCopyrightText: 2018-present Tobias Kunze
-# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Pretalx-AGPL-3.0-Terms
+# SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
 import pytest
 from django_scopes import scope
 
-from pretalx.common.log_display import LOG_NAMES
-from pretalx.common.models.log import ActivityLog
+from imanage.common.log_display import LOG_NAMES
+from imanage.common.models.log import ActivityLog
 
 
 @pytest.fixture
 def activity_log(event, submission):
     return ActivityLog(
-        event=event, content_object=submission, action_type="pretalx.submission.create"
+        event=event, content_object=submission, action_type="imanage.submission.create"
     )
 
 
@@ -66,7 +66,7 @@ def test_activity_log_display_with_string_data(event, submission):
     log = ActivityLog(
         event=event,
         content_object=event,
-        action_type="pretalx.event.delete",
+        action_type="imanage.event.delete",
         data="not a dict",
     )
     assert log.display is not None

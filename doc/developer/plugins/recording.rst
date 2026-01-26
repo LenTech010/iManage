@@ -10,8 +10,8 @@ displayed on the public talk pages of a talk.
 In this document, we will walk through the creation of a plugin for a new
 recording provider step by step. If you’d like to look at a completed working
 recording provider, take a look at our `plugin for Vimeo
-<https://github.com/pretalx/pretalx-vimeo>`_ (manual embedding) or our `plugin
-for media.ccc.de <https://github.com/pretalx/pretalx-media-ccc-de>`_ (using an
+<https://github.com/imanage/imanage-vimeo>`_ (manual embedding) or our `plugin
+for media.ccc.de <https://github.com/imanage/imanage-media-ccc-de>`_ (using an
 API).
 
 Please read :ref:`Creating a plugin <pluginsetup>` first, if you haven’t
@@ -22,11 +22,11 @@ Recording Provider registration
 
 The recording provider API uses only one signal to collect a list of all
 available providers. Your plugin should listen for this signal and return a
-subclass of ``pretalx.agenda.recording.BaseRecordingProvider``::
+subclass of ``imanage.agenda.recording.BaseRecordingProvider``::
 
    from django.dispatch import receiver
 
-   from pretalx.agenda.signals import register_recording_provider
+   from imanage.agenda.signals import register_recording_provider
 
 
    @receiver(register_recording_provider)
@@ -38,7 +38,7 @@ subclass of ``pretalx.agenda.recording.BaseRecordingProvider``::
 The recording provider class
 ----------------------------
 
-.. class:: pretalx.agenda.recording.BaseRecordingProvider
+.. class:: imanage.agenda.recording.BaseRecordingProvider
 
    The central object of each recording provider is the subclass of ``BaseRecordingProvider``.
 

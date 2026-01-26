@@ -1,0 +1,66 @@
+<!--
+SPDX-FileCopyrightText: 2017-present Tobias Kunze
+SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
+-->
+
+{% extends "common/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Welcome to IManage{% endblock title %}
+
+{% block content %}
+<div class="container-fluid min-vh-100 d-flex align-items-center bg-light">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-3 font-weight-bold text-navy mb-4">Welcome to IManage</h1>
+                <p class="lead text-slate mb-5" style="font-size: 1.5rem;">The professional platform for academic conference planning and paper management. Streamline your scholarly workflows with ease.</p>
+                
+                <div class="d-flex flex-wrap">
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'orga:login' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow mr-3 mb-3">Login / Register</a>
+                    {% else %}
+                        <a href="{% url 'orga:dashboard' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow mr-3 mb-3">Go to Dashboard</a>
+                        <form action="{% url 'orga:logout' %}" method="post" class="d-inline mb-3">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-lg px-5 py-3 rounded-pill">Logout</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-lg rounded-xl p-4 bg-white">
+                    <div class="card-body">
+                        <h2 class="h4 font-weight-bold mb-4 text-navy"><i class="fa fa-calendar-check-o mr-2 text-primary"></i> Active Conferences</h2>
+                        <div class="list-group list-group-flush">
+                            {% for event in current_events %}
+                                <div class="list-group-item px-0 py-4 border-bottom">
+                                    <div class="d-flex w-100 justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="mb-1 font-weight-bold">{{ event.name }}</h5>
+                                            <p class="text-muted small mb-3"><i class="fa fa-calendar mr-1"></i> {{ event.get_date_range_display }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <a href="{{ event.urls.base }}" class="btn btn-sm btn-outline-secondary px-3 mr-2">Public Site</a>
+                                        {% if request.user.is_authenticated %}
+                                            <a href="{{ event.orga_urls.base }}" class="btn btn-sm btn-primary px-4">Manage <i class="fa fa-chevron-right ml-1 small"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <div class="text-center py-5">
+                                    <i class="fa fa-folder-open-o fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">No conferences are currently active.</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

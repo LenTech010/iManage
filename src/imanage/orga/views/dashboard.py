@@ -71,6 +71,19 @@ class DashboardEventListView(TemplateView):
                 context["past_orga_events"].append(event)
         context["speaker_events"] = (
             Event.objects.filter(submissions__speakers__in=[self.request.user])
+            .annotate(
+                submission_count=Count(
+                    "submissions",
+                    filter=Q(
+                        submissions__state__in=[
+                            state
+                            for state in SubmissionStates.display_values.keys()
+                            if state
+                               not in (SubmissionStates.DELETED, SubmissionStates.DRAFT)
+                        ]
+                    ),
+                )
+            )
             .distinct()
             .order_by("-date_from")
         )

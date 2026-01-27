@@ -20,12 +20,11 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy pyproject.toml and install dependencies
-COPY pyproject.toml ./
-RUN pip install -e ".[postgres]"
-
-# Copy the entire source code
+# Copy the entire source code first
 COPY . .
+
+# Install dependencies
+RUN pip install -e ".[postgres]"
 
 # Create necessary directories
 RUN mkdir -p /app/data/logs /app/data/media /app/static.dist

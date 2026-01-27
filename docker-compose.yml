@@ -1,0 +1,100 @@
+# SPDX-FileCopyrightText: 2025-present Tobias Kunze
+# SPDX-License-Identifier: Apache-2.0
+
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: imanage_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-imanage}
+      POSTGRES_USER: ${DB_USER:-imanage}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-imanage}  # WARNING: Change this password for production!
+    # Database port is NOT exposed by default for security. Uncomment if needed for debugging.
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-imanage}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: imanage_backend
+    environment:
+      # Database settings
+      IMANAGE_DB_TYPE: postgresql
+      IMANAGE_DB_NAME: ${DB_NAME:-imanage}
+      IMANAGE_DB_USER: ${DB_USER:-imanage}
+      IMANAGE_DB_PASS: ${DB_PASSWORD:-imanage}
+      IMANAGE_DB_HOST: db
+      IMANAGE_DB_PORT: 5432
+      
+      # Django settings - WARNING: DEBUG mode is for development only!
+      IMANAGE_DEBUG: "${DEBUG:-True}"
+      IMANAGE_SITE_URL: ${SITE_URL:-http://localhost:8000}
+      IMANAGE_SITE_STATIC: /static/
+      IMANAGE_SITE_MEDIA: /media/
+      
+      # Filesystem settings
+      IMANAGE_DATA_DIR: /app/data
+      
+      # Locale settings
+      IMANAGE_TIME_ZONE: ${TIME_ZONE:-UTC}
+      IMANAGE_LANGUAGE_CODE: ${LANGUAGE_CODE:-en}
+      
+      # Mail settings (console backend for development)
+      IMANAGE_MAIL_FROM: ${MAIL_FROM:-noreply@localhost}
+      
+      # Superuser credentials - WARNING: Change these for production!
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME:-admin}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-admin}
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-admin@localhost}
+      
+      # Redis (disabled for simple setup)
+      IMANAGE_REDIS: "False"
+      
+      # Celery (disabled for simple setup)
+      IMANAGE_CELERY_BROKER: ""
+      IMANAGE_CELERY_BACKEND: ""
+      
+      # Variables for entrypoint script
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-imanage}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - static_volume:/app/static.dist
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: imanage_frontend
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/imanage/frontend/schedule-editor/src:/app/frontend/src
+      - ./src/imanage/frontend/schedule-editor/locales:/app/frontend/locales
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:

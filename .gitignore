@@ -109,3 +109,6 @@ src/tests/**/*.yml
 
 # Screenshots
 screens/
+
+# Docker
+docker-compose.override.yml

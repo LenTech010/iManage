@@ -40,6 +40,27 @@ documentation`_, or use our public instance at `imanage.com`_. If you want to
 use Imanage, we recommend you follow `our blog`_, where we announce new
 versions and upcoming features.
 
+🚀 Quick Start with Docker
+---------------------------
+
+The fastest way to get iManage running locally is with Docker:
+
+.. code-block:: bash
+
+   git clone https://github.com/LenTech010/iManage.git
+   cd iManage
+   ./run_all.sh
+
+This will start the complete application with:
+
+* **Backend (Django)**: http://localhost:8000
+* **Frontend (Node.js)**: http://localhost:3000
+* **PostgreSQL Database**: localhost:5432
+
+Default admin credentials: ``admin`` / ``admin``
+
+For detailed Docker setup instructions, see `DOCKER_README.md`_.
+
 📺 Look and feel
 ----------------
 

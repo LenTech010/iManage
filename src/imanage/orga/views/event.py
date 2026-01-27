@@ -4,6 +4,8 @@
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: luto
 
+import csv
+import io
 from pathlib import Path
 
 from csp.decorators import csp_update
@@ -14,6 +16,7 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 from django.forms.models import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -30,7 +33,6 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-from django.http import HttpResponse
 from django_context_decorator import context
 from django_scopes import scope, scopes_disabled
 from formtools.wizard.views import SessionWizardView
@@ -899,8 +901,6 @@ class AnalyticsCSVExporter(BaseExporter):
     filename = "analytics.csv"
     
     def get_data(self):
-        import csv
-        import io
         from imanage.event.models import EventMetrics
         from imanage.submission.models import Submission, Review
         from django.db.models import Avg
@@ -961,8 +961,6 @@ class AttendeeCSVExporter(BaseExporter):
     filename = "attendees.csv"
     
     def get_data(self):
-        import csv
-        import io
         from imanage.event.models import AttendeeMetrics
         
         output = io.StringIO()
@@ -1012,8 +1010,6 @@ class ReviewSummaryCSVExporter(BaseExporter):
     filename = "review-summary.csv"
     
     def get_data(self):
-        import csv
-        import io
         from imanage.submission.models import Submission, Review
         
         output = io.StringIO()

@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
 # SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
+import hashlib
 from contextlib import suppress
 from pathlib import Path
 
@@ -73,8 +74,6 @@ class Resource(ImanageModel):
     def save(self, *args, **kwargs):
         """Calculate file hash and size on save."""
         if self.resource and not self.file_hash:
-            import hashlib
-            
             # Calculate SHA-256 hash
             self.resource.seek(0)
             file_hash = hashlib.sha256()
@@ -97,7 +96,6 @@ class Resource(ImanageModel):
         if not self.resource or not self.file_hash:
             return True
         
-        import hashlib
         self.resource.seek(0)
         file_hash = hashlib.sha256()
         for chunk in self.resource.chunks():

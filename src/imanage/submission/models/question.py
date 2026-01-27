@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
 # SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
+import os
+
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
@@ -443,7 +445,6 @@ class Question(GenerateCode, OrderedModel, ImanageModel):
         
         # Check file type
         if self.allowed_file_types:
-            import os
             file_ext = os.path.splitext(file.name)[1].lower().lstrip('.')
             allowed_types = [ft.strip().lower() for ft in self.allowed_file_types.split(',')]
             if file_ext not in allowed_types:
@@ -702,7 +703,9 @@ class Answer(ImanageModel):
                 self.question.validate_file(self.answer_file)
             except ValidationError as e:
                 from django.core.exceptions import ValidationError as DjangoValidationError
-                raise DjangoValidationError({'answer_file': e.message})
+                # ValidationError.messages is a list, get the first message
+                error_msg = str(e) if not hasattr(e, 'messages') else e.messages[0]
+                raise DjangoValidationError({'answer_file': error_msg})
 
     def log_action(self, *args, content_object=None, **kwargs):
         if not content_object:

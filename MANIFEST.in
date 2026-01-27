@@ -11,6 +11,7 @@ exclude src/imanage.cfg
 exclude justfile
 
 recursive-exclude doc *
+recursive-exclude scripts *
 recursive-exclude src/data *
 recursive-exclude src/local *
 recursive-exclude src/static.dist *

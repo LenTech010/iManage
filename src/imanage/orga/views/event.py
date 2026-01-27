@@ -30,6 +30,7 @@ from django.views.generic import (
     UpdateView,
     View,
 )
+from django.http import HttpResponse
 from django_context_decorator import context
 from django_scopes import scope, scopes_disabled
 from formtools.wizard.views import SessionWizardView
@@ -46,6 +47,11 @@ from imanage.common.views.mixins import (
     Filterable,
     PermissionRequired,
     SensibleBackWizardMixin,
+)
+from imanage.event.exporters import (
+    AnalyticsCSVExporter,
+    AttendeeCSVExporter,
+    ReviewSummaryCSVExporter,
 )
 from imanage.event.forms import (
     EventWizardBasicsForm,
@@ -878,13 +884,6 @@ class AnalyticsExportView(EventPermissionRequired, PermissionRequired, View):
     permission_required = "orga.view_orga_area"
 
     def get(self, request, *args, **kwargs):
-        from django.http import HttpResponse
-        from imanage.event.exporters import (
-            AnalyticsCSVExporter,
-            AttendeeCSVExporter,
-            ReviewSummaryCSVExporter,
-        )
-        
         format_type = kwargs.get("format", "csv")
         
         exporters = {

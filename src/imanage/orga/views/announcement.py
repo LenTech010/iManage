@@ -84,7 +84,7 @@ class AnnouncementUpdateView(EventPermissionRequired, PermissionRequired, Update
                 locale=self.request.event.locale,
             )
         
-        messages.info(self.request, _(f"Announcement email queued for {len(recipients)} recipients."))
+        messages.info(self.request, _("Announcement email queued for %(count)d recipients.") % {'count': len(recipients)})
 
     def _get_recipients(self, announcement):
         """Get recipient emails based on target audience."""

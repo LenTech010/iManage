@@ -129,7 +129,7 @@ class UserSuspendView(PermissionRequired, DetailView):
             details={'suspended_at': str(now())}
         )
         
-        messages.success(request, _(f"User {user.email} has been suspended."))
+        messages.success(request, _("User %(email)s has been suspended.") % {'email': user.email})
         return redirect('orga:security.dashboard')
 
 
@@ -156,7 +156,7 @@ class UserReinstateView(PermissionRequired, DetailView):
             details={'reinstated_at': str(now())}
         )
         
-        messages.success(request, _(f"User {user.email} has been reinstated."))
+        messages.success(request, _("User %(email)s has been reinstated.") % {'email': user.email})
         return redirect('orga:security.dashboard')
 
 

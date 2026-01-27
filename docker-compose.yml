@@ -28,12 +28,12 @@ services:
     container_name: imanage_backend
     environment:
       # Database settings
-      IMANAGE_DATABASE_BACKEND: postgresql
-      IMANAGE_DATABASE_NAME: ${DB_NAME:-imanage}
-      IMANAGE_DATABASE_USER: ${DB_USER:-imanage}
-      IMANAGE_DATABASE_PASSWORD: ${DB_PASSWORD:-imanage}
-      IMANAGE_DATABASE_HOST: db
-      IMANAGE_DATABASE_PORT: 5432
+      IMANAGE_DB_TYPE: postgresql
+      IMANAGE_DB_NAME: ${DB_NAME:-imanage}
+      IMANAGE_DB_USER: ${DB_USER:-imanage}
+      IMANAGE_DB_PASS: ${DB_PASSWORD:-imanage}
+      IMANAGE_DB_HOST: db
+      IMANAGE_DB_PORT: 5432
       
       # Django settings
       IMANAGE_DEBUG: "True"
@@ -42,12 +42,11 @@ services:
       IMANAGE_SITE_MEDIA: /media/
       
       # Filesystem settings
-      IMANAGE_FILESYSTEM_BASE: /app/src
       IMANAGE_DATA_DIR: /app/data
       
       # Locale settings
-      IMANAGE_LOCALE_TIME_ZONE: ${TIME_ZONE:-UTC}
-      IMANAGE_LOCALE_LANGUAGE_CODE: ${LANGUAGE_CODE:-en}
+      IMANAGE_TIME_ZONE: ${TIME_ZONE:-UTC}
+      IMANAGE_LANGUAGE_CODE: ${LANGUAGE_CODE:-en}
       
       # Mail settings (console backend for development)
       IMANAGE_MAIL_FROM: ${MAIL_FROM:-noreply@localhost}
@@ -58,13 +57,13 @@ services:
       DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-admin@localhost}
       
       # Redis (disabled for simple setup)
-      IMANAGE_REDIS_LOCATION: "False"
+      IMANAGE_REDIS: "False"
       
       # Celery (disabled for simple setup)
       IMANAGE_CELERY_BROKER: ""
       IMANAGE_CELERY_BACKEND: ""
       
-      # Additional settings
+      # Additional settings for entrypoint script
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: ${DB_USER:-imanage}

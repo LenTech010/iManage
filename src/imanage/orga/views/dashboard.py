@@ -5,6 +5,7 @@
 # SPDX-FileContributor: Florian Mösch
 # SPDX-FileContributor: luto
 
+from django.contrib import messages
 from django.db.models import Count, Q
 from django.shortcuts import redirect
 from django.template.defaultfilters import timeuntil
@@ -94,6 +95,23 @@ class DashboardOrganiserEventListView(PermissionRequired, DashboardEventListView
 class DashboardOrganiserListView(PermissionRequired, TemplateView):
     template_name = "orga/organiser/list.html"
     permission_required = "event.list"
+
+    def get_permission_object(self):
+        """Return None for organiser list view - permission check is handled differently."""
+        return None
+
+    def dispatch(self, request, *args, **kwargs):
+        """Redirect users without organisers to the dashboard instead of showing 404."""
+        # If user is not an administrator and has no organiser access, redirect
+        if not request.user.is_administrator:
+            user_teams = request.user.teams.filter(can_change_organiser_settings=True)
+            if not user_teams.exists():
+                messages.info(
+                    request,
+                    _("You don't have access to any organisers. Here are your events instead.")
+                )
+                return redirect(reverse("orga:dashboard"))
+        return super().dispatch(request, *args, **kwargs)
 
     def filter_organiser(self, organiser, query):
         name = (

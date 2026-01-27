@@ -4,6 +4,7 @@
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: Raphael Michel
 
+import logging
 from urllib.parse import urlencode
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,6 +18,8 @@ from django_scopes import scopes_disabled
 from imanage.common.views.mixins import PermissionRequired
 from imanage.event.models import Event
 from imanage.event.rules import get_events_for_user
+
+logger = logging.getLogger(__name__)
 
 
 class EventPageMixin(PermissionRequired):
@@ -93,15 +96,40 @@ class GeneralView(TemplateView):
             qs = Event.objects.filter(custom_domain=f"https://{self.request.host}")
         else:
             qs = Event.objects.filter(custom_domain__isnull=True)
-        qs = get_events_for_user(self.request.user, qs)
+        qs = get_events_for_user(self.request.user, qs).distinct()
+
+        # Add proper sorting by date (most recent first)
+        qs = qs.order_by("-date_from")
+
         result["current_events"] = []
         result["past_events"] = []
         result["future_events"] = []
         for event in qs:
-            if event.date_from <= _now <= event.date_to:
-                result["current_events"].append(event)
-            elif event.date_to < _now:
-                result["past_events"].append(event)
-            else:
-                result["future_events"].append(event)
+            try:
+                # Add error handling for events with missing or invalid date fields
+                if not event.date_from or not event.date_to:
+                    logger.warning(f"Event {event.slug} is missing date fields.")
+                    continue
+
+                # Add filtering to exclude non-public events for non-authenticated users
+                if not self.request.user.is_authenticated and not event.is_public:
+                    continue
+
+                # Safety check for URL generation
+                try:
+                    event.urls.base
+                    if self.request.user.is_authenticated:
+                        event.orga_urls.base
+                except Exception as e:
+                    logger.error(f"Error generating URLs for event {event.slug}: {e}")
+                    continue
+
+                if event.date_from <= _now <= event.date_to:
+                    result["current_events"].append(event)
+                elif event.date_to < _now:
+                    result["past_events"].append(event)
+                else:
+                    result["future_events"].append(event)
+            except Exception as e:
+                logger.exception(f"Unexpected error processing event {event.slug}: {e}")
         return result

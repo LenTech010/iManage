@@ -75,6 +75,7 @@ class DashboardEventListView(TemplateView):
                 submission_count=Count(
                     "submissions",
                     filter=Q(
+                        submissions__speakers__in=[self.request.user],
                         submissions__state__in=[
                             state
                             for state in SubmissionStates.display_values.keys()

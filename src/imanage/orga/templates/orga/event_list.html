@@ -51,7 +51,7 @@ SPDX-FileContributor: luto
         <h2>{% translate "Your events as speaker" %}</h2>
         <div class="dashboard-list">
             {% for event in speaker_events %}
-                {% include "orga/includes/dashboard_block_event.html" %}
+                {% include "orga/includes/dashboard_block_speaker_event.html" %}
             {% endfor %}
         </div>
     {% endif %}

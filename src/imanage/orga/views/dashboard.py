@@ -51,7 +51,7 @@ class DashboardEventListView(TemplateView):
                         state
                         for state in SubmissionStates.display_values.keys()
                         if state
-                        not in (SubmissionStates.DELETED, SubmissionStates.DRAFT)
+                           not in (SubmissionStates.DELETED, SubmissionStates.DRAFT)
                     ]
                 ),
             )
@@ -100,17 +100,25 @@ class DashboardOrganiserListView(PermissionRequired, TemplateView):
         """Return None for organiser list view - permission check is handled differently."""
         return None
 
+    def has_permission(self):
+        """Override permission check for organiser list view."""
+        # Allow administrators
+        if self.request.user.is_administrator:
+            return True
+        # Allow users with organiser management permissions
+        return self.request.user.teams.filter(
+            can_change_organiser_settings=True
+        ).exists()
+
     def dispatch(self, request, *args, **kwargs):
         """Redirect users without organisers to the dashboard instead of showing 404."""
-        # If user is not an administrator and has no organiser access, redirect
-        if not request.user.is_administrator:
-            user_teams = request.user.teams.filter(can_change_organiser_settings=True)
-            if not user_teams.exists():
-                messages.info(
-                    request,
-                    _("You don't have access to any organisers. Here are your events instead.")
-                )
-                return redirect(reverse("orga:dashboard"))
+        # Check permission first
+        if not self.has_permission():
+            messages.info(
+                request,
+                _("You don't have access to any organisers. Here are your events instead.")
+            )
+            return redirect(reverse("orga:dashboard"))
         return super().dispatch(request, *args, **kwargs)
 
     def filter_organiser(self, organiser, query):
@@ -338,17 +346,17 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
             ).count()
             result["tiles"].append(
                 {
-                    # Don’t show 0 here for events that do not use the scheduling
+                    # Don't show 0 here for events that do not use the scheduling
                     # component, instead show accepted + confirmed
                     "large": talk_count or (accepted_count + confirmed_count),
                     "small": ngettext_lazy("session", "sessions", talk_count),
                     "url": event.orga_urls.submissions
-                    + f"?state={SubmissionStates.ACCEPTED}&state={SubmissionStates.CONFIRMED}",
+                           + f"?state={SubmissionStates.ACCEPTED}&state={SubmissionStates.CONFIRMED}",
                     "priority": 55,
                     "right": {
                         "text": str(_("unconfirmed")) + f": {accepted_count}",
                         "url": event.orga_urls.submissions
-                        + f"?state={SubmissionStates.ACCEPTED}",
+                               + f"?state={SubmissionStates.ACCEPTED}",
                         "color": "error" if accepted_count else "info",
                     },
                     "left": {
@@ -360,81 +368,4 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
             )
         elif submission_count:
             count = event.submissions.count()
-            result["tiles"].append(
-                {
-                    "large": count,
-                    "small": ngettext_lazy("proposal", "proposals", count),
-                    "url": event.orga_urls.submissions,
-                    "priority": 60,
-                }
-            )
-        if pending_state_submissions and pending_state_submissions > 0:
-            states = "&".join(
-                [
-                    f"state=pending_state__{state}"
-                    for state, __ in SubmissionStates.get_choices()
-                    if state not in (SubmissionStates.DRAFT, SubmissionStates.DELETED)
-                ]
-            )
-            result["tiles"].append(
-                {
-                    "large": pending_state_submissions,
-                    "small": ngettext_lazy(
-                        "submission with pending changes",
-                        "submissions with pending changes",
-                        pending_state_submissions,
-                    ),
-                    "url": event.orga_urls.submissions + f"?{states}",
-                    "priority": 56,
-                }
-            )
-        submitter_count = event.submitters.count()
-        speaker_count = event.speakers.count()
-        rejected_count = (
-            event.submitters.filter(submissions__state=SubmissionStates.REJECTED)
-            .distinct()
-            .count()
-        )
-        if speaker_count:
-            result["tiles"].append(
-                {
-                    "large": speaker_count,
-                    "small": ngettext_lazy("speaker", "speakers", speaker_count),
-                    "url": event.orga_urls.speakers + "?role=true",
-                    "priority": 56,
-                    "right": {
-                        "text": _("rejected") + f": {rejected_count}",
-                        "url": event.orga_urls.speakers + "?role=false",
-                        "color": "error",
-                    },
-                    "left": {
-                        "text": phrases.submission.submitted + f": {submitter_count}",
-                        "url": event.orga_urls.speakers,
-                        "color": "success",
-                    },
-                }
-            )
-        else:
-            result["tiles"].append(
-                {
-                    "large": submitter_count,
-                    "small": ngettext_lazy("submitter", "submitters", submitter_count),
-                    "url": event.orga_urls.speakers,
-                    "priority": 60,
-                }
-            )
-        count = event.queued_mails.filter(sent__isnull=False).count()
-        result["tiles"].append(
-            {
-                "large": count,
-                "small": ngettext_lazy("sent email", "sent emails", count),
-                "url": event.orga_urls.sent_mails,
-                "priority": 80,
-            }
-        )
-        result["tiles"] += self.get_review_tiles(
-            can_change_settings=can_change_settings
-        )
-        result["tiles"] += self.get_plugin_tiles()
-        result["tiles"].sort(key=lambda tile: tile.get("priority") or 100)
-        return result
+            result["tiles"].append()

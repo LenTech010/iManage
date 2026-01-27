@@ -264,6 +264,9 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
     def get_plugin_tiles(self):
         tiles = []
         for __, response in dashboard_tile.send_robust(sender=self.request.event):
+            if isinstance(response, Exception):
+                # Skip failed plugin responses
+                continue
             if isinstance(response, list):
                 tiles.extend(response)
             else:
@@ -392,16 +395,16 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
                     "priority": 50,
                 }
             )
-        
+
         # Add review tiles
         result["tiles"].extend(self.get_review_tiles(can_change_settings))
-        
-        # Add plugin tiles  
+
+        # Add plugin tiles
         result["tiles"].extend(self.get_plugin_tiles())
-        
+
         # Sort tiles by priority
         result["tiles"] = sorted(
             result["tiles"], key=lambda tile: tile.get("priority", 100)
         )
-        
+
         return result

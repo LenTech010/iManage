@@ -124,6 +124,9 @@ class GeneralView(TemplateView):
                     logger.error(f"Error generating URLs for event {event.slug}: {e}")
                     continue
 
+                event.display_badge = "Active" if event.date_from <= _now <= event.date_to else "Upcoming" if event.date_from > _now else "Past"
+                event.display_badge_color = "success" if event.date_from <= _now <= event.date_to else "primary" if event.date_from > _now else "secondary"
+
                 if event.date_from <= _now <= event.date_to:
                     result["current_events"].append(event)
                 elif event.date_to < _now:

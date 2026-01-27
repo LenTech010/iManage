@@ -89,6 +89,11 @@ class ImanageViewSetMixin:
         return [arg for arg in args if is_expanded(self.request, arg)]
 
 
+class EventPermissionMixin(ImanageViewSetMixin):
+    def get_queryset(self):
+        return super().get_queryset().filter(event=self.request.event)
+
+
 class ActivityLogMixin:
 
     @extend_schema(

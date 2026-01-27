@@ -1028,6 +1028,31 @@ class Event(ImanageModel):
         """
         return daterange(self.date_from, self.date_to)
 
+    def get_event_status(self) -> str:
+        """Returns the current status of the event: 'active', 'upcoming', or 'past'."""
+        _now = now().date()
+        if self.date_from <= _now <= self.date_to:
+            return 'active'
+        elif self.date_to < _now:
+            return 'past'
+        else:
+            return 'upcoming'
+
+    @property
+    def is_active(self) -> bool:
+        """Returns True if the event is currently active (ongoing)."""
+        return self.get_event_status() == 'active'
+
+    @property
+    def is_upcoming(self) -> bool:
+        """Returns True if the event is upcoming (scheduled but not started)."""
+        return self.get_event_status() == 'upcoming'
+
+    @property
+    def is_past(self) -> bool:
+        """Returns True if the event is past (already concluded)."""
+        return self.get_event_status() == 'past'
+
     def get_feature_flag(self, feature):
         if feature in self.feature_flags:
             return self.feature_flags[feature]
@@ -1083,6 +1108,56 @@ class Event(ImanageModel):
                 locale=self.locale,
             ).send()
 
+    def _send_deletion_notifications(self):
+        """Send cancellation notifications to all event participants."""
+        from django.utils.translation import override
+        from imanage.mail.models import QueuedMail
+
+        # Get all unique users associated with this event
+        recipients = set()
+        
+        # Add all speakers
+        recipients.update(self.submitters.values_list('email', flat=True))
+        
+        # Add all reviewers
+        from imanage.submission.models import Review
+        reviewers = Review.objects.filter(submission__event=self).values_list(
+            'user__email', flat=True
+        ).distinct()
+        recipients.update(reviewers)
+        
+        # Add team members
+        recipients.update(
+            self.teams.values_list('members__email', flat=True)
+        )
+
+        # Remove empty emails
+        recipients = {email for email in recipients if email}
+
+        # Send notification to each recipient
+        with override(self.locale):
+            for email in recipients:
+                QueuedMail.objects.create(
+                    event=self,
+                    to=email,
+                    subject=f"Event Cancelled: {self.name}",
+                    text=f"""
+Dear Participant,
+
+We regret to inform you that the event "{self.name}" scheduled for {self.get_date_range_display()} has been cancelled.
+
+All associated submissions, reviews, and registrations have been removed from the system.
+
+If you have any questions, please contact the event organizers at {self.email}.
+
+We apologize for any inconvenience this may cause.
+
+Best regards,
+The IManage Team
+                    """.strip(),
+                    locale=self.locale,
+                )
+
     @property
     def has_unreleased_schedule_changes(self) -> bool:
         """Returns True if there are unreleased changes in the WIP schedule.
@@ -1097,8 +1172,12 @@ class Event(ImanageModel):
         return has_unreleased_schedule_changes(self)
 
     @transaction.atomic
-    def shred(self, person=None):
-        """Irrevocably deletes an event and all related data."""
+    def shred(self, person=None, send_notifications=True):
+        """Irrevocably deletes an event and all related data.
+        
+        :param person: The person performing the deletion
+        :param send_notifications: Whether to send cancellation notifications to participants
+        """
         from imanage.common.models import ActivityLog
         from imanage.person.models import SpeakerProfile
         from imanage.schedule.models import TalkSlot
@@ -1110,6 +1189,10 @@ class Event(ImanageModel):
             Resource,
             Submission,
         )
+
+        # Send notifications before deletion if requested
+        if send_notifications:
+            self._send_deletion_notifications()
 
         ActivityLog.objects.create(
             person=person,

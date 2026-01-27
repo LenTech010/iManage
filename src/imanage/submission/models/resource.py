@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2017-present Tobias Kunze
 # SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 
+import hashlib
 from contextlib import suppress
 from pathlib import Path
 
@@ -69,6 +70,40 @@ class Resource(ImanageModel):
     def __str__(self):
         """Help when debugging."""
         return f"Resource(event={self.submission.event.slug}, submission={self.submission.title})"
+    
+    def save(self, *args, **kwargs):
+        """Calculate file hash and size on save."""
+        if self.resource and not self.file_hash:
+            # Calculate SHA-256 hash
+            self.resource.seek(0)
+            file_hash = hashlib.sha256()
+            for chunk in self.resource.chunks():
+                file_hash.update(chunk)
+            self.file_hash = file_hash.hexdigest()
+            
+            # Get file size
+            self.resource.seek(0, 2)  # Seek to end
+            self.file_size = self.resource.tell()
+            self.resource.seek(0)  # Reset to beginning
+            
+            # Get MIME type from content_type if available
+            self.mime_type = getattr(self.resource, 'content_type', None)
+        
+        super().save(*args, **kwargs)
+    
+    def verify_integrity(self):
+        """Verify the file integrity by recalculating the hash."""
+        if not self.resource or not self.file_hash:
+            return True
+        
+        self.resource.seek(0)
+        file_hash = hashlib.sha256()
+        for chunk in self.resource.chunks():
+            file_hash.update(chunk)
+        calculated_hash = file_hash.hexdigest()
+        self.resource.seek(0)
+        
+        return calculated_hash == self.file_hash
 
     @cached_property
     def url(self):

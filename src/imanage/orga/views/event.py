@@ -4,6 +4,8 @@
 # This file contains Apache-2.0 licensed contributions copyrighted by the following contributors:
 # SPDX-FileContributor: luto
 
+import csv
+import io
 from pathlib import Path
 
 from csp.decorators import csp_update
@@ -14,6 +16,7 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 from django.forms.models import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -30,7 +33,6 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-from django.http import HttpResponse
 from django_context_decorator import context
 from django_scopes import scope, scopes_disabled
 from formtools.wizard.views import SessionWizardView
@@ -876,6 +878,170 @@ class WidgetSettings(EventSettingsPermission, FormView):
     def get_success_url(self) -> str:
         return self.request.event.orga_urls.widget_settings
 
+
+# Analytics Export Classes
+
+class BaseExporter:
+    """Base class for data exporters."""
+    
+    content_type = "text/csv"
+    filename = "export.csv"
+    
+    def __init__(self, event):
+        self.event = event
+    
+    def get_data(self):
+        """Override this method to return export data."""
+        raise NotImplementedError
+
+
+class AnalyticsCSVExporter(BaseExporter):
+    """Export general analytics data to CSV."""
+    
+    filename = "analytics.csv"
+    
+    def get_data(self):
+        from imanage.event.models import EventMetrics
+        from imanage.submission.models import Submission, Review
+        from django.db.models import Avg
+        
+        output = io.StringIO()
+        writer = csv.writer(output)
+        
+        # Header
+        writer.writerow([
+            "Date",
+            "Total Submissions",
+            "Accepted",
+            "Rejected", 
+            "Pending",
+            "Total Reviews",
+            "Avg Review Score",
+            "Registered Attendees",
+        ])
+        
+        # Get metrics over time
+        metrics = EventMetrics.objects.filter(event=self.event).order_by('date')
+        
+        for metric in metrics:
+            writer.writerow([
+                metric.date,
+                metric.total_submissions,
+                metric.accepted_submissions,
+                metric.rejected_submissions,
+                metric.pending_submissions,
+                metric.total_reviews,
+                metric.avg_review_score or 0,
+                metric.registered_attendees,
+            ])
+        
+        # If no historical metrics, add current state
+        if not metrics.exists():
+            submissions = Submission.objects.filter(event=self.event)
+            reviews = Review.objects.filter(submission__event=self.event)
+            avg_score = reviews.aggregate(Avg('score'))['score__avg'] or 0
+            
+            writer.writerow([
+                "Current",
+                submissions.count(),
+                submissions.filter(state='accepted').count(),
+                submissions.filter(state='rejected').count(),
+                submissions.filter(state='submitted').count(),
+                reviews.count(),
+                round(avg_score, 2),
+                self.event.attendee_metrics.count(),
+            ])
+        
+        return output.getvalue()
+
+
+class AttendeeCSVExporter(BaseExporter):
+    """Export attendee list to CSV."""
+    
+    filename = "attendees.csv"
+    
+    def get_data(self):
+        from imanage.event.models import AttendeeMetrics
+        
+        output = io.StringIO()
+        writer = csv.writer(output)
+        
+        # Header
+        writer.writerow([
+            "Email",
+            "Name",
+            "Institution",
+            "Country",
+            "City",
+            "Registered At",
+            "Checked In",
+            "Papers Submitted",
+            "Reviews Completed",
+            "Sessions Attended",
+            "Last Active",
+        ])
+        
+        # Get attendees
+        attendees = AttendeeMetrics.objects.filter(
+            event=self.event
+        ).select_related('user').order_by('-registered_at')
+        
+        for attendee in attendees:
+            writer.writerow([
+                attendee.user.email,
+                attendee.user.get_display_name,
+                attendee.institution,
+                attendee.country,
+                attendee.city,
+                attendee.registered_at.strftime('%Y-%m-%d %H:%M'),
+                'Yes' if attendee.checked_in else 'No',
+                attendee.papers_submitted,
+                attendee.reviews_completed,
+                attendee.sessions_attended,
+                attendee.last_active.strftime('%Y-%m-%d %H:%M'),
+            ])
+        
+        return output.getvalue()
+
+
+class ReviewSummaryCSVExporter(BaseExporter):
+    """Export review summary to CSV."""
+    
+    filename = "review-summary.csv"
+    
+    def get_data(self):
+        from imanage.submission.models import Submission, Review
+        
+        output = io.StringIO()
+        writer = csv.writer(output)
+        
+        # Header
+        writer.writerow([
+            "Submission Code",
+            "Title",
+            "State",
+            "Total Reviews",
+            "Avg Score",
+            "Created At",
+        ])
+        
+        # Get submissions with review data
+        submissions = Submission.objects.filter(event=self.event).prefetch_related('reviews')
+        
+        for submission in submissions:
+            reviews = submission.reviews.all()
+            avg_score = sum(r.score for r in reviews if r.score) / len(reviews) if reviews else 0
+            
+            writer.writerow([
+                submission.code,
+                submission.title,
+                submission.state,
+                reviews.count(),
+                round(avg_score, 2) if avg_score else 'N/A',
+                submission.created.strftime('%Y-%m-%d'),
+            ])
+        
+        return output.getvalue()
 
 
 class AnalyticsExportView(EventPermissionRequired, PermissionRequired, View):

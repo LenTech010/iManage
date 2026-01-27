@@ -118,7 +118,6 @@ class GeneralView(TemplateView):
         result["my_managed_current"] = []
         result["my_managed_past"] = []
         result["my_managed_future"] = []
-        
         for event in qs:
             try:
                 # Add error handling for events with missing or invalid date fields
@@ -150,7 +149,7 @@ class GeneralView(TemplateView):
                     result["future_events"].append(event)
             except Exception as e:
                 logger.exception(f"Unexpected error processing event {event.slug}: {e}")
-        
+
         # Process managed events separately
         if my_managed_events_qs is not None:
             for event in my_managed_events_qs:
@@ -179,5 +178,12 @@ class GeneralView(TemplateView):
                         result["my_managed_future"].append(event)
                 except Exception as e:
                     logger.exception(f"Unexpected error processing managed event {event.slug}: {e}")
-        
+
+        # Add total count for badge display
+        result["my_managed_total"] = (
+            len(result["my_managed_current"]) +
+            len(result["my_managed_future"]) +
+            len(result["my_managed_past"])
+        )
+
         return result

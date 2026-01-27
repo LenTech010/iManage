@@ -81,12 +81,8 @@ class GeneralView(TemplateView):
     template_name = "cfp/index.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # Check if they have events they can manage
-            with scopes_disabled():
-                orga_events = request.user.get_events_with_any_permission()
-                if orga_events.exists():
-                    return redirect(reverse("orga:dashboard"))
+        # Removed automatic redirect to dashboard - users should be able to
+        # access the home page even if they have management permissions
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -101,9 +97,28 @@ class GeneralView(TemplateView):
         # Add proper sorting by date (most recent first)
         qs = qs.order_by("-date_from")
 
+        # Get managed events for authenticated users
+        my_managed_events_qs = None
+        if self.request.user.is_authenticated:
+            with scopes_disabled():
+                my_managed_events_qs = self.request.user.get_events_with_any_permission()
+                if self.request.uses_custom_domain:
+                    my_managed_events_qs = my_managed_events_qs.filter(
+                        custom_domain=f"https://{self.request.host}"
+                    )
+                else:
+                    my_managed_events_qs = my_managed_events_qs.filter(
+                        custom_domain__isnull=True
+                    )
+                my_managed_events_qs = my_managed_events_qs.distinct().order_by("-date_from")
+
         result["current_events"] = []
         result["past_events"] = []
         result["future_events"] = []
+        result["my_managed_current"] = []
+        result["my_managed_past"] = []
+        result["my_managed_future"] = []
+        
         for event in qs:
             try:
                 # Add error handling for events with missing or invalid date fields
@@ -135,4 +150,34 @@ class GeneralView(TemplateView):
                     result["future_events"].append(event)
             except Exception as e:
                 logger.exception(f"Unexpected error processing event {event.slug}: {e}")
+        
+        # Process managed events separately
+        if my_managed_events_qs is not None:
+            for event in my_managed_events_qs:
+                try:
+                    # Add error handling for events with missing or invalid date fields
+                    if not event.date_from or not event.date_to:
+                        logger.warning(f"Event {event.slug} is missing date fields.")
+                        continue
+
+                    # Safety check for URL generation
+                    try:
+                        event.urls.base
+                        event.orga_urls.base
+                    except Exception as e:
+                        logger.error(f"Error generating URLs for event {event.slug}: {e}")
+                        continue
+
+                    event.display_badge = "Active" if event.date_from <= _now <= event.date_to else "Upcoming" if event.date_from > _now else "Past"
+                    event.display_badge_color = "success" if event.date_from <= _now <= event.date_to else "primary" if event.date_from > _now else "secondary"
+
+                    if event.date_from <= _now <= event.date_to:
+                        result["my_managed_current"].append(event)
+                    elif event.date_to < _now:
+                        result["my_managed_past"].append(event)
+                    else:
+                        result["my_managed_future"].append(event)
+                except Exception as e:
+                    logger.exception(f"Unexpected error processing managed event {event.slug}: {e}")
+        
         return result

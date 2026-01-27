@@ -264,6 +264,9 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
     def get_plugin_tiles(self):
         tiles = []
         for __, response in dashboard_tile.send_robust(sender=self.request.event):
+            if isinstance(response, Exception):
+                # Skip failed plugin responses
+                continue
             if isinstance(response, list):
                 tiles.extend(response)
             else:
@@ -350,6 +353,7 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
             state=SubmissionStates.ACCEPTED
         ).count()
         result["accepted_count"] = accepted_count
+        result["submission_count"] = submission_count
         talk_count = event.talks.count()
         pending_state_submissions = event.submissions.filter(
             pending_state__isnull=False
@@ -381,5 +385,26 @@ class EventDashboardView(EventPermissionRequired, TemplateView):
                 }
             )
         elif submission_count:
-            count = event.submissions.count()
-            result["tiles"].append()
+            result["tiles"].append(
+                {
+                    "large": submission_count,
+                    "small": ngettext_lazy(
+                        "proposal", "proposals", submission_count
+                    ),
+                    "url": event.orga_urls.submissions,
+                    "priority": 50,
+                }
+            )
+
+        # Add review tiles
+        result["tiles"].extend(self.get_review_tiles(can_change_settings))
+
+        # Add plugin tiles
+        result["tiles"].extend(self.get_plugin_tiles())
+
+        # Sort tiles by priority
+        result["tiles"] = sorted(
+            result["tiles"], key=lambda tile: tile.get("priority", 100)
+        )
+
+        return result

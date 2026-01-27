@@ -40,6 +40,26 @@ class Resource(ImanageModel):
     is_public = models.BooleanField(
         default=True, verbose_name=_("Publicly visible resource")
     )
+    
+    # Security fields for file integrity
+    file_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        verbose_name=_("File hash (SHA-256)"),
+        help_text=_("SHA-256 hash of the file for integrity verification")
+    )
+    file_size = models.BigIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_("File size in bytes")
+    )
+    mime_type = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        verbose_name=_("MIME type")
+    )
 
     objects = ScopedManager(event="submission__event")
 

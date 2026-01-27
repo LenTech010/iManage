@@ -6,6 +6,8 @@ from django.views.generic.base import RedirectView
 
 from imanage.orga.views import (
     admin,
+    analytics,
+    announcement,
     auth,
     cards,
     cfp,
@@ -17,6 +19,7 @@ from imanage.orga.views import (
     plugins,
     review,
     schedule,
+    security,
     speaker,
     submission,
     typeahead,
@@ -614,6 +617,91 @@ urlpatterns = [
                     "schedule/api/warnings/",
                     schedule.ScheduleWarnings.as_view(),
                     name="schedule.api.warnings",
+                ),
+                # Analytics URLs
+                path(
+                    "analytics/",
+                    analytics.AnalyticsDashboardView.as_view(),
+                    name="event.analytics",
+                ),
+                path(
+                    "analytics/attendees/",
+                    analytics.AttendeeMetricsView.as_view(),
+                    name="event.analytics.attendees",
+                ),
+                path(
+                    "analytics/export/<str:format>/",
+                    event.AnalyticsExportView.as_view(),
+                    name="event.analytics.export",
+                ),
+                # Announcement URLs
+                path(
+                    "announcements/",
+                    announcement.AnnouncementListView.as_view(),
+                    name="event.announcements",
+                ),
+                path(
+                    "announcements/new/",
+                    announcement.AnnouncementCreateView.as_view(),
+                    name="event.announcement.create",
+                ),
+                path(
+                    "announcements/<int:pk>/",
+                    announcement.AnnouncementUpdateView.as_view(),
+                    name="event.announcement.update",
+                ),
+                path(
+                    "announcements/<int:pk>/delete/",
+                    announcement.AnnouncementDeleteView.as_view(),
+                    name="event.announcement.delete",
+                ),
+                path(
+                    "announcements/<int:pk>/publish/",
+                    announcement.AnnouncementPublishView.as_view(),
+                    name="event.announcement.publish",
+                ),
+            ]
+        ),
+    ),
+    # Security Dashboard URLs (admin only, not event-specific)
+    path(
+        "security/",
+        include(
+            [
+                path(
+                    "",
+                    security.SecurityDashboardView.as_view(),
+                    name="security.dashboard",
+                ),
+                path(
+                    "alerts/<int:pk>/",
+                    security.SecurityAlertDetailView.as_view(),
+                    name="security.alert.detail",
+                ),
+                path(
+                    "alerts/<int:pk>/resolve/",
+                    security.SecurityAlertResolveView.as_view(),
+                    name="security.alert.resolve",
+                ),
+                path(
+                    "users/",
+                    security.FlaggedUsersListView.as_view(),
+                    name="security.users",
+                ),
+                path(
+                    "users/<int:pk>/suspend/",
+                    security.UserSuspendView.as_view(),
+                    name="security.user.suspend",
+                ),
+                path(
+                    "users/<int:pk>/reinstate/",
+                    security.UserReinstateView.as_view(),
+                    name="security.user.reinstate",
+                ),
+                path(
+                    "logs/",
+                    security.ModerationLogListView.as_view(),
+                    name="security.logs",
                 ),
             ]
         ),

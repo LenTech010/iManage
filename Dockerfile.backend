@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2025-present Tobias Kunze
+# SPDX-License-Identifier: Apache-2.0
+
+FROM python:3.12-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-client \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy pyproject.toml and install dependencies
+COPY pyproject.toml ./
+RUN pip install -e ".[postgres]"
+
+# Copy the entire source code
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p /app/data/logs /app/data/media /app/static.dist
+
+# Create entrypoint script for migrations and superuser creation
+RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+# Wait for database to be ready\n\
+echo "Waiting for PostgreSQL..."\n\
+while ! pg_isready -h ${DB_HOST:-db} -p ${DB_PORT:-5432} -U ${DB_USER:-imanage}; do\n\
+  sleep 1\n\
+done\n\
+echo "PostgreSQL is ready!"\n\
+\n\
+# Run migrations\n\
+echo "Running database migrations..."\n\
+cd /app/src\n\
+python manage.py migrate --noinput\n\
+\n\
+# Create superuser if environment variables are set\n\
+if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ]; then\n\
+  echo "Creating superuser..."\n\
+  python manage.py shell << EOF\n\
+from django.contrib.auth import get_user_model\n\
+User = get_user_model()\n\
+if not User.objects.filter(email="$DJANGO_SUPERUSER_EMAIL").exists():\n\
+    User.objects.create_superuser(\n\
+        email="$DJANGO_SUPERUSER_EMAIL",\n\
+        password="$DJANGO_SUPERUSER_PASSWORD",\n\
+        name="$DJANGO_SUPERUSER_USERNAME"\n\
+    )\n\
+    print("Superuser created successfully")\n\
+else:\n\
+    print("Superuser already exists")\n\
+EOF\n\
+fi\n\
+\n\
+# Collect static files\n\
+echo "Collecting static files..."\n\
+python manage.py collectstatic --noinput --clear || echo "Static collection skipped"\n\
+\n\
+# Start the Django development server\n\
+echo "Starting Django development server on 0.0.0.0:8000..."\n\
+exec python manage.py runserver 0.0.0.0:8000\n\
+' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
+
+EXPOSE 8000
+
+ENTRYPOINT ["/app/entrypoint.sh"]

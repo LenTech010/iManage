@@ -692,6 +692,17 @@ class Answer(ImanageModel):
     @property
     def is_answered(self):
         return bool(self.answer_string)
+    
+    def clean(self):
+        """Validate the answer, including file validation."""
+        super().clean()
+        if self.answer_file and self.question:
+            # Validate file if this is a file upload question
+            try:
+                self.question.validate_file(self.answer_file)
+            except ValidationError as e:
+                from django.core.exceptions import ValidationError as DjangoValidationError
+                raise DjangoValidationError({'answer_file': e.message})
 
     def log_action(self, *args, content_object=None, **kwargs):
         if not content_object:

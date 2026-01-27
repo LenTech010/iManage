@@ -23,8 +23,8 @@ WORKDIR /app
 # Copy the entire source code first
 COPY . .
 
-# Install dependencies
-RUN pip install -e ".[postgres]"
+# Install dependencies with SSL certificate workaround
+RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -e ".[postgres]"
 
 # Create necessary directories
 RUN mkdir -p /app/data/logs /app/data/media /app/static.dist

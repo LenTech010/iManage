@@ -9,8 +9,8 @@ WORKDIR /app/frontend
 # Copy package files
 COPY src/imanage/frontend/schedule-editor/package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with SSL certificate workaround
+RUN npm config set strict-ssl false && npm ci && npm config set strict-ssl true
 
 # Copy frontend source code
 COPY src/imanage/frontend/schedule-editor/ ./

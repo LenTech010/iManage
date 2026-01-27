@@ -361,6 +361,22 @@ class Question(GenerateCode, OrderedModel, ImanageModel):
             "Custom URL fields that are shown publicly can use an icon when displaying the link."
         ),
     )
+    # File validation fields
+    allowed_file_types = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        verbose_name=_("Allowed file types"),
+        help_text=_(
+            "Comma-separated list of allowed file extensions (e.g., pdf,doc,docx). Leave empty to allow all types."
+        ),
+    )
+    max_file_size = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_("Maximum file size (MB)"),
+        help_text=_("Maximum file size in megabytes. Default is 10MB if not specified."),
+    )
     objects = ScopedManager(event="event", _manager_class=QuestionManager)
     all_objects = ScopedManager(event="event", _manager_class=AllQuestionManager)
 
@@ -410,6 +426,33 @@ class Question(GenerateCode, OrderedModel, ImanageModel):
 
     def __str__(self):
         return str(self.question)
+    
+    def validate_file(self, file):
+        """Validate uploaded file against configured restrictions."""
+        if self.variant != QuestionVariant.FILE:
+            return
+        
+        # Check file size
+        max_size = (self.max_file_size or 10) * 1024 * 1024  # Convert MB to bytes
+        if file.size > max_size:
+            raise ValidationError(
+                _("File size exceeds the maximum allowed size of %(max)s MB.") % {
+                    "max": self.max_file_size or 10
+                }
+            )
+        
+        # Check file type
+        if self.allowed_file_types:
+            import os
+            file_ext = os.path.splitext(file.name)[1].lower().lstrip('.')
+            allowed_types = [ft.strip().lower() for ft in self.allowed_file_types.split(',')]
+            if file_ext not in allowed_types:
+                raise ValidationError(
+                    _("File type '%(type)s' is not allowed. Allowed types: %(allowed)s") % {
+                        "type": file_ext,
+                        "allowed": self.allowed_file_types
+                    }
+                )
 
     @staticmethod
     def _clean_identifier(event, code, instance=None):

@@ -1,8 +1,6 @@
 # SPDX-FileCopyrightText: 2025-present Tobias Kunze
 # SPDX-License-Identifier: Apache-2.0
 
-version: '3.8'
-
 services:
   db:
     image: postgres:15-alpine

@@ -19,7 +19,7 @@ python manage.py migrate --noinput
 # Create superuser if environment variables are set
 if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ]; then
   echo "Creating superuser..."
-  python manage.py shell << 'PYEOF'
+  python manage.py shell --unsafe-disable-scopes << 'PYEOF'
 import os
 from django.contrib.auth import get_user_model
 

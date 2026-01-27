@@ -376,6 +376,17 @@ class Event(ImanageModel):
         plugins = "{settings}plugins"
         information = "{base}info/"
         new_information = "{base}info/new/"
+        # New analytics URLs
+        analytics = "{base}analytics/"
+        analytics_attendees = "{analytics}attendees/"
+        # New announcement URLs
+        announcements = "{base}announcements/"
+        new_announcement = "{announcements}new/"
+        # New security URLs (admin only)
+        security = "/orga/security/"
+        security_alerts = "{security}alerts/"
+        security_users = "{security}users/"
+        moderation_logs = "{security}logs/"
 
     class api_urls(EventUrls):
         base = "/api/events/{self.slug}/"
@@ -388,6 +399,10 @@ class Event(ImanageModel):
         feedback = "{base}feedback/"
         rooms = "{base}rooms/"
         questions = "{base}questions/"
+        # New API URLs
+        favorites = "{base}favorites/"
+        notifications = "{base}notifications/"
+        announcements = "{base}announcements/"
         question_options = "{base}question-options/"
         answers = "{base}answers/"
         tags = "{base}tags/"

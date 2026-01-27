@@ -869,3 +869,38 @@ class WidgetSettings(EventSettingsPermission, FormView):
 
     def get_success_url(self) -> str:
         return self.request.event.orga_urls.widget_settings
+
+
+
+class AnalyticsExportView(EventPermissionRequired, PermissionRequired, View):
+    """Export analytics data in various formats."""
+
+    permission_required = "orga.view_orga_area"
+
+    def get(self, request, *args, **kwargs):
+        from django.http import HttpResponse
+        from imanage.event.exporters import (
+            AnalyticsCSVExporter,
+            AttendeeCSVExporter,
+            ReviewSummaryCSVExporter,
+        )
+        
+        format_type = kwargs.get("format", "csv")
+        
+        exporters = {
+            "csv": AnalyticsCSVExporter,
+            "attendees": AttendeeCSVExporter,
+            "reviews": ReviewSummaryCSVExporter,
+        }
+        
+        exporter_class = exporters.get(format_type, AnalyticsCSVExporter)
+        exporter = exporter_class(request.event)
+        
+        response = HttpResponse(
+            exporter.get_data(),
+            content_type=exporter.content_type
+        )
+        response["Content-Disposition"] = f"attachment; filename=\"{request.event.slug}-{exporter.filename}\""
+        
+        return response
+

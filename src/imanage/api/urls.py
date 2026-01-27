@@ -8,8 +8,10 @@ from rest_framework import routers
 from imanage.api.views import (
     access_code,
     event,
+    favorites,
     feedback,
     mail,
+    notifications,
     question,
     review,
     room,
@@ -98,6 +100,48 @@ urlpatterns = [
         "events/<slug:event>/submissions/<slug:code>/favourite/",
         submission.favourite_view,
         name="submission.favourite",
+    ),
+    # Event favourites endpoints
+    path(
+        "events/<slug:event>/favorites/",
+        favorites.EventFavouriteViewSet.as_view({'get': 'list'}),
+        name="event.favorites.list",
+    ),
+    path(
+        "events/<slug:event>/favorites/add/",
+        favorites.EventFavouriteViewSet.as_view({'post': 'add'}),
+        name="event.favorites.add",
+    ),
+    path(
+        "events/<slug:event>/favorites/remove/",
+        favorites.EventFavouriteViewSet.as_view({'delete': 'remove'}),
+        name="event.favorites.remove",
+    ),
+    path(
+        "events/<slug:event>/favorites/check/",
+        favorites.EventFavouriteViewSet.as_view({'get': 'check'}),
+        name="event.favorites.check",
+    ),
+    # Notifications endpoints
+    path(
+        "events/<slug:event>/notifications/",
+        notifications.NotificationViewSet.as_view({'get': 'list'}),
+        name="event.notifications.list",
+    ),
+    path(
+        "events/<slug:event>/notifications/<int:pk>/read/",
+        notifications.NotificationViewSet.as_view({'post': 'mark_read'}),
+        name="event.notifications.mark_read",
+    ),
+    path(
+        "events/<slug:event>/notifications/read-all/",
+        notifications.NotificationViewSet.as_view({'post': 'mark_all_read'}),
+        name="event.notifications.mark_all_read",
+    ),
+    path(
+        "events/<slug:event>/notifications/<int:pk>/",
+        notifications.NotificationViewSet.as_view({'delete': 'delete'}),
+        name="event.notifications.delete",
     ),
     path("upload/", upload.UploadView.as_view(), name="upload"),
     path("events/<slug:event>/", include(event_router.urls)),

@@ -28,11 +28,13 @@ This directory contains various utility and development scripts for the iManage 
 
 - **`rebrand.py`** - Basic rebranding utility
   - Performs case-sensitive replacements in project files
+  - **Note:** Contains placeholder values - modify search/replace strings before use
   - Use with caution - intended for one-time rebranding operations
 
 - **`rebrand_v2.py`** - Enhanced rebranding utility
   - Includes file and directory renaming capabilities
   - More comprehensive than rebrand.py
+  - **Note:** Contains placeholder values - modify search/replace strings before use
   - Use with caution - intended for one-time rebranding operations
 
 ## Usage

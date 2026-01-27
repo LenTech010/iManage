@@ -36,7 +36,10 @@ fi
 # Load environment variables from .env file if it exists
 if [ -f .env ]; then
     echo -e "${GREEN}✓ Loading environment variables from .env file${NC}"
-    export $(grep -v '^#' .env | xargs)
+    # Safely load .env file
+    set -a
+    source .env 2>/dev/null || true
+    set +a
 else
     echo -e "${YELLOW}! No .env file found. Using default values.${NC}"
     echo -e "${YELLOW}  You can create a .env file to customize settings.${NC}"
@@ -64,16 +67,29 @@ sleep 5
 
 # Check if backend is responding
 echo -e "${BLUE}Checking backend health...${NC}"
+BACKEND_READY=false
 for i in {1..30}; do
     if curl -s http://localhost:8000 > /dev/null 2>&1; then
         echo -e "${GREEN}✓ Backend is ready!${NC}"
+        BACKEND_READY=true
         break
-    fi
-    if [ $i -eq 30 ]; then
-        echo -e "${YELLOW}! Backend might still be starting. Check logs with: $DOCKER_COMPOSE_CMD logs backend${NC}"
     fi
     sleep 2
 done
+
+if [ "$BACKEND_READY" = false ]; then
+    echo -e "${YELLOW}========================================${NC}"
+    echo -e "${YELLOW}  WARNING: Backend did not start${NC}"
+    echo -e "${YELLOW}========================================${NC}"
+    echo ""
+    echo -e "${YELLOW}The backend service did not respond within 60 seconds.${NC}"
+    echo -e "${YELLOW}This may be normal if it's still starting up.${NC}"
+    echo ""
+    echo -e "${BLUE}Check logs with:${NC} $DOCKER_COMPOSE_CMD logs backend"
+    echo ""
+    echo -e "${YELLOW}Press Ctrl+C to stop, or wait for services to continue starting...${NC}"
+    echo ""
+fi
 
 # Display status
 echo ""

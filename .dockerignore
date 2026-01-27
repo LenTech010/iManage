@@ -1,0 +1,57 @@
+# Ignore version control
+.git
+.gitignore
+.gitattributes
+
+# Ignore documentation
+*.md
+*.rst
+doc/
+LICENSES/
+
+# Ignore development files
+.vscode
+.idea
+*.swp
+*~
+.DS_Store
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Ignore test files
+src/tests/
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# Ignore local data
+data/
+local/
+*.db
+*.sqlite3
+*.sqlite
+
+# Ignore environment files
+.env
+.venv
+venv/
+ENV/
+
+# Ignore logs
+*.log
+
+# Ignore pytest cache
+.pytest_cache/
+.coverage
+.tox/
+htmlcov/

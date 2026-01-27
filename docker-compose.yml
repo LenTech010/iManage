@@ -10,9 +10,10 @@ services:
     environment:
       POSTGRES_DB: ${DB_NAME:-imanage}
       POSTGRES_USER: ${DB_USER:-imanage}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-imanage}
-    ports:
-      - "5432:5432"
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-imanage}  # WARNING: Change this password for production!
+    # Database port is NOT exposed by default for security. Uncomment if needed for debugging.
+    # ports:
+    #   - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -35,8 +36,8 @@ services:
       IMANAGE_DB_HOST: db
       IMANAGE_DB_PORT: 5432
       
-      # Django settings
-      IMANAGE_DEBUG: "True"
+      # Django settings - WARNING: DEBUG mode is for development only!
+      IMANAGE_DEBUG: "${DEBUG:-True}"
       IMANAGE_SITE_URL: ${SITE_URL:-http://localhost:8000}
       IMANAGE_SITE_STATIC: /static/
       IMANAGE_SITE_MEDIA: /media/
@@ -51,7 +52,7 @@ services:
       # Mail settings (console backend for development)
       IMANAGE_MAIL_FROM: ${MAIL_FROM:-noreply@localhost}
       
-      # Superuser credentials
+      # Superuser credentials - WARNING: Change these for production!
       DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME:-admin}
       DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-admin}
       DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-admin@localhost}
@@ -63,7 +64,7 @@ services:
       IMANAGE_CELERY_BROKER: ""
       IMANAGE_CELERY_BACKEND: ""
       
-      # Additional settings for entrypoint script
+      # Variables for entrypoint script
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: ${DB_USER:-imanage}

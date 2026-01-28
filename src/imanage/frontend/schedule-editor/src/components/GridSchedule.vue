@@ -557,7 +557,6 @@ export default {
 		background-color: $clr-grey-50
 		display: grid
 		grid-template-columns: 78px repeat(var(--total-rooms), minmax(310px, 1fr)) auto
-		// grid-gap: 8px
 		position: relative
 		min-width: min-content
 		&.illegal-hover
@@ -566,23 +565,32 @@ export default {
 				cursor: not-allowed !important
 		> .room
 			position: sticky
-			top: 48px
+			top: 56px
 			display: flex
 			justify-content: center
 			align-items: center
-			font-size: 18px
+			font-size: 16px
+			font-weight: 600
+			color: var(--color-text)
 			background-color: $clr-white
-			border-bottom: border-separator()
+			border-bottom: 1px solid $clr-dividers-light
+			border-right: 1px solid $clr-dividers-light
 			z-index: 20
+			box-shadow: 0 1px 2px rgba(0,0,0,0.05)
 			.hide-room
 				color: $clr-secondary-text-light
 				font-size: 14px
-				margin-left: 16px
+				margin-left: 8px
 				cursor: pointer
-				padding: 4px 8px
+				padding: 4px
 				border-radius: 4px
+				opacity: 0
+				transition: all 0.2s
 				&:hover
-					background-color: $clr-grey-200
+					background-color: $clr-grey-100
+					color: var(--color-text)
+			&:hover .hide-room
+				opacity: 1
 		.c-linear-schedule-session
 			z-index: 10
 	.timeslice
@@ -591,42 +599,55 @@ export default {
 		white-space: nowrap
 		position: sticky
 		left: 0
-		text-align: center
-		background-color: $clr-grey-50
+		text-align: right
+		background-color: $clr-white
 		border-top: 1px solid $clr-dividers-light
+		border-right: 1px solid $clr-dividers-light
 		z-index: 20
-		font-size: 14px
+		font-size: 12px
+		font-weight: 500
+		font-variant-numeric: tabular-nums
 		.expand
 			display: none
 		&.datebreak
-			font-weight: 600
-			border-top: 3px solid $clr-dividers-light
+			font-weight: 700
+			border-top: 1px solid $clr-dividers-dark
 			white-space: pre
+			background-color: $clr-grey-50
+			text-align: center
+			color: var(--color-text)
 		&.expandable:hover
-			background-color: $clr-grey-200
+			background-color: $clr-grey-50
 			cursor: pointer
 			.expand
 				display: block
 				width: 20px
 				margin: 4px auto
 				path
-					fill: $clr-grey-500
+					fill: var(--color-primary)
 
 	.timeseparator
 		height: 1px
 		background-color: $clr-dividers-light
 		position: absolute
-		// transform: translate(-16px, -8px)
 		width: 100%
+		opacity: 0.5
 		&.datebreak
-			height: 3px
+			height: 1px
+			background-color: $clr-dividers-dark
+			opacity: 1
+
 .bunt-scrollbar-rail-wrapper-x, .bunt-scrollbar-rail-wrapper-y
 	z-index: 30
+
 .availability
-	background-color: white
+	background-color: $clr-white
 	pointer-events: none
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, $clr-grey-50 10px, $clr-grey-50 20px)
 	&.active
-		background-color: rgba(56, 158, 119, 0.1)
+		background-image: none
+		background-color: rgba(99, 102, 241, 0.05)
+
 .c-grid-schedule.condensed-grid
 	.grid
 		grid-template-columns: 58px repeat(var(--total-rooms), minmax(150px, 1fr)) auto
@@ -640,27 +661,34 @@ export default {
 				padding: 2px 6px
 	.timeslice
 		padding: 4px 6px 0 6px
-		font-size: 12px
+		font-size: 11px
 		&.datebreak
 			padding-top: 0
+
 #hiddenRooms.collapse-container
 	.room-entry
-		border-bottom: border-separator()
+		border-bottom: 1px solid $clr-dividers-light
 		display: flex
 		justify-content: space-between
 		align-items: center
-		height: 28px
-		padding: 4px 0
+		height: 36px
+		padding: 0 8px
 		cursor: pointer
+		border-radius: 4px
+		transition: background-color 0.2s
+		.span
+			font-weight: 500
 		.show-room
 			color: $clr-secondary-text-light
 			font-size: 14px
 			margin-left: 16px
 			padding: 4px 8px
 			border-radius: 4px
+			&:hover
+				color: var(--color-primary)
 		&:hover
-			background-color: $clr-grey-100
+			background-color: $clr-grey-50
 
 .condensed-mode #hiddenRooms
-	right: 345px  // 350px unassigned panel - 5px spacing to not overlap the rounded column
+	right: 345px
 </style>

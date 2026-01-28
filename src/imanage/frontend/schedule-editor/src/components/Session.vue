@@ -180,6 +180,7 @@ export default {
 				color: $clr-red-300
 				text-align: center
 	&.istalk
+		transition: transform 0.2s ease
 		.time-box
 			background-color: var(--track-color)
 			.start
@@ -187,70 +188,91 @@ export default {
 			.duration
 				color: $clr-secondary-text-dark
 		.info
-			border: border-separator()
+			border: 1px solid $clr-dividers-light
 			border-left: none
-			border-radius: 0 6px 6px 0
+			border-radius: 0 var(--border-radius) var(--border-radius) 0
 			background-color: $clr-white
+			box-shadow: var(--shadow-sm)
+			transition: all 0.2s ease
 			.title
-				font-size: 16px
+				font-size: 15px
+				font-weight: 600
 				margin-bottom: 4px
+				color: var(--color-text)
+				line-height: 1.4
 		&:hover
+			z-index: 100
+			transform: translateY(-2px)
 			.info
-				border: 1px solid var(--track-color)
-				border-left: none
+				border-color: var(--track-color)
+				box-shadow: var(--shadow-md)
 				.title
 					color: var(--color-primary)
 	&.pending, &.unconfirmed
 		.time-box
 			opacity: 0.5
 		.info
-			background-image: repeating-linear-gradient(-38deg, $clr-grey-100, $clr-grey-100 10px, $clr-white 10px, $clr-white 20px)
+			background-image: repeating-linear-gradient(-38deg, $clr-grey-50, $clr-grey-50 10px, $clr-white 10px, $clr-white 20px)
 		&:hover
 			.info
-				border: 1px solid var(--track-color)
-				border-left: none
+				border-color: var(--track-color)
 				.title
 					color: var(--color-primary)
 	&.pending
 		.info
 			border-style: dashed dashed dashed none
 	.time-box
-		width: 69px
+		width: 72px
 		box-sizing: border-box
-		padding: 12px 16px 8px 12px
-		border-radius: 6px 0 0 6px
+		padding: 12px 10px
+		border-radius: var(--border-radius) 0 0 var(--border-radius)
 		display: flex
 		flex-direction: column
 		align-items: center
+		justify-content: center
 		.start
-			font-size: 16px
-			font-weight: 600
-			margin-bottom: 8px
+			font-size: 15px
+			font-weight: 700
+			margin-bottom: 4px
 			display: flex
 			flex-direction: column
-			align-items: flex-end
+			align-items: center
+			line-height: 1.2
 			&.has-ampm
-				align-self: stretch
+				align-self: center
 			.ampm
-				font-weight: 400
-				font-size: 13px
+				font-weight: 500
+				font-size: 11px
+				text-transform: uppercase
+				opacity: 0.8
+		.duration
+			font-size: 12px
+			font-weight: 500
+			opacity: 0.9
 	.info
 		flex: auto
 		display: flex
 		flex-direction: column
-		padding: 8px
+		padding: 10px 14px
 		min-width: 0
 		.title
-			font-weight: 500
+			font-weight: 600
 		.speakers
 			color: $clr-secondary-text-light
+			font-size: 13px
+			margin-bottom: 4px
 		.bottom-info
 			flex: auto
 			display: flex
 			align-items: flex-end
+			margin-top: 4px
 			.track
 				flex: 1
 				color: var(--track-color)
+				font-size: 12px
+				font-weight: 600
+				text-transform: uppercase
+				letter-spacing: 0.5px
 				ellipsis()
 				margin-right: 4px
 	.pending-line

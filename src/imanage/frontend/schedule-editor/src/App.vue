@@ -588,6 +588,7 @@ export default {
 <style lang="stylus">
 #page-content
 	padding: 0
+
 .imanage-schedule
 	display: flex
 	flex-direction: column
@@ -599,63 +600,87 @@ export default {
 	padding-left: 24px
 	font-family: var(--font-family)
 	color: var(--color-text)
+	background-color: var(--color-bg-app)
+
 	h1, h2, h3, h4, h5, h6, legend, button, .btn
 		font-family: var(--font-family-title)
+
 	.bunt-scrollbar-rail-wrapper-y
 		display: none
+
 	&.is-dragging
 		user-select: none
 		cursor: grabbing
+
 	#main-wrapper
 		display: flex
 		flex: auto
 		min-height: 0
 		min-width: 0
+
 	.collapse-container
 		position: fixed
-		bottom: 0
-		right: 0
-		width: 300px
+		bottom: 16px
+		right: 16px
+		width: 320px
 		z-index: 500
 		background-color: $clr-white
-		padding: 8px 16px
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
-		border-top-left-radius: 8px
+		padding: 16px
+		box-shadow: var(--shadow-lg)
+		border-radius: var(--border-radius)
 		overflow-y: hidden
+		transition: all 0.3s ease
+
 		.collapse-content
 			display: none
 			overflow-y: auto
+			max-height: 400px
+
 		&:hover
 			.collapse-content
 				display: block
+
 		h4
 			margin: 0
 			font-size: 16px
+			font-weight: 600
 			display: flex
 			justify-content: space-between
 			align-items: center
+			color: var(--color-text)
+
 	&.condensed-mode
 		#unassigned
 			margin-top: 0
 			z-index: 501
 			font-size: 16px
+			background-color: transparent
+
 			.session-list
 				margin-right: 0
+
 			&.pinned .collapse-content
 				display: block
+
 			.bunt-scrollbar-rail-wrapper-y
 				top: 30px
+
 			.pin-button
-				padding: 0
+				padding: 4px
 				cursor: pointer
+				border-radius: 4px
+				transition: background-color 0.2s
+
 				&:hover
-					opacity: 0.7
+					background-color: $clr-grey-100
+
 				&.pinned
 					color: var(--color-primary)
-			.session-list
-				max-height: 400px
+					background-color: $clr-grey-100
+
 		#schedule-wrapper
 			margin-right: 0
+
 	.settings
 		margin-left: 18px
 		align-self: flex-start
@@ -664,109 +689,168 @@ export default {
 		position: sticky
 		z-index: 100
 		left: 18px
+
 		.bunt-select
 			max-width: 300px
 			padding-right: 8px
+
 		.timezone-label
 			cursor: default
 			color: $clr-secondary-text-light
+
 	.days
 		tabs-style(active-color: var(--color-primary), indicator-color: var(--color-primary), background-color: transparent)
 		overflow-x: auto
 		margin-bottom: 0
 		flex: auto
 		min-width: 0
-		height: 48px
+		height: 56px
+
 		.bunt-tabs-header
 			min-width: min-content
+			border-bottom: 1px solid $clr-dividers-light
+
 		.bunt-tabs-header-items
 			justify-content: center
 			min-width: min-content
+
 			.bunt-tab-header-item
 				min-width: min-content
+				text-transform: uppercase
+				font-weight: 600
+				letter-spacing: 0.5px
+				color: $clr-secondary-text-light
+
+				&.active
+					color: var(--color-primary)
+
 			.bunt-tab-header-item-text
 				white-space: nowrap
+
 	#unassigned
-		margin-top: 35px
+		margin-top: 24px
 		background-color: $clr-white
-		width: 350px
+		width: 360px
 		flex: none
+		border-right: 1px solid $clr-dividers-light
+		display: flex
+		flex-direction: column
+
 		.session-list
-			margin-right: 12px
+			margin-right: 0
+			padding: 0 12px
+
 		> .bunt-scrollbar-rail-y
 			margin: 0
+
 		> .title
-			padding 4px 0
+			padding 12px 16px
 			font-size: 18px
-			text-align: center
+			font-weight: 600
 			background-color: $clr-white
-			border-bottom: 4px solid $clr-dividers-light
+			border-bottom: 1px solid $clr-dividers-light
 			display: flex
-			align-items: flex-end
-			margin-left: 8px
+			align-items: center
+			margin-left: 0
+
 			#filter-input
-				width: calc(100% - 36px)
-				.label-input-container, .label-input-container:active
+				flex: 1
+				margin-right: 8px
+
+				.label-input-container
+					background-color: $clr-grey-50
+					border-radius: 6px
+					padding: 6px 12px
+
 					.outline
 						display: none
+
+					input
+						font-size: 14px
+
 			#unassigned-sort
-				width: 28px
-				height: 28px
-				text-align: center
+				width: 32px
+				height: 32px
+				display: flex
+				align-items: center
+				justify-content: center
 				cursor: pointer
-				border-radius: 4px
-				margin-bottom: 8px
-				margin-left: 4px
+				border-radius: 6px
 				color: $clr-secondary-text-light
+				transition: all 0.2s
+
 				&:hover, &.active
-					opacity: 0.8
-					background-color: $clr-dividers-light
+					background-color: $clr-grey-100
+					color: var(--color-primary)
+
 		.new-slot-row
 			display: flex
 			align-items: center
+			padding: 8px 0
+
 			.slot-help-icon
 				margin-left: 8px
 				margin-right: 8px
-				color: $clr-secondary-text-light
+				color: $clr-grey-400
 				cursor: help
 				font-size: 14px
+
 				&:hover
-					color: $clr-primary-text-light
+					color: var(--color-primary)
+
 		.new-break.c-linear-schedule-session, .new-blocker.c-linear-schedule-session
 			min-height: 48px
 			flex: 1
+			margin: 0
+			border-radius: var(--border-radius)
+			box-shadow: var(--shadow-sm)
+			transition: all 0.2s
+
+			&:hover
+				box-shadow: var(--shadow-md)
+				transform: translateY(-1px)
+
 		#unassigned-sort-menu
-			color: $clr-primary-text-light
+			color: var(--color-text)
 			display: flex
 			flex-direction: column
 			background-color: white
 			position: absolute
-			top: 53px
-			right: 15px
-			width: 130px
-			font-size: 16px
+			top: 60px
+			right: 16px
+			width: 160px
+			font-size: 14px
 			cursor: pointer
 			z-index: 1000
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)
-			text-align: left;
+			box-shadow: var(--shadow-lg)
+			border-radius: 6px
+			text-align: left
+			overflow: hidden
+			border: 1px solid $clr-dividers-light
+
 			.sort-method
-				padding: 8px 16px
+				padding: 10px 16px
 				display: flex
 				justify-content: space-between
 				align-items: center
+				transition: background-color 0.2s
+
 				&:hover
-					background-color: $clr-dividers-light
+					background-color: $clr-grey-50
+
 	.schedule-header
 		display: flex
 		justify-content: space-between
 		align-items: center
-		margin: 1rem 42px 1rem 8px
+		margin: 16px 24px 16px 0
 		max-width: 100%
 		padding: 0
+
 		.schedule-controls-left
 			display: flex
 			align-items: center
 			gap: 12px
+
 			.mode-toggle-button
 				display: flex
 				align-items: center
@@ -774,28 +858,52 @@ export default {
 				padding: 8px 16px
 				background-color: $clr-white
 				border: 1px solid $clr-dividers-light
-				border-radius: 4px
+				border-radius: 6px
 				cursor: pointer
 				font-size: 14px
-				color: $clr-primary-text-light
+				font-weight: 500
+				color: var(--color-text)
 				transition: all 0.2s
+				box-shadow: var(--shadow-sm)
+
 				&:hover
-					background-color: $clr-grey-100
-					border-color: var(--color-primary)
+					background-color: $clr-grey-50
+					border-color: $clr-grey-300
+					transform: translateY(-1px)
+					box-shadow: var(--shadow-md)
+
 				&.active
 					background-color: var(--color-primary)
 					color: $clr-white
 					border-color: var(--color-primary)
+
 				.fa
 					font-size: 16px
+
 		#schedule-action-wrapper-target
 			display: flex
 			align-items: center
+
 			#schedule-action-wrapper
 				display: flex !important
+				gap: 8px
+
+				.btn
+					border-radius: 6px !important
+					font-weight: 500 !important
+					padding: 8px 16px !important
+					box-shadow: var(--shadow-sm) !important
+					transition: all 0.2s !important
+
+					&:hover
+						transform: translateY(-1px) !important
+						box-shadow: var(--shadow-md) !important
+
 	#schedule-wrapper
 		width: 100%
-		margin-right: 40px
+		margin-right: 0
+		background-color: $clr-grey-50
+
 	.schedule-controls
 		display: flex
 		justify-content: space-between
@@ -805,76 +913,180 @@ export default {
 		top: 0
 		z-index: 30
 		background-color: $clr-white
-  #session-editor-wrapper
+		border-bottom: 1px solid $clr-dividers-light
+		box-shadow: var(--shadow-sm)
+
+	#session-editor-wrapper
 		position: absolute
 		z-index: 1000
 		top: 0
 		left: 0
 		width: 100%
 		height: 100%
-		background-color: rgba(0, 0, 0, 0.5)
+		background-color: rgba(0, 0, 0, 0.6)
+		backdrop-filter: blur(2px)
 
 		#session-editor
 			background-color: $clr-white
-			border-radius: 4px
-			padding: 32px 40px
+			border-radius: 12px
+			padding: 0
 			position: absolute
 			top: 50%
 			left: 50%
 			transform: translate(-50%, -50%)
 			width: 680px
+			box-shadow: var(--shadow-lg)
+			overflow: hidden
+			display: flex
+			flex-direction: column
+			max-height: 90vh
 
 			.session-editor-title
-				font-size: 22px
-				margin-bottom: 16px
-				position: relative
-				.close-button
-					position: absolute
-					right: 0
-					top: 0
-			.button-row
+				font-size: 20px
+				font-weight: 600
+				margin: 0
+				padding: 20px 24px
+				background-color: $clr-grey-50
+				border-bottom: 1px solid $clr-dividers-light
 				display: flex
-				width: 100%
-				margin-top: 24px
+				align-items: center
+				justify-content: space-between
 
-				.bunt-button-content
-					font-size: 16px !important
-				#btn-delete
-					button-style(color: $clr-danger, text-color: $clr-white)
-					font-weight: bold;
-				#btn-unschedule
-					button-style(color: $clr-warning, text-color: $clr-white)
-					font-weight: bold;
-				#btn-copy-to-rooms
-					button-style(color: #4a90e2, text-color: $clr-white)
-					font-weight: bold;
-				#btn-save
-					margin-left: auto
-					font-weight: bold;
-					button-style(color: #3aa57c)
-				[type=submit]
-					display: none
+				a, span
+					color: var(--color-text)
+					text-decoration: none
+					flex: 1
+					ellipsis()
+
+				.close-button
+					position: static
+					width: 32px
+					height: 32px
+					display: flex
+					align-items: center
+					justify-content: center
+					background-color: transparent
+					color: $clr-grey-500
+					border-radius: 6px
+					cursor: pointer
+					transition: all 0.2s
+					margin-left: 16px
+
+					&:hover
+						background-color: $clr-grey-200
+						color: $clr-danger
+
 			.data
 				display: flex
 				flex-direction: column
-				font-size: 16px
+				font-size: 15px
+				padding: 24px
+				overflow-y: auto
+				flex: 1
+
 				.data-row
+					margin-bottom: 16px
+					align-items: center
+
+					&:last-child
+						margin-bottom: 0
+
+					.data-label
+						font-weight: 500
+						color: $clr-secondary-text-light
+
 					.data-value
-						padding-top: 8px
+						color: var(--color-text)
+
 						ul
 							list-style: none
 							padding: 0
+							margin: 0
+
+							li
+								margin-bottom: 4px
+
+					input[type="text"], input[type="number"]
+						width: 100%
+						padding: 8px 12px
+						border: 1px solid $clr-dividers-light
+						border-radius: 6px
+						font-size: 14px
+						transition: border-color 0.2s
+
+						&:focus
+							outline: none
+							border-color: var(--color-primary)
+							box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1)
+
 				.slot-type-badge
 					display: inline-block
 					padding: 4px 12px
-					border-radius: 4px
+					border-radius: 20px
 					font-weight: 500
+					font-size: 13px
+
 					&.slot-type-break
-						background-color: $clr-grey-200
-						color: $clr-secondary-text-light
+						background-color: $clr-grey-100
+						color: $clr-grey-700
+						border: 1px solid $clr-grey-200
+
 					&.slot-type-blocker
-						background-color: $clr-red-50
-						color: $clr-red-300
+						background-color: #fef2f2
+						color: #ef4444
+						border: 1px solid #fee2e2
+
+			.button-row
+				display: flex
+				width: 100%
+				padding: 16px 24px
+				background-color: $clr-grey-50
+				border-top: 1px solid $clr-dividers-light
+				margin-top: 0
+				gap: 12px
+
+				.bunt-button-content
+					font-size: 14px !important
+					font-weight: 500 !important
+
+				button
+					height: 38px
+					padding: 0 16px
+					border-radius: 6px !important
+					text-transform: none !important
+					box-shadow: var(--shadow-sm) !important
+					transition: all 0.2s !important
+
+					&:hover
+						transform: translateY(-1px) !important
+						box-shadow: var(--shadow-md) !important
+
+				#btn-delete
+					button-style(color: $clr-danger, text-color: $clr-white)
+
+				#btn-unschedule
+					button-style(color: $clr-warning, text-color: $clr-white)
+
+				#btn-copy-to-rooms
+					button-style(color: #3b82f6, text-color: $clr-white)
+
+				#btn-save
+					margin-left: auto
+					button-style(color: var(--color-primary), text-color: $clr-white)
+
+				[type=submit]
+					display: none
+
 		.warning
-			color: #b23e65
+			color: $clr-danger
+			display: flex
+			align-items: center
+			gap: 8px
+			background-color: #fef2f2
+			padding: 12px
+			border-radius: 6px
+			border: 1px solid #fee2e2
+
+			i
+				font-size: 18px
 </style>

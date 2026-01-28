@@ -1,0 +1,68 @@
+// SPDX-FileCopyrightText: 2022-present Tobias Kunze
+// SPDX-License-Identifier: Apache-2.0
+
+// Color Palette
+$clr-primary = #6366f1 // Indigo 500
+$clr-primary-dark = #4f46e5 // Indigo 600
+$clr-primary-light = #818cf8 // Indigo 400
+$clr-secondary = #ec4899 // Pink 500
+
+// Neutrals
+$clr-white = #ffffff
+$clr-grey-50 = #f9fafb
+$clr-grey-100 = #f3f4f6
+$clr-grey-200 = #e5e7eb
+$clr-grey-300 = #d1d5db
+$clr-grey-400 = #9ca3af
+$clr-grey-500 = #6b7280
+$clr-grey-600 = #4b5563
+$clr-grey-700 = #374151
+$clr-grey-800 = #1f2937
+$clr-grey-900 = #111827
+
+// Semantic Colors
+$clr-danger = #ef4444
+$clr-warning = #f59e0b
+$clr-success = #10b981
+$clr-info = #3b82f6
+
+// Text Colors
+$clr-primary-text-light = $clr-grey-800
+$clr-secondary-text-light = $clr-grey-500
+$clr-primary-text-dark = $clr-white
+$clr-secondary-text-dark = $clr-grey-300
+$clr-text-base = $clr-grey-800
+
+// Layout
+$clr-dividers-light = $clr-grey-200
+$clr-dividers-dark = $clr-grey-700
+
+// CSS Variables for dynamic usage
+:root
+	--color-primary: $clr-primary
+	--color-primary-dark: $clr-primary-dark
+	--color-bg-app: $clr-grey-50
+	--color-surface: $clr-white
+	--color-text: $clr-text-base
+	--color-text-muted: $clr-secondary-text-light
+	--border-radius: 8px
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05)
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)
+	--font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+	--font-family-title: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+
+// Mixins
+border-separator()
+	border: 1px solid $clr-dividers-light
+
+card-shadow()
+	box-shadow: var(--shadow-sm)
+	transition: box-shadow 0.2s ease, transform 0.2s ease
+	&:hover
+		box-shadow: var(--shadow-md)
+
+ellipsis()
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis

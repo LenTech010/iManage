@@ -18,11 +18,11 @@ SPDX-FileContributor: Raphael Michel
 <html lang="{{ html_locale }}"{% if rtl %} dir="rtl" class="rtl"{% endif %}>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% block extra_title %}{% endblock extra_title %}{% if request.event %}{{ request.event.name }} :: {% endif %}{% endblock title %}CUE</title>
-        <meta name="title" content="{% block meta_title %}{% endblock meta_title %} {% if request.event %} - {{ request.event.name }} {% endif %}CUE">
-        <meta name="description" content="{% block meta_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by CUE{% endif %}{% endblock meta_description %}">
-            <meta name="application-name" content="CUE">
-            <meta name="generator" content="CUE">
+        <title>{% block title %}{% block extra_title %}{% endblock extra_title %}{% if request.event %}{{ request.event.name }} :: {% endif %}{% endblock title %}Imanage</title>
+        <meta name="title" content="{% block meta_title %}{% endblock meta_title %} {% if request.event %} - {{ request.event.name }} {% endif %}Imanage">
+        <meta name="description" content="{% block meta_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by Imanage{% endif %}{% endblock meta_description %}">
+            <meta name="application-name" content="Imanage">
+            <meta name="generator" content="Imanage">
         <meta name="keywords" content="{% if request.event %}{{ request.event.name }}, {{ request.event.slug }}, {% if request.event.date_from %}{{ request.event.date_from.year }}, {% endif %}{% endif %}schedule, talks, cfp, call for papers, conference, submissions, organizer">
         <meta name="robots" content="nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">

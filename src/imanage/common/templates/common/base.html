@@ -12,11 +12,11 @@ SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
 <html lang="{{ html_locale }}"{% if rtl %} dir="rtl" class="rtl"{% endif %}>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock title %} {% if request.event %} {{ request.event.name }} {% endif %}:: Imanage</title>
-        <meta name="title" content="{% block meta_title %}{% endblock meta_title %} {% if request.event %} - {{ request.event.name }} {% endif %}Imanage">
-        <meta name="description" content="{% block meta_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by Imanage{% endif %}{% endblock meta_description %}">
-        <meta name="application-name" content="Imanage">
-        <meta name="generator" content="Imanage">
+        <title>{% block title %}{% endblock title %} {% if request.event %} {{ request.event.name }} {% endif %}:: CUE</title>
+        <meta name="title" content="{% block meta_title %}{% endblock meta_title %} {% if request.event %} - {{ request.event.name }} {% endif %}CUE">
+        <meta name="description" content="{% block meta_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by CUE{% endif %}{% endblock meta_description %}">
+        <meta name="application-name" content="CUE">
+        <meta name="generator" content="CUE">
         <meta name="keywords" content="{% if request.event %}{{ request.event.name }}, {{ request.event.slug }}, {% if request.event.date_from %}{{ request.event.date_from.year }}, {% endif %}{% endif %}schedule, talks, cfp, call for papers, conference, submissions, organizer">
         {{ html_head|safe }}
         {% if request.event and request.event.display_settings.meta_noindex %}
@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-only WITH LicenseRef-Imanage-AGPL-3.0-Terms
             <meta property="og:image" content="{{ request.event.urls.social_image.full }}">
         {% endif %}{% endblock meta_image %}
         <meta property="og:title" content="{% block social_title %}{% endblock social_title %} {% if request.event %}{{ request.event.name }}{% endif %}">
-        <meta property="og:description" content="{% block social_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by Imanage{% endif %}{% endblock social_description %}">
+        <meta property="og:description" content="{% block social_description %}{% if request.event %}Schedule, talks and talk submissions for {{ request.event.name }}{% else %}Talks and talk submissions by CUE{% endif %}{% endblock social_description %}">
         <meta property="og:url" content="{% if request.event and request.event.display_settings.html_export_url %}{{ request.event.display_settings.html_export_url }}{{ request.path|slice:"1:" }}{% else %}{{ request.build_absolute_uri }}{% endif %}">
         <meta property="twitter:card" content="summary">
 

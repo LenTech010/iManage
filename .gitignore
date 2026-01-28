@@ -115,5 +115,4 @@ docker-compose.override.yml
 
 # Node.js
 node_modules/
-frontend/node_modules/
-package-lock.json
+**/package-lock.json

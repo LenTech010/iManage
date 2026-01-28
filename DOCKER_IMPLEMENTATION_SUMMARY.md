@@ -18,7 +18,7 @@ This implementation provides a complete Docker-based development environment for
   - Uses external entrypoint script for secure initialization
 
 ### 2. Dockerfile.frontend
-- **Purpose**: Builds the Node.js frontend container
+- **Purpose**: Builds the Vite frontend container
 - **Key Features**:
   - Based on Node.js 18-slim
   - Installs npm dependencies for the schedule-editor
@@ -30,7 +30,7 @@ This implementation provides a complete Docker-based development environment for
 - **Services**:
   - `db`: PostgreSQL 15 database with health checks
   - `backend`: Django application server on port 8000
-  - `frontend`: Node.js/Vite development server on port 3000
+  - `frontend`: Vite development server on port 3000
 - **Key Features**:
   - Proper service dependencies and health checks
   - Volume mounts for hot-reloading

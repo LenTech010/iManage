@@ -60,7 +60,7 @@ You can change these by editing the `.env` file before running the setup.
   - Exposes port 8000
 
 - **`Dockerfile.frontend`**: Builds the Vite frontend container
-  - Based on Node.js 18
+  - Based on Node.js 18 (runtime for Vite)
   - Installs dependencies from `package.json`
   - Runs Vite dev server
   - Exposes port 3000

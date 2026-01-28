@@ -12,7 +12,7 @@ echo.
 REM Check if Docker is installed
 docker --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Error: Docker is not installed. Please install Docker first.
+    echo [91mError: Docker is not installed. Please install Docker first.[0m
     exit /b 1
 )
 
@@ -25,7 +25,7 @@ if %errorlevel% equ 0 (
     if %errorlevel% equ 0 (
         set DOCKER_COMPOSE_CMD=docker compose
     ) else (
-        echo Error: Docker Compose is not installed. Please install Docker Compose first.
+        echo [91mError: Docker Compose is not installed. Please install Docker Compose first.[0m
         exit /b 1
     )
 )
@@ -58,7 +58,7 @@ echo.
 echo [94mBuilding Docker images...[0m
 %DOCKER_COMPOSE_CMD% build
 if %errorlevel% neq 0 (
-    echo [93mError building Docker images[0m
+    echo [91mError building Docker images[0m
     exit /b 1
 )
 
@@ -67,7 +67,7 @@ echo.
 echo [94mStarting services...[0m
 %DOCKER_COMPOSE_CMD% up -d
 if %errorlevel% neq 0 (
-    echo [93mError starting services[0m
+    echo [91mError starting services[0m
     exit /b 1
 )
 

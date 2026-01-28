@@ -195,7 +195,7 @@ Or simply run:
 ```
 
 **Windows:**
-```batch
+```bat
 run_all.bat
 ```
 
@@ -255,7 +255,7 @@ docker-compose down -v
 ```
 
 **Windows:**
-```batch
+```bat
 docker-compose down -v
 run_all.bat
 ```

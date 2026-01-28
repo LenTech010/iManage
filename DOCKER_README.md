@@ -31,7 +31,7 @@ This directory contains Docker configuration files to run the complete iManage a
    ```
    
    **Windows:**
-   ```batch
+   ```bat
    run_all.bat
    ```
 
@@ -170,7 +170,7 @@ Or simply run:
 ```
 
 **Windows:**
-```batch
+```bat
 run_all.bat
 ```
 

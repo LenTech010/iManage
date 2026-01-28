@@ -55,7 +55,7 @@ The fastest way to get iManage running locally is with Docker:
 
 **Windows:**
 
-.. code-block:: batch
+.. code-block:: bat
 
    git clone https://github.com/LenTech010/iManage.git
    cd iManage

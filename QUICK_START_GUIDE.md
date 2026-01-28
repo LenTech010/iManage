@@ -191,6 +191,22 @@ Or simply run:
 
 ## Troubleshooting
 
+### My UI/UX Changes Aren't Showing Up! 🔥
+
+**Most Common Issue**: You just edited Vue files but don't see changes?
+
+**Solution**: You **DO NOT need to run `run_all.sh` again**! The frontend uses hot-reloading:
+
+1. **Save your Vue file** - Changes should appear in 1-2 seconds
+2. **Hard refresh your browser**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
+3. **If still not working**:
+   ```bash
+   # Just restart the frontend service (takes 10 seconds)
+   docker-compose restart frontend
+   ```
+
+**See detailed guide**: [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) - Complete explanation of when to rebuild vs. when changes auto-reload
+
 ### Backend Won't Start
 
 Check logs:
@@ -243,8 +259,13 @@ Both services support hot reloading:
 ### Making Code Changes
 
 1. Edit files in `./src` directory
-2. Changes are reflected immediately (backend restarts automatically)
-3. Refresh your browser to see changes
+2. Changes are reflected immediately (backend restarts automatically, frontend hot-reloads)
+3. For Vue/Frontend changes: Your browser should auto-reload within 1-2 seconds
+4. For Backend changes: Django restarts automatically (may take 2-3 seconds)
+
+**Important**: You DO NOT need to run `./run_all.sh` again for code changes! Only run it when you change dependencies or Docker configuration.
+
+**See detailed workflow guide**: [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md)
 
 ### Database Migrations
 

@@ -104,6 +104,8 @@ Both backend and frontend support hot reloading during development:
 - **Backend**: Code changes in `./src` are automatically reflected
 - **Frontend**: Changes in `./src/imanage/frontend/schedule-editor/src` trigger Vite's hot module replacement
 
+**You DO NOT need to rebuild containers for code changes!** See [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) for details on when to rebuild vs. when changes auto-reload.
+
 ### Useful Commands
 
 View all service logs:
@@ -158,7 +160,20 @@ Or simply run:
 ./run_all.sh
 ```
 
+**Note**: You only need to rebuild when you change dependencies (package.json, pyproject.toml) or Docker configuration. For code changes (Vue files, Python files), just save the file and the changes will auto-reload. See [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) for details.
+
 ## Troubleshooting
+
+### UI/UX changes not appearing
+
+If you've made changes to Vue files but don't see them in your browser:
+
+1. **Do NOT run `./run_all.sh`** - This rebuilds everything unnecessarily
+2. **Try a hard refresh**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
+3. **Check frontend logs**: `docker-compose logs -f frontend` for any errors
+4. **Restart frontend only**: `docker-compose restart frontend` (takes ~10 seconds)
+
+**Full guide**: See [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) for complete troubleshooting steps.
 
 ### Backend won't start
 

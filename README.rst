@@ -59,6 +59,8 @@ This will start the complete application with:
 
 Default admin credentials: ``admin`` / ``admin``
 
+**📝 Development Note**: After making UI/UX changes to Vue files, you **DO NOT** need to run ``./run_all.sh`` again! The frontend uses hot-reloading. Just save your files and refresh your browser. See `DEVELOPMENT_WORKFLOW.md`_ for complete details.
+
 For detailed Docker setup instructions, see `DOCKER_README.md`_.
 
 📺 Look and feel
@@ -138,3 +140,5 @@ list (or tell us about it, and we'll add it)!
 .. _GitHub: https://github.com/imanage/imanage
 .. _docs.imanage.org: https://docs.imanage.org
 .. _Twitter: https://twitter.com/imanage
+.. _DOCKER_README.md: DOCKER_README.md
+.. _DEVELOPMENT_WORKFLOW.md: DEVELOPMENT_WORKFLOW.md

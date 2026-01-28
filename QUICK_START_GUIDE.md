@@ -254,7 +254,7 @@ The Dockerfiles include SSL certificate workarounds for development environments
 
 Both services support hot reloading:
 - **Backend**: Changes in `./src` are automatically detected
-- **Frontend**: Changes in `./src/imanage/frontend/schedule-editor/src` trigger Vite HMR
+- **Frontend**: Changes in `./frontend/src` trigger Vite HMR
 
 ### Making Code Changes
 

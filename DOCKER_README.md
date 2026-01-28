@@ -102,7 +102,7 @@ Create a `.env` file based on `.env.example` to customize:
 Both backend and frontend support hot reloading during development:
 
 - **Backend**: Code changes in `./src` are automatically reflected
-- **Frontend**: Changes in `./src/imanage/frontend/schedule-editor/src` trigger Vite's hot module replacement
+- **Frontend**: Changes in `./frontend/src` trigger Vite's hot module replacement
 
 **You DO NOT need to rebuild containers for code changes!** See [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) for details on when to rebuild vs. when changes auto-reload.
 

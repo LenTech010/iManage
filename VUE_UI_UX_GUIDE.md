@@ -8,7 +8,7 @@ This project uses **Vue.js** for specific interactive components, primarily the 
 
 ### Location
 ```
-src/imanage/frontend/schedule-editor/
+frontend/
 ├── src/
 │   ├── App.vue              # Main schedule editor component
 │   ├── main.js              # Entry point
@@ -201,7 +201,7 @@ The Vue schedule editor supports hot module replacement (HMR):
 docker-compose up frontend
 
 # Or locally
-cd src/imanage/frontend/schedule-editor
+cd frontend
 npm install
 npm run start
 ```

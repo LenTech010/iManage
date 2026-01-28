@@ -53,7 +53,7 @@ The frontend is configured with hot reloading (Vite HMR), so your changes should
 
 ### Scenario 1: Making Vue UI/UX Changes
 
-**What you changed:** Modified components, styles, or templates in `src/imanage/frontend/schedule-editor/src/`
+**What you changed:** Modified components, styles, or templates in `frontend/src/`
 
 **Command needed:**
 ```bash
@@ -133,8 +133,8 @@ If your Vue changes aren't showing up in the browser:
 ### Step 1: Verify the file is in the right location
 ```bash
 # Your Vue files should be in:
-src/imanage/frontend/schedule-editor/src/components/
-src/imanage/frontend/schedule-editor/src/
+frontend/src/components/
+frontend/src/
 ```
 
 ### Step 2: Check if Vite dev server is running
@@ -178,9 +178,9 @@ The docker-compose.yml file mounts these directories:
 frontend:
   volumes:
     # Your Vue source files (hot-reload enabled)
-    - ./src/imanage/frontend/schedule-editor/src:/app/frontend/src
+    - ./frontend/src:/app/frontend/src
     # Translation files (hot-reload enabled)
-    - ./src/imanage/frontend/schedule-editor/locales:/app/frontend/locales
+    - ./frontend/locales:/app/frontend/locales
 
 backend:
   volumes:

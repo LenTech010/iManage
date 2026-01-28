@@ -79,7 +79,8 @@ class Command(Parent):
 
         # Create frontend translations
         base_path = locale_path.parent
-        frontend_path = base_path / "frontend/schedule-editor"
+        # Frontend is now at repo root, so go up from src/imanage to reach it
+        frontend_path = base_path.parent.parent / "frontend"
         locales = [locale.name for locale in locale_path.iterdir() if locale.is_dir()]
 
         subprocess.run(
@@ -93,5 +94,5 @@ class Command(Parent):
 
         # Now merge the js file with the django file in each language
         for locale in locales:
-            command = f"msgcat -o locale/{locale}/LC_MESSAGES/django.po --use-first locale/{locale}/LC_MESSAGES/django.po frontend/schedule-editor/locales/en/translation.po"
+            command = f"msgcat -o locale/{locale}/LC_MESSAGES/django.po --use-first locale/{locale}/LC_MESSAGES/django.po ../../../frontend/locales/en/translation.po"
             subprocess.run(command, check=True, shell=True, cwd=base_path)

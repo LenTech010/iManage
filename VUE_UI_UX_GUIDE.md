@@ -140,9 +140,8 @@ Sessions have different visual states:
 
 2. **Use Existing Styles**
    ```stylus
-   // Import variables
-   @import '~@/styles/variables.styl'
-   
+   // Stylus is configured globally in vite.config.js
+   // Variables are auto-imported from variables.styl
    // Use consistent spacing, colors, and typography
    .my-component
      padding: 10px
@@ -272,11 +271,13 @@ The Vue components use **Buntpapier** for common UI elements:
 ### Custom Directives
 
 ```vue
-// Scrollbar
+// Scrollbar (empty string is required)
 <div v-scrollbar.y="">Content</div>
+<div v-scrollbar.x.y="">Content</div>
 
-// Tooltip
+// Tooltip (object with text property)
 <span v-tooltip="{text: 'Tooltip text'}">Hover me</span>
+<span v-tooltip.fixed="{text: 'Fixed tooltip', show: condition}">Conditional</span>
 ```
 
 ## Best Practices
@@ -356,8 +357,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '~@/styles/variables.styl'
-
+// Variables are auto-imported via vite.config.js
+// See: stylusOptions.imports in vite.config.js
 .my-new-component
   padding: 16px
   background: white
@@ -431,8 +432,8 @@ docker-compose restart frontend
 ```vue
 // Make sure you're using lang="stylus"
 <style lang="stylus">
-// Import variables if needed
-@import '~@/styles/variables.styl'
+// Variables are auto-imported via vite.config.js
+// No manual import needed - variables.styl is globally available
 </style>
 ```
 

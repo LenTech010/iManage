@@ -51,11 +51,11 @@ export default {
 	  host: '0.0.0.0',
 	  proxy: {
 		  '/orga': {
-			  target: 'http://localhost:8000',
+			  target: process.env.BACKEND_URL || 'http://backend:8000',
 			  changeOrigin: true
 		  },
 		  '/api': {
-			  target: 'http://localhost:8000',
+			  target: process.env.BACKEND_URL || 'http://backend:8000',
 			  changeOrigin: true
 		  }
 	  }

@@ -84,11 +84,14 @@ services:
     container_name: imanage_frontend
     environment:
       NODE_ENV: development
+      BACKEND_URL: http://backend:8000
     ports:
       - "3000:3000"
     volumes:
       - ./frontend/src:/app/frontend/src
       - ./frontend/locales:/app/frontend/locales
+      - ./frontend/vite.config.js:/app/frontend/vite.config.js
+      - ./frontend/index.html:/app/frontend/index.html
     stdin_open: true
     tty: true
     restart: unless-stopped

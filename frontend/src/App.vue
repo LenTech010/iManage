@@ -699,7 +699,7 @@ export default {
 			color: $clr-secondary-text-light
 
 	.days
-		tabs-style(active-color: var(--color-primary), indicator-color: var(--color-primary), background-color: transparent)
+		tabs-style(active-color: $clr-primary, indicator-color: $clr-primary, background-color: transparent)
 		overflow-x: auto
 		margin-bottom: 0
 		flex: auto
@@ -1072,7 +1072,7 @@ export default {
 
 				#btn-save
 					margin-left: auto
-					button-style(color: var(--color-primary), text-color: $clr-white)
+					button-style(color: $clr-primary, text-color: $clr-white)
 
 				[type=submit]
 					display: none

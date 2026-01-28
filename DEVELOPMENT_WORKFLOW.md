@@ -149,7 +149,7 @@ docker-compose logs -f frontend
 
 ### Step 3: Verify browser is pointing to the correct URL
 - Frontend dev server: http://localhost:3000
-- Backend server: http://localhost:8000
+- Backend server: http://localhost:3000
 
 ### Step 4: Check for syntax errors
 ```bash

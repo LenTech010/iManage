@@ -69,7 +69,7 @@ sleep 5
 echo -e "${BLUE}Checking backend health...${NC}"
 BACKEND_READY=false
 for i in {1..30}; do
-    if curl -s http://localhost:8000 > /dev/null 2>&1; then
+    if curl -s http://localhost:3000 > /dev/null 2>&1; then
         echo -e "${GREEN}✓ Backend is ready!${NC}"
         BACKEND_READY=true
         break
@@ -97,8 +97,7 @@ echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}  Services are up and running!${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
-echo -e "${GREEN}Backend (Django):${NC}   http://localhost:8000"
-echo -e "${GREEN}Frontend (Vite):${NC}   http://localhost:3000"
+echo -e "${GREEN}Website (Django):${NC}    http://localhost:3000"
 echo -e "${GREEN}Database (PostgreSQL):${NC} localhost:5432"
 echo ""
 echo -e "${BLUE}Default superuser credentials:${NC}"

@@ -39,7 +39,7 @@ That's it! The script will:
 
 After running `./run_all.sh`, you can access:
 
-- **Backend (Django)**: http://localhost:8000
+- **Backend (Django)**: http://localhost:3000
 - **Frontend (Vite)**: http://localhost:3000
 - **Database (PostgreSQL)**: localhost:5432
 
@@ -57,7 +57,7 @@ You can change these by editing the `.env` file before running the setup.
   - Based on Python 3.12
   - Installs dependencies from `pyproject.toml`
   - Runs migrations and creates superuser on startup
-  - Exposes port 8000
+  - Exposes port 3000
 
 - **`Dockerfile.frontend`**: Builds the Vite frontend container
   - Based on Node.js 18 (runtime for Vite)
@@ -91,7 +91,7 @@ Create a `.env` file based on `.env.example` to customize:
   - `DJANGO_SUPERUSER_EMAIL`: Admin email (default: admin@localhost)
 
 - **Site settings**:
-  - `SITE_URL`: Site URL (default: http://localhost:8000)
+  - `SITE_URL`: Site URL (default: http://localhost:3000)
   - `TIME_ZONE`: Time zone (default: UTC)
   - `LANGUAGE_CODE`: Language code (default: en)
 

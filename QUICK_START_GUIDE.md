@@ -42,7 +42,7 @@ The script will:
 
 After starting, you can access:
 
-- **Backend (Django Admin/Management)**: http://localhost:8000
+- **Backend (Django Admin/Management)**: http://localhost:3000
 - **Frontend (Schedule Editor Dev Server)**: Running on port 3000 (integrated into backend)
 - **Database**: PostgreSQL on localhost:5432
 
@@ -114,7 +114,7 @@ Available settings:
 - `DJANGO_SUPERUSER_USERNAME`: Admin username (default: admin)
 - `DJANGO_SUPERUSER_PASSWORD`: Admin password (default: admin)
 - `DJANGO_SUPERUSER_EMAIL`: Admin email (default: admin@localhost)
-- `SITE_URL`: Site URL (default: http://localhost:8000)
+- `SITE_URL`: Site URL (default: http://localhost:3000)
 - `TIME_ZONE`: Timezone (default: UTC)
 - `LANGUAGE_CODE`: Language (default: en)
 - `DEBUG`: Debug mode (default: True)

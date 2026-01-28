@@ -48,6 +48,16 @@ export default {
 	},
 	server: {
 	  port: 3000,
-	  host: '0.0.0.0'
+	  host: '0.0.0.0',
+	  proxy: {
+		  '/orga': {
+			  target: process.env.BACKEND_URL || 'http://backend:8000',
+			  changeOrigin: true
+		  },
+		  '/api': {
+			  target: process.env.BACKEND_URL || 'http://backend:8000',
+			  changeOrigin: true
+		  }
+	  }
 	}
 }

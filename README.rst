@@ -54,7 +54,7 @@ The fastest way to get iManage running locally is with Docker:
 This will start the complete application with:
 
 * **Backend (Django)**: http://localhost:8000
-* **Frontend (Node.js)**: http://localhost:3000
+* **Frontend (Vite)**: http://localhost:3000
 * **PostgreSQL Database**: localhost:5432
 
 Default admin credentials: ``admin`` / ``admin``

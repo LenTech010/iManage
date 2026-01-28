@@ -30,7 +30,7 @@ This directory contains Docker configuration files to run the complete iManage a
 
 That's it! The script will:
 - Build Docker images for backend and frontend
-- Start all services (PostgreSQL, Django backend, Node.js frontend)
+- Start all services (PostgreSQL, Django backend, Vite frontend)
 - Run database migrations
 - Create a Django superuser
 - Display URLs where services are accessible
@@ -40,7 +40,7 @@ That's it! The script will:
 After running `./run_all.sh`, you can access:
 
 - **Backend (Django)**: http://localhost:8000
-- **Frontend (Node.js)**: http://localhost:3000
+- **Frontend (Vite)**: http://localhost:3000
 - **Database (PostgreSQL)**: localhost:5432
 
 ### Default Credentials
@@ -59,7 +59,7 @@ You can change these by editing the `.env` file before running the setup.
   - Runs migrations and creates superuser on startup
   - Exposes port 8000
 
-- **`Dockerfile.frontend`**: Builds the Node.js frontend container
+- **`Dockerfile.frontend`**: Builds the Vite frontend container
   - Based on Node.js 18
   - Installs dependencies from `package.json`
   - Runs Vite dev server
@@ -68,7 +68,7 @@ You can change these by editing the `.env` file before running the setup.
 - **`docker-compose.yml`**: Orchestrates all services
   - **db**: PostgreSQL 15 database
   - **backend**: Django application
-  - **frontend**: Node.js/Vite development server
+  - **frontend**: Vite development server
 
 - **`run_all.sh`**: Automation script
   - Builds and starts all containers

@@ -14,12 +14,12 @@ The iManage frontend is a **Vue 3 web component** built with Vite. It's designed
 - **Behavior**: 
   - Loads successfully and shows Vue app structure
   - Displays loading state (black spinner) because it needs backend API data
-  - Proxies API requests to Django backend at port 8000
+  - Proxies API requests to Django backend at port 3000
   - **This is expected behavior** - the frontend needs a Django event context to display content
 
 #### 2. Production Mode (Web Component in Django)
 - **Purpose**: Final integration with Django
-- **URL**: http://localhost:8000 (accessed through Django)
+- **URL**: http://localhost:3000 (accessed through Django)
 - **Behavior**:
   - Schedule editor embedded in Django templates
   - Full functionality with backend API integration
@@ -34,7 +34,7 @@ The iManage frontend is a **Vue 3 web component** built with Vite. It's designed
 ./run_all.sh
 
 # Access the app
-# - Django Backend: http://localhost:8000
+# - Django Backend: http://localhost:3000
 # - Vite Dev Server: http://localhost:3000 (for development)
 ```
 
@@ -120,7 +120,7 @@ npm run start
 # Opens on http://localhost:3000
 ```
 
-**Note**: You'll need Django backend running at localhost:8000 for API calls to work.
+**Note**: You'll need Django backend running at localhost:3000 for API calls to work.
 
 ### Build for Production
 
@@ -153,7 +153,7 @@ npm run i18n:extract
 **This is expected!** The frontend is a web component that needs backend API data. 
 
 **Solutions:**
-1. Access the app through Django at http://localhost:8000
+1. Access the app through Django at http://localhost:3000
 2. Create a conference event in Django, then the schedule editor will have data
 
 ### Stylus Compilation Errors
@@ -181,7 +181,7 @@ button-style(color: $clr-primary, text-color: $clr-white)
 ### API 404 Errors
 
 Check that:
-- Django backend is running at port 8000
+- Django backend is running at port 3000
 - Proxy configuration in `vite.config.js` is correct
 - You're accessing through a valid event URL in Django
 
@@ -198,7 +198,7 @@ environment:
 ### Local Development
 
 ```bash
-export BACKEND_URL=http://localhost:8000
+export BACKEND_URL=http://localhost:3000
 npm run start
 ```
 
@@ -243,14 +243,14 @@ When you visit http://localhost:3000, you see a loading spinner because:
 
 ### To See It Working:
 
-1. Go to http://localhost:8000
+1. Go to http://localhost:3000
 2. Create a conference event
 3. Navigate to the event's schedule page
 4. The schedule editor will render with full functionality
 
 ## Development Best Practices
 
-1. **Use Django for testing**: Always test through localhost:8000
+1. **Use Django for testing**: Always test through localhost:3000
 2. **Hot reload**: Make changes, save, browser auto-updates
 3. **Don't rebuild unnecessarily**: Only rebuild when changing dependencies
 4. **Check logs**: `docker compose logs -f frontend` for errors
@@ -261,7 +261,7 @@ When you visit http://localhost:3000, you see a loading spinner because:
 When making frontend changes:
 
 1. Edit files in `frontend/src/`
-2. Test in browser at localhost:8000
+2. Test in browser at localhost:3000
 3. Ensure linting passes: `npm run lint`
 4. Commit changes (Docker auto-rebuilds on next run)
 5. Document any new dependencies or configuration

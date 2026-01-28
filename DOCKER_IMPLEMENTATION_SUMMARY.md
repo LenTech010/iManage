@@ -29,7 +29,7 @@ This implementation provides a complete Docker-based development environment for
 - **Purpose**: Orchestrates all services
 - **Services**:
   - `db`: PostgreSQL 15 database with health checks
-  - `backend`: Django application server on port 8000
+  - `backend`: Django application server on port 3000
   - `frontend`: Vite development server on port 3000
 - **Key Features**:
   - Proper service dependencies and health checks
@@ -110,7 +110,7 @@ This implementation provides a complete Docker-based development environment for
 - `DJANGO_SUPERUSER_EMAIL`: Admin email (default: admin@localhost)
 
 ### Site Configuration
-- `SITE_URL`: Site URL (default: http://localhost:8000)
+- `SITE_URL`: Site URL (default: http://localhost:3000)
 - `TIME_ZONE`: Time zone (default: UTC)
 - `LANGUAGE_CODE`: Language code (default: en)
 - `DEBUG`: Debug mode (default: True)
@@ -141,7 +141,7 @@ docker-compose down
 ```
 
 ### Accessing Services
-- Backend: http://localhost:8000
+- Backend: http://localhost:3000
 - Frontend: http://localhost:3000
 - Database: Internal only (can be enabled in docker-compose.yml)
 

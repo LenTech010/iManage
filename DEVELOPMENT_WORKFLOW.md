@@ -6,7 +6,7 @@ The iManage project uses Docker with volume mounting for development, which enab
 
 ## 🚀 Quick Answer: UI/UX Changes
 
-**If you've made Vue UI/UX changes, you DO NOT need to run `run_all.sh` again!**
+**If you've made Vue UI/UX changes, you DO NOT need to run `run_all.sh` / `run_all.bat` again!**
 
 The frontend is configured with hot reloading (Vite HMR), so your changes should appear automatically in your browser.
 
@@ -28,7 +28,7 @@ The frontend is configured with hot reloading (Vite HMR), so your changes should
 
 ## 📋 When to Use Each Command
 
-### ❌ Do NOT run `run_all.sh` for:
+### ❌ Do NOT run `run_all.sh` / `run_all.bat` for:
 
 - ✅ Vue component changes (`.vue` files)
 - ✅ JavaScript/TypeScript changes
@@ -40,7 +40,7 @@ The frontend is configured with hot reloading (Vite HMR), so your changes should
 
 **Why?** These files are mounted as volumes and support hot reloading!
 
-### ✅ DO run `run_all.sh` when:
+### ✅ DO run `run_all.sh` / `run_all.bat` when:
 
 - 📦 You add/remove npm packages (change `package.json`)
 - 📦 You add/remove Python packages (change `pyproject.toml`)
@@ -82,8 +82,11 @@ docker-compose build frontend
 # Start services again
 docker-compose up -d
 
-# Or just use run_all.sh to rebuild everything
+# Or just use run_all.sh / run_all.bat to rebuild everything
+# Linux/Mac:
 ./run_all.sh
+# Windows:
+run_all.bat
 ```
 
 ### Scenario 3: Backend Code Changes
@@ -123,7 +126,10 @@ docker-compose up -d frontend
 
 # Option 3: Full reset (nuclear option)
 docker-compose down
+# Linux/Mac:
 ./run_all.sh
+# Windows:
+run_all.bat
 ```
 
 ## 🔍 Debugging: Changes Not Appearing
@@ -197,7 +203,7 @@ backend:
 
 ## 🎯 Best Practices
 
-1. **Keep Docker running**: Start once with `./run_all.sh`, then just edit files
+1. **Keep Docker running**: Start once with `./run_all.sh` / `run_all.bat`, then just edit files
 2. **Watch the logs**: Keep a terminal open with `docker-compose logs -f frontend`
 3. **Test incrementally**: Make small changes and verify each one works
 4. **Use the linter**: Run `docker-compose exec frontend npm run lint` before committing
@@ -211,10 +217,10 @@ backend:
 | JavaScript (.js) | None (auto-reload) | ~1 sec |
 | CSS/Stylus (.css/.styl) | None (auto-reload) | ~1 sec |
 | Python backend code (.py) | None (auto-reload) | ~2 sec |
-| package.json | `./run_all.sh` or rebuild frontend | ~2 min |
-| pyproject.toml | `./run_all.sh` or rebuild backend | ~2 min |
-| Dockerfile.* | `./run_all.sh` | ~2 min |
-| docker-compose.yml | `./run_all.sh` | ~2 min |
+| package.json | `./run_all.sh` / `run_all.bat` or rebuild frontend | ~2 min |
+| pyproject.toml | `./run_all.sh` / `run_all.bat` or rebuild backend | ~2 min |
+| Dockerfile.* | `./run_all.sh` / `run_all.bat` | ~2 min |
+| docker-compose.yml | `./run_all.sh` / `run_all.bat` | ~2 min |
 
 ## 🆘 Still Having Issues?
 
@@ -231,7 +237,10 @@ backend:
 3. **Nuclear option (fresh start):**
    ```bash
    docker-compose down -v  # ⚠️ This deletes the database!
+   # Linux/Mac:
    ./run_all.sh
+   # Windows:
+   run_all.bat
    ```
 
 4. **Check the specific guides:**

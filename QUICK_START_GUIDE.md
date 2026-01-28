@@ -27,7 +27,10 @@ git clone https://github.com/LenTech010/iManage.git
 cd iManage
 
 # Run the application
+# Linux/Mac:
 ./run_all.sh
+# Windows:
+run_all.bat
 ```
 
 The script will:
@@ -185,8 +188,15 @@ docker-compose up -d
 ```
 
 Or simply run:
+
+**Linux/Mac:**
 ```bash
 ./run_all.sh
+```
+
+**Windows:**
+```batch
+run_all.bat
 ```
 
 ## Troubleshooting
@@ -195,7 +205,7 @@ Or simply run:
 
 **Most Common Issue**: You just edited Vue files but don't see changes?
 
-**Solution**: You **DO NOT need to run `run_all.sh` again**! The frontend uses hot-reloading:
+**Solution**: You **DO NOT need to run `run_all.sh` / `run_all.bat` again**! The frontend uses hot-reloading:
 
 1. **Save your Vue file** - Changes should appear in 1-2 seconds
 2. **Hard refresh your browser**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
@@ -237,9 +247,17 @@ docker-compose ps
 ```
 
 Reset database (⚠️ This will delete all data):
+
+**Linux/Mac:**
 ```bash
 docker-compose down -v
 ./run_all.sh
+```
+
+**Windows:**
+```batch
+docker-compose down -v
+run_all.bat
 ```
 
 ### SSL Certificate Errors
@@ -263,7 +281,7 @@ Both services support hot reloading:
 3. For Vue/Frontend changes: Your browser should auto-reload within 1-2 seconds
 4. For Backend changes: Django restarts automatically (may take 2-3 seconds)
 
-**Important**: You DO NOT need to run `./run_all.sh` again for code changes! Only run it when you change dependencies or Docker configuration.
+**Important**: You DO NOT need to run `./run_all.sh` / `run_all.bat` again for code changes! Only run it when you change dependencies or Docker configuration.
 
 **See detailed workflow guide**: [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md)
 

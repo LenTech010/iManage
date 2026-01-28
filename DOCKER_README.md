@@ -24,8 +24,15 @@ This directory contains Docker configuration files to run the complete iManage a
    ```
 
 3. **Run the application**:
+   
+   **Linux/Mac:**
    ```bash
    ./run_all.sh
+   ```
+   
+   **Windows:**
+   ```batch
+   run_all.bat
    ```
 
 That's it! The script will:
@@ -37,7 +44,7 @@ That's it! The script will:
 
 ### Accessing the Application
 
-After running `./run_all.sh`, you can access:
+After running `./run_all.sh` (or `run_all.bat` on Windows), you can access:
 
 - **Backend (Django)**: http://localhost:3000
 - **Frontend (Vite)**: http://localhost:3000
@@ -70,7 +77,7 @@ You can change these by editing the `.env` file before running the setup.
   - **backend**: Django application
   - **frontend**: Vite development server
 
-- **`run_all.sh`**: Automation script
+- **`run_all.sh` / `run_all.bat`**: Automation scripts (Linux/Mac and Windows)
   - Builds and starts all containers
   - Displays service URLs and useful commands
 
@@ -156,8 +163,15 @@ docker-compose up -d
 ```
 
 Or simply run:
+
+**Linux/Mac:**
 ```bash
 ./run_all.sh
+```
+
+**Windows:**
+```batch
+run_all.bat
 ```
 
 **Note**: You only need to rebuild when you change dependencies (package.json, pyproject.toml) or Docker configuration. For code changes (Vue files, Python files), just save the file and the changes will auto-reload. See [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md) for details.
@@ -168,7 +182,7 @@ Or simply run:
 
 If you've made changes to Vue files but don't see them in your browser:
 
-1. **Do NOT run `./run_all.sh`** - This rebuilds everything unnecessarily
+1. **Do NOT run `./run_all.sh` / `run_all.bat`** - This rebuilds everything unnecessarily
 2. **Try a hard refresh**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
 3. **Check frontend logs**: `docker-compose logs -f frontend` for any errors
 4. **Restart frontend only**: `docker-compose restart frontend` (takes ~10 seconds)

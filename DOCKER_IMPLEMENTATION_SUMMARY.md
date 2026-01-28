@@ -20,7 +20,7 @@ This implementation provides a complete Docker-based development environment for
 ### 2. Dockerfile.frontend
 - **Purpose**: Builds the Vite frontend container
 - **Key Features**:
-  - Based on Node.js 18-slim
+  - Based on Node.js 18-slim (runtime for Vite)
   - Installs npm dependencies for the schedule-editor
   - Runs Vite development server on port 3000
   - Configured for hot module replacement

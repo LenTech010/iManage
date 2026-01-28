@@ -18,5 +18,5 @@ COPY frontend/ ./
 # Expose port for Vite dev server
 EXPOSE 3000
 
-# Start the development server on port 3000
+# Start the Vite development server on port 3000
 CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "3000"]

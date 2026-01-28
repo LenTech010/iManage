@@ -59,7 +59,7 @@ This will start the complete application with:
 
 Default admin credentials: ``admin`` / ``admin``
 
-**📝 Development Note**: After making UI/UX changes to Vue files, you **DO NOT** need to run ``./run_all.sh`` again! The frontend uses hot-reloading. Just save your files and refresh your browser. See `DEVELOPMENT_WORKFLOW.md`_ for complete details.
+**📝 Development Note**: After making UI/UX changes to Vue files, you **DO NOT** need to run ``./run_all.sh`` again! The frontend uses hot reloading. Just save your files and refresh your browser. See `DEVELOPMENT_WORKFLOW.md`_ for complete details.
 
 For detailed Docker setup instructions, see `DOCKER_README.md`_.
 

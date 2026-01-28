@@ -36,7 +36,7 @@ The frontend is configured with hot reloading (Vite HMR), so your changes should
 - ✅ Template/HTML changes
 - ✅ Python backend code changes
 - ✅ Django template changes
-- ✅ Most configuration changes
+- ✅ Application configuration files (e.g., Django settings, environment variables)
 
 **Why?** These files are mounted as volumes and support hot reloading!
 

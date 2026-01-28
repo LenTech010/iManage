@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2023-present NONE
+# SPDX-License-Identifier: CC0-1.0
+
+include LICENSE
+recursive-include LICENSES *.txt
+include README.rst
+include src/imanage.example.cfg
+
+exclude src/imanage/override_settings.py
+exclude src/imanage.cfg
+exclude justfile
+
+recursive-exclude doc *
+recursive-exclude scripts *
+recursive-exclude src/data *
+recursive-exclude src/local *
+recursive-exclude src/static.dist *
+
+recursive-include src/imanage/frontend *
+recursive-exclude src/imanage/frontend/schedule-editor/dist *
+recursive-exclude src/imanage/frontend/schedule-editor/node_modules *
+
+recursive-include src/imanage/static *
+recursive-include src/imanage/locale *
+recursive-include src/imanage/agenda/templates *
+recursive-include src/imanage/api/templates *
+recursive-include src/imanage/common/templates *
+recursive-include src/imanage/cfp/templates *
+recursive-include src/imanage/mail/templates *
+recursive-include src/imanage/orga/templates *
+recursive-include src/imanage/schedule/templates *
+recursive-exclude src/tests *
+recursive-include src *.py
+recursive-include src *.license
+
+global-exclude *.py[co]
+global-exclude __pycache__

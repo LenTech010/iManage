@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy the entire source code first
-COPY . .
+# Copy backend directory
+COPY backend/ .
 
 # Install dependencies with SSL certificate workaround
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -e ".[postgres]"

@@ -69,7 +69,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
       - ./data:/app/data
       - static_volume:/app/static.dist
     depends_on:
@@ -87,8 +87,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./src/imanage/frontend/schedule-editor/src:/app/frontend/src
-      - ./src/imanage/frontend/schedule-editor/locales:/app/frontend/locales
+      - ./frontend/src:/app/frontend/src
+      - ./frontend/locales:/app/frontend/locales
     stdin_open: true
     tty: true
     restart: unless-stopped

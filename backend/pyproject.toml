@@ -1,0 +1,223 @@
+# SPDX-FileCopyrightText: 2023-present Tobias Kunze
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "Imanage"
+dynamic = ["version"]
+description = "Imanage conference management"
+readme = "README.rst"
+license = "AGPL-3.0-only"
+# SHOULD be the following, but Python does not support SPDX v3 (yet?)
+#license = "AGPL-3.0-only WITH AdditionRef-Imanage-AGPL-3.0-Terms"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+keywords = ["conference", "event", "schedule", "talk", "cfp"]
+authors = [
+  {name = "Tobias Kunze", email = "r@rixx.de"},
+]
+maintainers = [
+  {name = "Tobias Kunze", email = "r@rixx.de"},
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Web Environment",
+  "Framework :: Django :: 6.0",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Other Audience",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+
+dependencies = [
+  "beautifulsoup4[lxml]~=4.14.0",
+  "bleach~=6.3.0",
+  "celery~=5.6.0",
+  "css_inline~=0.19.0",
+  "cssutils~=2.11.0",
+  "defusedcsv~=3.0.0",
+  "defusedxml~=0.7.0",
+  "diff-match-patch==20241021",
+  "Django[argon2]~=6.0.0",
+  "django-context-decorator",
+  "django-csp~=4.0.0",
+  "django-filter==25.2",
+  "django-formtools~=2.5.1",
+  "django-hierarkey~=2.0.1",
+  "django-i18nfield~=1.11.0",
+  "django-minify-html~=1.14.0",
+  "django-scopes~=2.0.0",
+  "django-tables2~=2.8.0",
+  "djangorestframework~=3.16.0",
+  "drf-flex-fields~=1.0.0",
+  "Markdown~=3.10.0",
+  "Pillow~=12.1.0",
+  "publicsuffixlist~=1.0.0",
+  "python-dateutil~=2.9.0",
+  "qrcode~=8.0",
+  "reportlab~=4.4.0",
+  "requests~=2.32.0",
+  "rules~=3.5.0",
+  "urlman~=2.0.1",
+  "vobject~=0.9.0",
+  "whitenoise[brotli]~=6.11.0",
+  "zxcvbn~=4.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "build",
+  "check-manifest",
+  "coverage",
+  "django-watchfiles",
+  "djhtml",
+  "flake8",
+  "flake8-bugbear",
+  "flake8-pyproject",
+  "freezegun",
+  "isort",
+  "jsonschema",
+  "pytest",
+  "pytest-cov",
+  "pytest-django",
+  "pytest-mock",
+  "pytest-sugar",
+  "pytest-xdist",
+  "responses",
+  "twine",
+  "urllib3",
+]
+devdocs = [
+  "drf-spectacular~=0.29.0",
+  "sphinx",
+  "sphinx-autobuild",
+  "sphinx-autodoc-typehints",
+  "sphinx-copybutton",
+  "sphinxcontrib-django",
+  "sphinxcontrib-httpdomain",
+  "sphinxcontrib-spelling",
+]
+postgres = ["psycopg2-binary~=2.9.0"]
+redis = ["redis~=7.1.0"]
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "wheel"]
+
+[project.urls]
+Homepage = "https://imanage.com"
+Documentation = "https://docs.imanage.org"
+Repository = "https://github.com/imanage/imanage"
+Changelog = "https://docs.imanage.org/changelog/"
+Issues = "https://github.com/imanage/imanage/issues"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "imanage.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["imanage*"]
+exclude = ["imanage/frontend/node_modules"]
+
+[tool.check-manifest]
+ignore = [
+  ".*",
+  "assets/*",
+  "CODE_OF_CONDUCT.md",
+  "CONTRIBUTORS",
+  "docs/*",
+  "src/local/*",
+  "src/tests",
+  "src/tests/*",
+  "SECURITY.md",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "imanage.common.settings.test_settings"
+testpaths = "src/tests"
+pythonpath = "src"
+filterwarnings = [
+    # We can ignore this one, as it's just about trying to parse the XML output while exporting the schedule
+    "ignore:It looks like you're parsing an XML document using an HTML parser.::imanage.agenda.management.commands.export_schedule:",
+    # This warning *should* get suppressed via our own settings anyway …
+    "ignore:Cache key contains characters that will cause errors if used with memcached::django.core.cache.backends.base:"
+]
+addopts = "-p no:doctest -p no:pastebin -p no:nose --cov=src --cov-report=term-missing:skip-covered --cov-config=pyproject.toml"
+
+[tool.coverage.run]
+branch = true
+omit = [
+  "*/__init__.py",
+  "*/__main__.py",
+  "*/admin.py",
+  "*/celery_app.py",
+  "*/legacy.py",
+  "*/local/*",
+  "*/manage.py",
+  "*/migrations/*",
+  "*/screenshots/*",
+  "*/settings*",
+  "*/test_settings*",
+  "*/urls.py",
+  "*/wsgi.py",
+]
+relative_files = true
+
+[tool.coverage.report]
+exclude_also = [
+  "def __repr__",
+  "def __str__",
+  "if settings.DEBUG",
+  "NOQA",
+  "noqa",
+  "NotImplementedError",
+]
+
+[tool.isort]
+profile = "black"
+known_first_party = "imanage"
+skip = [
+  "celery_app.py",
+  "local",
+  "migrations",
+  "settings.py",
+  "test_settings.py",
+  "wsgi.py",
+]
+
+[tool.flake8]
+max-line-length = 160
+exclude = [
+  "*settings.py",
+  ".venv",
+  "build",
+  "doc",
+  "local",
+  "migrations",
+  "static",
+]
+ignore-names = [
+  "allDay",
+  "get_allDay",
+  "urls",
+  "orga_urls",
+  "api_urls",
+  "SendMailException",
+  "extendMarkdown",
+  "setUp",
+  "setUpTestData",
+]
+ignore = [
+  "E203",  # Whitespace before ‘,’, ‘;’, or ‘:’
+  "E231",  # Missing whitespace after ‘,’, ‘;’, or ‘:’
+  "E266",  # Too many leading ‘#’ for block comment
+  "E501",  # Line too long
+  "W503",  # Line break before binary operator
+  "W605",  # Invalid escape sequence
+  "B028",  # No explicit stacklevel argument found
+]

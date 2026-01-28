@@ -58,8 +58,9 @@ class Command(BaseCommand):
             "collectstatic", verbosity=silent, interactive=False, clear=options["clear"]
         )
         with override_settings(VITE_IGNORE=True):
+            # Navigate from backend/src/imanage/common/management/commands/ to repo root, then to frontend/
             frontend_dir = (
-                Path(__file__).parent.parent.parent.parent / "frontend/schedule-editor/"
+                Path(__file__).parent.parent.parent.parent.parent.parent.parent / "frontend/"
             )
             env = os.environ.copy()
             env["OUT_DIR"] = str(settings.STATIC_ROOT)

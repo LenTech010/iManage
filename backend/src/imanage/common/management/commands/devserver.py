@@ -28,8 +28,9 @@ class Command(Parent):
         from subprocess import Popen
 
         # run "npm start" in the frontend directory
+        # Navigate from backend/src/imanage/common/management/commands/ to repo root, then to frontend/
         frontend_dir = (
-            Path(__file__).parent.parent.parent.parent / "frontend/schedule-editor"
+            Path(__file__).parent.parent.parent.parent.parent.parent.parent / "frontend"
         )
         vite_server = Popen(["npm", "start"], cwd=frontend_dir)
 

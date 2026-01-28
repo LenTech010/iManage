@@ -69,7 +69,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
       - ./data:/app/data
       - static_volume:/app/static.dist
     depends_on:
